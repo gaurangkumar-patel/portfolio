@@ -616,8 +616,11 @@ section,
   .hero p {
     font-size: 20px;
   }
+  .hero img {
+    content: url('../img/my-profile-img1.jpg'); /* New image for mobile */
+    object-position: center; /* Center the image for mobile */
 }
-
+}
 /*--------------------------------------------------------------
 # About Section
 --------------------------------------------------------------*/
