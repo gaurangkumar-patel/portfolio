@@ -1,0 +1,25 @@
+.project-card {
+    margin-bottom: 40px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.project-card h2 {
+    margin-bottom: 5px;
+}
+
+.project-type {
+    font-size: 14px;
+    color: #666;
+}
+
+.project-card ul {
+    margin-top: 10px;
+    padding-left: 20px;
+}
+
+.project-card .tech {
+    margin-top: 10px;
+    font-size: 14px;
+}

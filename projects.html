@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Projects | Gaurang Patel</title>
+
+    <!-- Favicons -->
+    <link href="assets/img/favicon.png" rel="icon">
+    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Poppins:wght@300;400;500;600;700&family=Raleway:wght@400;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+
+    <!-- Main CSS File -->
+    <link href="assets/css/main.css" rel="stylesheet">
+
+    <!-- Projects page small overrides -->
+    <link href="assets/css/projects.css" rel="stylesheet">
+</head>
+
+<body class="projects-page">
+
+    <!-- Sidebar Header (same as template) -->
+    <header id="header" class="header dark-background d-flex flex-column">
+        <i class="header-toggle d-xl-none bi bi-list"></i>
+
+        <div class="profile-img">
+            <img src="assets/img/my-profile-img1.jpg" alt="" class="img-fluid rounded-circle">
+        </div>
+
+        <a href="index.html" class="logo d-flex align-items-center justify-content-center">
+            <h1 class="sitename">Gaurang Patel</h1>
+        </a>
+
+        <div class="social-links text-center">
+            <a href="https://www.linkedin.com/in/gaurangpatel2326" target="_blank"><i class="bi bi-linkedin"></i></a>
+            <a href="https://github.com/gaurangkumar-patel" target="_blank"><i class="bi bi-github"></i></a>
+        </div>
+
+        <nav id="navmenu" class="navmenu">
+            <ul>
+                <li><a href="index.html#hero"><i class="bi bi-house navicon"></i>Home</a></li>
+                <li><a href="index.html#about"><i class="bi bi-person navicon"></i> About</a></li>
+                <li><a href="index.html#resume"><i class="bi bi-file-earmark-text navicon"></i> Resume</a></li>
+                <li><a href="index.html#portfolio"><i class="bi bi-images navicon"></i> Portfolio</a></li>
+
+                <!-- NEW -->
+                <li><a href="projects.html" class="active"><i class="bi bi-kanban navicon"></i> Projects</a></li>
+
+                <li><a href="index.html#services"><i class="bi bi-hdd-stack navicon"></i> Services</a></li>
+                <li><a href="index.html#contact"><i class="bi bi-envelope navicon"></i> Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="main">
+
+        <!-- Page Title -->
+        <div class="page-title dark-background">
+            <div class="container d-lg-flex justify-content-between align-items-center">
+                <div>
+                    <h1 class="mb-1">Projects</h1>
+                    <p class="mb-0 small opacity-75">Selected professional & freelance work (NDA-safe previews)</p>
+                </div>
+                <nav class="breadcrumbs">
+                    <ol>
+                        <li><a href="index.html">Home</a></li>
+                        <li class="current">Projects</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+
+        <!-- Projects Section -->
+        <section id="projects" class="section light-background">
+            <div class="container" data-aos="fade-up">
+
+                <!-- Filters -->
+                <div class="projects-toolbar">
+                    <div class="d-flex flex-wrap gap-2 align-items-center justify-content-between">
+                        <div class="btn-group flex-wrap" role="group" aria-label="Project filters">
+                            <button class="btn btn-outline-primary btn-sm active" data-filter="all">All</button>
+                            <button class="btn btn-outline-primary btn-sm" data-filter="freelance">Freelance</button>
+                            <button class="btn btn-outline-primary btn-sm" data-filter="enterprise">Enterprise</button>
+                            <button class="btn btn-outline-primary btn-sm" data-filter="backend">Backend</button>
+                            <button class="btn btn-outline-primary btn-sm" data-filter="fullstack">Full-stack</button>
+                            <button class="btn btn-outline-primary btn-sm" data-filter="training">Training</button>
+
+                        </div>
+
+                        <div class="projects-search">
+                            <i class="bi bi-search"></i>
+                            <input id="projectSearch" type="text" class="form-control form-control-sm"
+                                placeholder="Search projects (e.g., Laravel, Redis, API)">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- List -->
+                <div id="projectsList" class="row gy-4 mt-1"></div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <footer id="footer" class="footer position-relative light-background">
+        <div class="container">
+            <div class="copyright text-center">
+                <p>© <span>Copyright</span> <strong class="px-1 sitename">Gaurang Patel</strong></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll Top -->
+    <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center">
+        <i class="bi bi-arrow-up-short"></i>
+    </a>
+
+    <!-- Preloader -->
+    <div id="preloader"></div>
+
+    <!-- Vendor JS Files -->
+    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/vendor/aos/aos.js"></script>
+
+    <!-- Main JS File -->
+    <script src="assets/js/main.js"></script>
+
+    <!-- Projects JS -->
+    <script src="assets/js/projects.js"></script>
+
+</body>
+
+</html>
