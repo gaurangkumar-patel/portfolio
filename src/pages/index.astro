@@ -1,36 +1,17 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import HeroScene from '../components/HeroScene';
-
+import SiteHeader from '../components/layout/SiteHeader.astro';
 const githubURL = 'https://github.com/gaurangkumar-patel';
 const linkedinURL = 'https://www.linkedin.com/in/gaurangpatel2326';
 ---
 
 <BaseLayout>
   <div class="page-shell">
-    <header class="topbar panel">
-      <a class="brand" href="/">
-        <span class="brand-button">GP</span>
+    <SiteHeader />
 
-        <span>
-          <strong>Gaurangkumar Patel</strong>
-          <small>Backend Engineering Portfolio</small>
-        </span>
-      </a>
-
-      <nav aria-label="External links">
-        <a href={githubURL} target="_blank" rel="noreferrer">GitHub</a>
-        <a href={linkedinURL} target="_blank" rel="noreferrer">LinkedIn</a>
-      </nav>
-
-      <span class="availability">
-        <span class="status-light"></span>
-        London, UK
-      </span>
-    </header>
-
-    <main>
-      <section class="hero">
+    <main id="main-content">
+      <section id="home" class="hero">
         <div class="hero-copy panel">
           <p class="eyebrow">BACKEND ENGINEERING // SYSTEM ONLINE</p>
 
@@ -127,6 +108,30 @@ const linkedinURL = 'https://www.linkedin.com/in/gaurangpatel2326';
           </div>
         </div>
       </section>
+	  <section id="about" class="content-placeholder">
+		<p>ABOUT MODULE // PENDING</p>
+		<h2>About</h2>
+	  </section>
+
+	  <section id="expertise" class="content-placeholder">
+		<p>EXPERTISE MODULE // PENDING</p>
+		<h2>Engineering Expertise</h2>
+	  </section>
+
+	  <section id="experience" class="content-placeholder">
+		<p>EXPERIENCE MODULE // PENDING</p>
+		<h2>Professional Experience</h2>
+	  </section>
+
+	  <section id="projects" class="content-placeholder">
+		<p>PROJECT MODULE // PENDING</p>
+		<h2>Selected Projects</h2>
+	  </section>
+
+	  <section id="contact" class="content-placeholder">
+		<p>CONTACT MODULE // PENDING</p>
+		<h2>Start a Conversation</h2>
+	  </section>
     </main>
   </div>
 </BaseLayout>
@@ -553,7 +558,39 @@ const linkedinURL = 'https://www.linkedin.com/in/gaurangpatel2326';
 		width: 260px;
 	}
   }
+.content-placeholder {
+  display: grid;
+  min-height: 62vh;
+  margin-top: 30px;
+  padding: clamp(34px, 6vw, 80px);
+  align-content: center;
+  border: 1px solid var(--border);
+  border-radius: 32px;
+  background:
+    linear-gradient(
+      145deg,
+      rgba(38, 42, 45, 0.78),
+      rgba(17, 19, 21, 0.9)
+    );
+  box-shadow:
+    18px 18px 45px rgba(0, 0, 0, 0.38),
+    inset 1px 1px 1px rgba(255, 255, 255, 0.06);
+}
 
+.content-placeholder p {
+  margin: 0 0 14px;
+  color: var(--accent);
+  font-family: monospace;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+}
+
+.content-placeholder h2 {
+  margin: 0;
+  font-size: clamp(2.5rem, 6vw, 5.5rem);
+  letter-spacing: -0.055em;
+}
   @media (prefers-reduced-motion: reduce) {
     html {
       scroll-behavior: auto;
