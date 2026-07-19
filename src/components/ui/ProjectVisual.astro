@@ -1,0 +1,543 @@
+---
+import { Image } from 'astro:assets';
+
+import type {
+  Project,
+  ProjectCategory,
+} from '../../data/projects';
+
+interface Props {
+  project: Project;
+  mode?: 'card' | 'hero';
+  eager?: boolean;
+}
+
+const {
+  project,
+  mode = 'card',
+  eager = false,
+} = Astro.props;
+
+const categoryLabels: Record<ProjectCategory, string> = {
+  public: 'PUBLIC BUILD',
+  product: 'PRODUCT SYSTEM',
+  commercial: 'COMMERCIAL PLATFORM',
+};
+
+const categoryLabel = categoryLabels[project.category];
+---
+
+<div
+  class:list={[
+    'project-visual',
+    `mode-${mode}`,
+    `category-${project.category}`,
+  ]}
+>
+  <div class="visual-chassis">
+    <div class="visual-header">
+      <div class="visual-lights" aria-hidden="true">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+
+      <span>PROJECT_DISPLAY.exe</span>
+
+      <span class="power-light" aria-hidden="true"></span>
+    </div>
+
+    <div class="visual-screen">
+      {
+        project.previewImage ? (
+          <>
+            <Image
+              class="project-image"
+              src={project.previewImage}
+              alt={
+                project.previewAlt ??
+                `${project.title} project preview`
+              }
+              widths={
+                mode === 'hero'
+                  ? [640, 960, 1280]
+                  : [400, 640, 800]
+              }
+              sizes={
+                mode === 'hero'
+                  ? '(max-width: 1000px) 100vw, 44vw'
+                  : '(max-width: 950px) 100vw, 42vw'
+              }
+              format="webp"
+              loading={eager ? 'eager' : 'lazy'}
+            />
+
+            <div class="image-overlay" aria-hidden="true"></div>
+
+            <div class="image-label">
+              <span>{categoryLabel}</span>
+              <strong>{project.title}</strong>
+            </div>
+          </>
+        ) : (
+          <div
+            class="abstract-visual"
+            aria-label={`${project.title} abstract project visual`}
+          >
+            <div class="grid-layer" aria-hidden="true"></div>
+            <div class="scan-line" aria-hidden="true"></div>
+
+            <div class="abstract-header">
+              <span>{categoryLabel}</span>
+              <strong>
+                {String(project.displayOrder).padStart(2, '0')}
+              </strong>
+            </div>
+
+            <div class="architecture-map" aria-hidden="true">
+              <div class="system-node node-primary">
+                <span></span>
+              </div>
+
+              <div class="system-line line-one"></div>
+              <div class="system-line line-two"></div>
+              <div class="system-line line-three"></div>
+
+              <div class="system-node node-one"></div>
+              <div class="system-node node-two"></div>
+              <div class="system-node node-three"></div>
+            </div>
+
+            <div class="abstract-copy">
+              <strong>{project.title}</strong>
+              <span>{project.domain}</span>
+            </div>
+          </div>
+        )
+      }
+    </div>
+
+    <div class="visual-controls" aria-hidden="true">
+      <span></span>
+      <span></span>
+      <span class="active"></span>
+    </div>
+  </div>
+</div>
+
+<style>
+  .project-visual {
+    width: 100%;
+  }
+
+  .visual-chassis {
+    padding: 12px;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    background:
+      linear-gradient(
+        145deg,
+        rgba(47, 51, 54, 0.97),
+        rgba(17, 19, 21, 0.99)
+      );
+    box-shadow:
+      11px 11px 25px rgba(0, 0, 0, 0.42),
+      inset 1px 1px 1px rgba(255, 255, 255, 0.07);
+  }
+
+  .mode-hero .visual-chassis {
+    padding: 18px;
+    border-radius: 27px;
+    transform:
+      perspective(1100px)
+      rotateY(-2deg)
+      rotateX(1deg);
+  }
+
+  .visual-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2px 4px 11px;
+    color: #737b7f;
+    font-family: monospace;
+    font-size: 0.59rem;
+    letter-spacing: 0.09em;
+  }
+
+  .visual-lights {
+    display: flex;
+    gap: 5px;
+  }
+
+  .visual-lights span {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #41474a;
+    box-shadow:
+      inset 2px 2px 3px rgba(0, 0, 0, 0.72);
+  }
+
+  .power-light {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--success);
+    box-shadow: 0 0 9px var(--success);
+  }
+
+  .category-product .power-light {
+    background: var(--accent);
+    box-shadow: 0 0 9px var(--accent);
+  }
+
+  .category-commercial .power-light {
+    background: #79aee6;
+    box-shadow: 0 0 9px #79aee6;
+  }
+
+  .visual-screen {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    border: 7px solid #101214;
+    border-radius: 15px;
+    background: #07100b;
+    box-shadow:
+      inset 8px 8px 22px rgba(0, 0, 0, 0.9);
+  }
+
+  .mode-hero .visual-screen {
+    min-height: 470px;
+    aspect-ratio: auto;
+    border-width: 10px;
+    border-radius: 21px;
+  }
+
+  :global(.project-image) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .image-overlay {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(
+        to top,
+        rgba(3, 7, 5, 0.9),
+        transparent 48%
+      );
+    pointer-events: none;
+  }
+
+  .image-label {
+    position: absolute;
+    right: 20px;
+    bottom: 18px;
+    left: 20px;
+  }
+
+  .image-label span,
+  .image-label strong {
+    display: block;
+  }
+
+  .image-label span {
+    color: var(--success);
+    font-family: monospace;
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 0.13em;
+  }
+
+  .image-label strong {
+    margin-top: 6px;
+    color: white;
+    font-size: clamp(1rem, 2vw, 1.4rem);
+  }
+
+  .abstract-visual {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    min-height: 260px;
+    overflow: hidden;
+    padding: 23px;
+    background:
+      radial-gradient(
+        circle at center,
+        rgba(121, 230, 167, 0.12),
+        transparent 56%
+      ),
+      #07100b;
+  }
+
+  .mode-hero .abstract-visual {
+    min-height: 450px;
+    padding: 30px;
+  }
+
+  .category-product .abstract-visual {
+    background:
+      radial-gradient(
+        circle at center,
+        rgba(239, 77, 77, 0.13),
+        transparent 56%
+      ),
+      #100707;
+  }
+
+  .category-commercial .abstract-visual {
+    background:
+      radial-gradient(
+        circle at center,
+        rgba(121, 174, 230, 0.14),
+        transparent 56%
+      ),
+      #070c11;
+  }
+
+  .grid-layer {
+    position: absolute;
+    inset: 0;
+    opacity: 0.55;
+    background:
+      linear-gradient(
+        rgba(121, 230, 167, 0.035) 1px,
+        transparent 1px
+      ),
+      linear-gradient(
+        90deg,
+        rgba(121, 230, 167, 0.035) 1px,
+        transparent 1px
+      );
+    background-size: 24px 24px;
+  }
+
+  .abstract-header,
+  .abstract-copy,
+  .architecture-map {
+    position: relative;
+    z-index: 2;
+  }
+
+  .abstract-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: var(--success);
+    font-family: monospace;
+    font-size: 0.63rem;
+    letter-spacing: 0.11em;
+  }
+
+  .category-product .abstract-header {
+    color: var(--accent);
+  }
+
+  .category-commercial .abstract-header {
+    color: #79aee6;
+  }
+
+  .architecture-map {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 220px;
+    height: 150px;
+    transform: translate(-50%, -50%);
+  }
+
+  .system-node {
+    position: absolute;
+    width: 26px;
+    height: 26px;
+    border: 1px solid rgba(121, 230, 167, 0.4);
+    border-radius: 8px;
+    background: #13231a;
+    box-shadow: 0 0 14px rgba(121, 230, 167, 0.18);
+  }
+
+  .node-primary {
+    top: 50%;
+    left: 50%;
+    display: grid;
+    width: 62px;
+    height: 62px;
+    place-items: center;
+    border-radius: 18px;
+    transform: translate(-50%, -50%);
+  }
+
+  .node-primary span {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--success);
+    box-shadow: 0 0 15px var(--success);
+  }
+
+  .node-one {
+    top: 5px;
+    left: 6px;
+  }
+
+  .node-two {
+    right: 0;
+    top: 16px;
+  }
+
+  .node-three {
+    right: 24px;
+    bottom: 0;
+  }
+
+  .system-line {
+    position: absolute;
+    height: 1px;
+    transform-origin: left center;
+    background: rgba(121, 230, 167, 0.3);
+  }
+
+  .line-one {
+    top: 49px;
+    left: 29px;
+    width: 85px;
+    transform: rotate(23deg);
+  }
+
+  .line-two {
+    top: 64px;
+    left: 119px;
+    width: 86px;
+    transform: rotate(-26deg);
+  }
+
+  .line-three {
+    top: 91px;
+    left: 118px;
+    width: 78px;
+    transform: rotate(31deg);
+  }
+
+  .category-product .system-node {
+    border-color: rgba(239, 77, 77, 0.4);
+    background: #251212;
+  }
+
+  .category-product .node-primary span {
+    background: var(--accent);
+    box-shadow: 0 0 15px var(--accent);
+  }
+
+  .category-product .system-line {
+    background: rgba(239, 77, 77, 0.32);
+  }
+
+  .category-commercial .system-node {
+    border-color: rgba(121, 174, 230, 0.42);
+    background: #101b25;
+  }
+
+  .category-commercial .node-primary span {
+    background: #79aee6;
+    box-shadow: 0 0 15px #79aee6;
+  }
+
+  .category-commercial .system-line {
+    background: rgba(121, 174, 230, 0.33);
+  }
+
+  .abstract-copy {
+    position: absolute;
+    right: 23px;
+    bottom: 22px;
+    left: 23px;
+  }
+
+  .abstract-copy strong,
+  .abstract-copy span {
+    display: block;
+  }
+
+  .abstract-copy strong {
+    font-size: 1.1rem;
+  }
+
+  .abstract-copy span {
+    margin-top: 5px;
+    color: var(--muted);
+    font-size: 0.69rem;
+  }
+
+  .scan-line {
+    position: absolute;
+    z-index: 1;
+    right: 0;
+    left: 0;
+    height: 2px;
+    opacity: 0.22;
+    background: var(--success);
+    box-shadow: 0 0 15px var(--success);
+    animation: scan 5s linear infinite;
+  }
+
+  .visual-controls {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    padding: 12px 5px 0;
+  }
+
+  .visual-controls span {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #33383b;
+    box-shadow:
+      3px 3px 6px rgba(0, 0, 0, 0.65),
+      inset 1px 1px 2px rgba(255, 255, 255, 0.07);
+  }
+
+  .visual-controls .active {
+    background: var(--success);
+    box-shadow: 0 0 9px var(--success);
+  }
+
+  @keyframes scan {
+    from {
+      top: 7%;
+    }
+
+    to {
+      top: 93%;
+    }
+  }
+
+  @media (max-width: 1000px) {
+    .mode-hero .visual-chassis {
+      transform: none;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .mode-hero .visual-screen {
+      min-height: 360px;
+    }
+
+    .architecture-map {
+      transform:
+        translate(-50%, -50%)
+        scale(0.82);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .scan-line {
+      animation: none;
+    }
+  }
+</style>
