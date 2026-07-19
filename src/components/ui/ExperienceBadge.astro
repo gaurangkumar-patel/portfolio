@@ -1,0 +1,80 @@
+---
+import type {
+  ExperienceKind,
+  ExperienceStatus,
+} from '../../data/experience';
+
+interface Props {
+  kind: ExperienceKind;
+  status?: ExperienceStatus;
+  label: string;
+}
+
+const {
+  kind,
+  status = 'completed',
+  label,
+} = Astro.props;
+---
+
+<span
+  class:list={[
+    'experience-badge',
+    `kind-${kind}`,
+    `status-${status}`,
+  ]}
+>
+  <span class="badge-light" aria-hidden="true"></span>
+  {label}
+</span>
+
+<style>
+  .experience-badge {
+    display: inline-flex;
+    width: fit-content;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 10px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    color: var(--muted);
+    font-family: monospace;
+    font-size: 0.64rem;
+    font-weight: 750;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    background: rgba(0, 0, 0, 0.18);
+  }
+
+  .badge-light {
+    width: 7px;
+    height: 7px;
+    flex: 0 0 auto;
+    border-radius: 50%;
+    background: #7f878b;
+  }
+
+  .status-current .badge-light {
+    background: var(--success);
+    box-shadow: 0 0 9px var(--success);
+  }
+
+  .kind-product .badge-light {
+    background: var(--accent);
+    box-shadow: 0 0 9px rgba(239, 77, 77, 0.75);
+  }
+
+  .kind-software:not(.status-current) .badge-light {
+    background: #79aee6;
+    box-shadow: 0 0 9px rgba(121, 174, 230, 0.6);
+  }
+
+  .kind-operations:not(.status-current) .badge-light {
+    background: #e4bc70;
+  }
+
+  .kind-development .badge-light,
+  .kind-training .badge-light {
+    background: #b998db;
+  }
+</style>

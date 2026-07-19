@@ -1,0 +1,743 @@
+---
+import {
+  earlierExperience,
+  primaryExperience,
+  type ExperienceKind,
+} from '../../data/experience';
+
+import SectionHeader from '../ui/SectionHeader.astro';
+import ExperienceBadge from '../ui/ExperienceBadge.astro';
+
+const getEarlierTypeLabel = (kind: ExperienceKind): string => {
+  const labels: Record<ExperienceKind, string> = {
+    product: 'Product development',
+    software: 'Software development',
+    operations: 'Business operations',
+    development: 'Professional development',
+    training: 'Academic training',
+  };
+
+  return labels[kind];
+};
+---
+
+<section
+  id="experience"
+  class="experience-section"
+  aria-labelledby="experience-title"
+>
+  <SectionHeader
+    id="experience-title"
+    eyebrow="CAREER TIMELINE // VERIFIED EXPERIENCE"
+    title="Backend engineering supported by practical business experience."
+    description="A career path spanning enterprise software development, product prototyping, automation and customer-facing UK operations."
+  />
+
+  <div class="experience-intro">
+    <div class="current-path">
+      <span class="path-light" aria-hidden="true"></span>
+
+      <div>
+        <small>CURRENT PROFESSIONAL DIRECTION</small>
+        <strong>PHP / Laravel Backend Engineering</strong>
+      </div>
+    </div>
+
+    <p>
+      Current product development continues alongside a
+      customer-facing UK operations role.
+    </p>
+  </div>
+
+  <ol class="timeline primary-timeline">
+    {
+      primaryExperience.map((experience, index) => (
+        <li class="timeline-item">
+          <div class="timeline-rail" aria-hidden="true">
+            <span
+              class:list={[
+                'timeline-node',
+                {
+                  'is-current':
+                    experience.status === 'current',
+                },
+              ]}
+            >
+              {String(index + 1).padStart(2, '0')}
+            </span>
+          </div>
+
+          <article class="experience-card">
+            <div class="card-topline">
+              <ExperienceBadge
+                kind={experience.kind}
+                status={experience.status}
+                label={experience.statusLabel}
+              />
+
+              <span class="experience-period">
+                {experience.period}
+              </span>
+            </div>
+
+            <div class="role-heading">
+              <div>
+                <h3>{experience.title}</h3>
+
+                <p class="organisation">
+                  {experience.organisation}
+                </p>
+              </div>
+
+              <span class="location">
+                {experience.location}
+              </span>
+            </div>
+
+            <p class="experience-summary">
+              {experience.summary}
+            </p>
+
+            <ul class="highlight-list">
+              {
+                experience.highlights.map((highlight) => (
+                  <li>{highlight}</li>
+                ))
+              }
+            </ul>
+
+            {
+              experience.technologies && (
+                <div
+                  class="technology-list"
+                  aria-label={`${experience.organisation} technologies`}
+                >
+                  {
+                    experience.technologies.map(
+                      (technology) => (
+                        <span>{technology}</span>
+                      ),
+                    )
+                  }
+                </div>
+              )
+            }
+          </article>
+        </li>
+      ))
+    }
+  </ol>
+
+  <div class="earlier-section">
+    <div class="earlier-heading">
+      <div>
+        <p>FOUNDATION PATH // EARLIER EXPERIENCE</p>
+        <h3>Earlier professional journey</h3>
+      </div>
+
+      <span>
+        Training, operations and development foundations
+      </span>
+    </div>
+
+    <ol class="timeline earlier-timeline">
+      {
+        earlierExperience.map((experience, index) => (
+          <li class="timeline-item earlier-timeline-item">
+            <div
+              class="timeline-rail earlier-rail"
+              aria-hidden="true"
+            >
+              <span class="timeline-node earlier-node">
+                {String(
+                  primaryExperience.length + index + 1,
+                ).padStart(2, '0')}
+              </span>
+            </div>
+
+            <article class="experience-card earlier-card">
+              <div class="card-topline">
+                <span
+                  class:list={[
+                    'earlier-type',
+                    `kind-${experience.kind}`,
+                  ]}
+                >
+                  <span
+                    class="type-light"
+                    aria-hidden="true"
+                  ></span>
+
+                  {getEarlierTypeLabel(experience.kind)}
+                </span>
+
+                <span class="experience-period">
+                  {experience.period}
+                </span>
+              </div>
+
+              <div class="role-heading earlier-role-heading">
+                <div>
+                  <h3>{experience.title}</h3>
+
+                  <p class="organisation">
+                    {experience.organisation}
+                  </p>
+                </div>
+
+                <span class="location">
+                  {experience.location}
+                </span>
+              </div>
+
+              <p class="experience-summary earlier-summary">
+                {experience.summary}
+              </p>
+
+              {
+                experience.technologies && (
+                  <div
+                    class="technology-list"
+                    aria-label={`${experience.organisation} technologies`}
+                  >
+                    {
+                      experience.technologies.map(
+                        (technology) => (
+                          <span>{technology}</span>
+                        ),
+                      )
+                    }
+                  </div>
+                )
+              }
+            </article>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+
+  <div class="experience-footer">
+    <span class="footer-light" aria-hidden="true"></span>
+
+    <p>
+      Commercial and product work is represented through
+      approved high-level descriptions only.
+    </p>
+  </div>
+</section>
+
+<style>
+  .experience-section {
+    margin-top: 30px;
+    padding: clamp(40px, 7vw, 92px);
+    border: 1px solid var(--border);
+    border-radius: 32px;
+    background:
+      radial-gradient(
+        circle at 90% 12%,
+        rgba(121, 174, 230, 0.08),
+        transparent 27rem
+      ),
+      linear-gradient(
+        145deg,
+        rgba(37, 41, 44, 0.82),
+        rgba(16, 18, 20, 0.94)
+      );
+    box-shadow:
+      18px 18px 45px rgba(0, 0, 0, 0.38),
+      inset 1px 1px 1px
+        rgba(255, 255, 255, 0.055);
+  }
+
+  .experience-intro {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 25px;
+    margin-top: 44px;
+    padding: 17px 20px;
+    border: 1px solid var(--border);
+    border-radius: 17px;
+    background: rgba(0, 0, 0, 0.18);
+    box-shadow:
+      inset 5px 5px 13px rgba(0, 0, 0, 0.35);
+  }
+
+  .current-path {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+  }
+
+  .path-light,
+  .footer-light {
+    width: 10px;
+    height: 10px;
+    flex: 0 0 auto;
+    border-radius: 50%;
+    background: var(--success);
+    box-shadow: 0 0 12px var(--success);
+  }
+
+  .current-path small,
+  .current-path strong {
+    display: block;
+  }
+
+  .current-path small {
+    color: #777f83;
+    font-family: monospace;
+    font-size: 0.64rem;
+    letter-spacing: 0.11em;
+  }
+
+  .current-path strong {
+    margin-top: 5px;
+    font-size: 0.9rem;
+  }
+
+  .experience-intro > p {
+    max-width: 440px;
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.83rem;
+    line-height: 1.55;
+    text-align: right;
+  }
+
+  .timeline {
+    width: 100%;
+    margin: 48px 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .timeline-item {
+    display: grid;
+    width: 100%;
+    grid-template-columns: 74px minmax(0, 1fr);
+    gap: 20px;
+  }
+
+  .timeline-item:not(:last-child) {
+    padding-bottom: 24px;
+  }
+
+  .timeline-rail {
+    position: relative;
+    display: flex;
+    justify-content: center;
+  }
+
+  .timeline-item:not(:last-child) .timeline-rail::after {
+    position: absolute;
+    z-index: 0;
+    top: 52px;
+    bottom: -25px;
+    width: 2px;
+    content: '';
+    background:
+      linear-gradient(
+        to bottom,
+        rgba(121, 230, 167, 0.32),
+        rgba(255, 255, 255, 0.04)
+      );
+  }
+
+  .timeline-node {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    width: 48px;
+    height: 48px;
+    place-items: center;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    color: #858d91;
+    font-family: monospace;
+    font-size: 0.7rem;
+    font-weight: 800;
+    background:
+      linear-gradient(145deg, #292d30, #151719);
+    box-shadow:
+      7px 7px 15px rgba(0, 0, 0, 0.48),
+      inset 1px 1px 1px
+        rgba(255, 255, 255, 0.08);
+  }
+
+  .timeline-node.is-current {
+    color: #102016;
+    background: var(--success);
+    box-shadow:
+      0 0 20px rgba(121, 230, 167, 0.35),
+      inset 4px 4px 8px
+        rgba(255, 255, 255, 0.35),
+      inset -4px -4px 8px
+        rgba(0, 0, 0, 0.18);
+  }
+
+  .experience-card {
+    width: 100%;
+    min-width: 0;
+    padding: clamp(24px, 4vw, 38px);
+    border: 1px solid var(--border);
+    border-radius: 25px;
+    background:
+      linear-gradient(
+        145deg,
+        rgba(43, 47, 50, 0.95),
+        rgba(19, 21, 23, 0.98)
+      );
+    box-shadow:
+      14px 14px 32px rgba(0, 0, 0, 0.4),
+      inset 1px 1px 1px
+        rgba(255, 255, 255, 0.065);
+    transition:
+      transform 180ms ease,
+      border-color 180ms ease;
+  }
+
+  .experience-card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(121, 230, 167, 0.18);
+  }
+
+  .card-topline,
+  .role-heading {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 20px;
+  }
+
+  .experience-period {
+    color: #8e9599;
+    font-family: monospace;
+    font-size: 0.72rem;
+    white-space: nowrap;
+  }
+
+  .role-heading {
+    margin-top: 31px;
+  }
+
+  .role-heading > div {
+    min-width: 0;
+  }
+
+  .role-heading h3 {
+    margin: 0;
+    font-size: clamp(1.65rem, 3vw, 2.5rem);
+    line-height: 1.08;
+    letter-spacing: -0.04em;
+  }
+
+  .organisation {
+    margin: 9px 0 0;
+    color: var(--accent);
+    font-weight: 750;
+  }
+
+  .location {
+    flex: 0 0 auto;
+    padding: 8px 11px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    color: var(--muted);
+    font-size: 0.75rem;
+    background: rgba(0, 0, 0, 0.17);
+  }
+
+  .experience-summary {
+    max-width: 880px;
+    margin: 25px 0 0;
+    color: #d7d6d1;
+    font-size: 1.02rem;
+    line-height: 1.75;
+  }
+
+  .highlight-list {
+    display: grid;
+    gap: 12px;
+    margin: 25px 0 0;
+    padding: 22px 0 0;
+    border-top: 1px solid var(--border);
+    list-style: none;
+  }
+
+  .highlight-list li {
+    position: relative;
+    padding-left: 22px;
+    color: var(--muted);
+    line-height: 1.65;
+  }
+
+  .highlight-list li::before {
+    position: absolute;
+    top: 0.69em;
+    left: 0;
+    width: 8px;
+    height: 2px;
+    content: '';
+    background: var(--success);
+    box-shadow:
+      0 0 8px rgba(121, 230, 167, 0.7);
+  }
+
+  .technology-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 25px;
+  }
+
+  .technology-list span {
+    padding: 8px 10px;
+    border: 1px solid rgba(121, 230, 167, 0.11);
+    border-radius: 9px;
+    color: #b5d1bf;
+    font-family: monospace;
+    font-size: 0.68rem;
+    background: rgba(5, 14, 9, 0.33);
+    box-shadow:
+      inset 2px 2px 5px rgba(0, 0, 0, 0.4);
+  }
+
+  .earlier-section {
+    width: 100%;
+    margin-top: 44px;
+  }
+
+  .earlier-heading {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 25px;
+    width: 100%;
+    padding: 28px 30px;
+    border: 1px solid var(--border);
+    border-radius: 22px;
+    background:
+      linear-gradient(
+        145deg,
+        rgba(13, 15, 16, 0.92),
+        rgba(25, 28, 30, 0.94)
+      );
+    box-shadow:
+      inset 8px 8px 22px rgba(0, 0, 0, 0.55),
+      inset -3px -3px 10px
+        rgba(255, 255, 255, 0.02);
+  }
+
+  .earlier-heading p {
+    margin: 0 0 10px;
+    color: var(--accent);
+    font-family: monospace;
+    font-size: 0.67rem;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+  }
+
+  .earlier-heading h3 {
+    margin: 0;
+    font-size: clamp(1.6rem, 3vw, 2.4rem);
+    letter-spacing: -0.04em;
+  }
+
+  .earlier-heading > span {
+    max-width: 300px;
+    color: var(--muted);
+    font-size: 0.76rem;
+    line-height: 1.5;
+    text-align: right;
+  }
+
+  .earlier-timeline {
+    margin-top: 28px;
+  }
+
+  .earlier-timeline-item:not(:last-child) {
+    padding-bottom: 20px;
+  }
+
+  .earlier-timeline-item:not(:last-child)
+    .earlier-rail::after {
+    background:
+      linear-gradient(
+        to bottom,
+        rgba(239, 77, 77, 0.34),
+        rgba(255, 255, 255, 0.035)
+      );
+  }
+
+  .earlier-node {
+    color: var(--accent);
+    border-color: rgba(239, 77, 77, 0.14);
+  }
+
+  .earlier-card {
+    padding: clamp(24px, 3.5vw, 34px);
+    border-radius: 23px;
+  }
+
+  .earlier-card:hover {
+    border-color: rgba(239, 77, 77, 0.18);
+  }
+
+  .earlier-type {
+    display: inline-flex;
+    width: fit-content;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 10px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    color: var(--muted);
+    font-family: monospace;
+    font-size: 0.62rem;
+    font-weight: 750;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    background: rgba(0, 0, 0, 0.17);
+  }
+
+  .type-light {
+    width: 7px;
+    height: 7px;
+    flex: 0 0 auto;
+    border-radius: 50%;
+    background: #8e969a;
+  }
+
+  .earlier-type.kind-software .type-light {
+    background: #79aee6;
+    box-shadow: 0 0 8px rgba(121, 174, 230, 0.55);
+  }
+
+  .earlier-type.kind-development .type-light,
+  .earlier-type.kind-training .type-light {
+    background: #b998db;
+    box-shadow: 0 0 8px rgba(185, 152, 219, 0.5);
+  }
+
+  .earlier-type.kind-operations .type-light {
+    background: #e4bc70;
+    box-shadow: 0 0 8px rgba(228, 188, 112, 0.45);
+  }
+
+  .earlier-role-heading {
+    margin-top: 27px;
+  }
+
+  .earlier-role-heading h3 {
+    font-size: clamp(1.35rem, 2.5vw, 2rem);
+  }
+
+  .earlier-summary {
+    padding-top: 21px;
+    border-top: 1px solid var(--border);
+  }
+
+  .experience-footer {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: fit-content;
+    margin: 28px 0 0 auto;
+    padding: 12px 15px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    color: var(--muted);
+    background: rgba(0, 0, 0, 0.17);
+  }
+
+  .experience-footer p {
+    margin: 0;
+    font-size: 0.76rem;
+  }
+
+  @media (max-width: 800px) {
+    .experience-intro,
+    .earlier-heading {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+
+    .experience-intro > p,
+    .earlier-heading > span {
+      max-width: none;
+      text-align: left;
+    }
+
+    .timeline-item {
+      grid-template-columns: 48px minmax(0, 1fr);
+      gap: 12px;
+    }
+
+    .timeline-node {
+      width: 42px;
+      height: 42px;
+    }
+
+    .timeline-item:not(:last-child)
+      .timeline-rail::after {
+      top: 46px;
+    }
+
+    .card-topline,
+    .role-heading {
+      flex-direction: column;
+    }
+
+    .location {
+      width: fit-content;
+    }
+
+    .experience-period {
+      white-space: normal;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .experience-section {
+      padding: 36px 18px;
+    }
+
+    .timeline,
+    .earlier-timeline {
+      margin-top: 35px;
+    }
+
+    .timeline-item {
+      grid-template-columns: 1fr;
+    }
+
+    .timeline-rail {
+      justify-content: flex-start;
+    }
+
+    .timeline-item:not(:last-child)
+      .timeline-rail::after {
+      display: none;
+    }
+
+    .experience-card {
+      padding: 24px 20px;
+    }
+
+    .earlier-heading {
+      padding: 24px 20px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .experience-card {
+      transition: none;
+    }
+
+    .experience-card:hover {
+      transform: none;
+    }
+  }
+</style>
