@@ -1,17 +1,565 @@
 ---
+import BaseLayout from '../layouts/BaseLayout.astro';
 
+const githubURL = 'https://github.com/gaurangkumar-patel';
+const linkedinURL = 'https://www.linkedin.com/in/gaurangpatel2326';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout>
+  <div class="page-shell">
+    <header class="topbar panel">
+      <a class="brand" href="/">
+        <span class="brand-button">GP</span>
+
+        <span>
+          <strong>Gaurangkumar Patel</strong>
+          <small>Backend Engineering Portfolio</small>
+        </span>
+      </a>
+
+      <nav aria-label="External links">
+        <a href={githubURL} target="_blank" rel="noreferrer">GitHub</a>
+        <a href={linkedinURL} target="_blank" rel="noreferrer">LinkedIn</a>
+      </nav>
+
+      <span class="availability">
+        <span class="status-light"></span>
+        London, UK
+      </span>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero-copy panel">
+          <p class="eyebrow">BACKEND ENGINEERING // SYSTEM ONLINE</p>
+
+          <h1>
+            Reliable backend systems,
+            <span>engineered with purpose.</span>
+          </h1>
+
+          <p class="intro">
+            Hi, I’m Gaurangkumar Patel — a Backend Software Engineer focused
+            on PHP, Laravel, REST APIs, databases and dependable web applications.
+          </p>
+
+          <div class="actions">
+            <a class="primary-button" href={githubURL} target="_blank" rel="noreferrer">
+              Explore GitHub
+            </a>
+
+            <a class="secondary-button" href={linkedinURL} target="_blank" rel="noreferrer">
+              View LinkedIn
+            </a>
+          </div>
+
+          <div class="capabilities">
+            <article>
+              <span>01</span>
+              <strong>Backend</strong>
+              <small>PHP · Laravel · Yii2</small>
+            </article>
+
+            <article>
+              <span>02</span>
+              <strong>Data</strong>
+              <small>MySQL · Redis · SQL</small>
+            </article>
+
+            <article>
+              <span>03</span>
+              <strong>Integration</strong>
+              <small>REST APIs · OAuth · JWT</small>
+            </article>
+          </div>
+        </div>
+
+        <div class="console panel" aria-label="Developer profile console">
+          <div class="console-header">
+            <div class="console-lights" aria-hidden="true">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+
+            <p>ENGINEER_PROFILE.exe</p>
+            <span class="power-light"></span>
+          </div>
+
+          <div class="monitor">
+            <div class="scan-line"></div>
+
+            <p class="monitor-label">PROFILE_BOOT.LOG</p>
+
+            <div class="terminal-copy">
+              <p><span>&gt;</span> Initialising profile...</p>
+              <p><span>&gt;</span> Identity: Gaurangkumar Patel</p>
+              <p><span>&gt;</span> Role: Backend Software Engineer</p>
+              <p><span>&gt;</span> Core: PHP / Laravel / REST APIs</p>
+              <p class="success"><span>&gt;</span> Status: Ready to build</p>
+            </div>
+
+            <div class="visual-core" aria-hidden="true">
+              <div class="orbit orbit-one"></div>
+              <div class="orbit orbit-two"></div>
+              <div class="core">GP</div>
+            </div>
+          </div>
+
+          <div class="console-controls">
+            <div>
+              <span class="control-button"></span>
+              <small>API</small>
+            </div>
+
+            <div>
+              <span class="control-button"></span>
+              <small>DATA</small>
+            </div>
+
+            <div>
+              <span class="control-button active"></span>
+              <small>ONLINE</small>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+</BaseLayout>
+
+<style>
+  .page-shell {
+    width: min(1440px, calc(100% - 40px));
+    margin: 0 auto;
+    padding: 24px 0 60px;
+  }
+
+  .panel {
+    border: 1px solid var(--border);
+    background:
+      linear-gradient(145deg, rgba(45, 49, 52, 0.96), rgba(22, 24, 26, 0.97));
+    box-shadow:
+      18px 18px 45px rgba(0, 0, 0, 0.45),
+      -8px -8px 30px rgba(255, 255, 255, 0.025),
+      inset 1px 1px 1px rgba(255, 255, 255, 0.08),
+      inset -1px -1px 1px rgba(0, 0, 0, 0.8);
+  }
+
+  .topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 28px;
+    padding: 14px 18px;
+    border-radius: 22px;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .brand-button {
+    display: grid;
+    width: 44px;
+    height: 44px;
+    place-items: center;
+    border-radius: 14px;
+    color: white;
+    font-weight: 800;
+    background: linear-gradient(145deg, #ff6565, #bd2929);
+    box-shadow:
+      5px 5px 12px rgba(0, 0, 0, 0.55),
+      -3px -3px 10px rgba(255, 255, 255, 0.08),
+      inset 2px 2px 3px rgba(255, 255, 255, 0.25);
+  }
+
+  .brand strong,
+  .brand small {
+    display: block;
+  }
+
+  .brand small {
+    margin-top: 3px;
+    color: var(--muted);
+  }
+
+  nav {
+    display: flex;
+    gap: 24px;
+    color: var(--muted);
+  }
+
+  nav a:hover {
+    color: white;
+  }
+
+  .availability {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+
+  .status-light,
+  .power-light {
+    display: inline-block;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--success);
+    box-shadow: 0 0 12px var(--success);
+  }
+
+  .hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1.08fr) minmax(420px, 0.92fr);
+    gap: 30px;
+    min-height: calc(100vh - 132px);
+    padding-top: 30px;
+  }
+
+  .hero-copy,
+  .console {
+    border-radius: 32px;
+  }
+
+  .hero-copy {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: clamp(34px, 6vw, 80px);
+  }
+
+  .eyebrow {
+    margin: 0 0 22px;
+    color: var(--accent);
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.18em;
+  }
+
+  h1 {
+    max-width: 800px;
+    margin: 0;
+    font-size: clamp(3rem, 6.3vw, 6.8rem);
+    line-height: 0.96;
+    letter-spacing: -0.065em;
+  }
+
+  h1 span {
+    display: block;
+    color: #9ea5aa;
+  }
+
+  .intro {
+    max-width: 720px;
+    margin: 30px 0 0;
+    color: var(--muted);
+    font-size: clamp(1rem, 1.4vw, 1.22rem);
+    line-height: 1.75;
+  }
+
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 34px;
+  }
+
+  .primary-button,
+  .secondary-button {
+    padding: 15px 21px;
+    border-radius: 14px;
+    font-weight: 750;
+  }
+
+  .primary-button {
+    background: linear-gradient(145deg, #ff5d5d, #c92f2f);
+    box-shadow:
+      8px 8px 18px rgba(0, 0, 0, 0.46),
+      inset 1px 1px 2px rgba(255, 255, 255, 0.3);
+  }
+
+  .secondary-button {
+    color: var(--muted);
+    border: 1px solid var(--border);
+    background: linear-gradient(145deg, #292d30, #181a1c);
+    box-shadow:
+      7px 7px 16px rgba(0, 0, 0, 0.42),
+      inset 1px 1px 1px rgba(255, 255, 255, 0.08);
+  }
+
+  .capabilities {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 13px;
+    margin-top: 48px;
+  }
+
+  .capabilities article {
+    padding: 17px;
+    border: 1px solid var(--border);
+    border-radius: 17px;
+    background: rgba(10, 12, 13, 0.32);
+    box-shadow: inset 4px 4px 12px rgba(0, 0, 0, 0.38);
+  }
+
+  .capabilities span {
+    display: block;
+    margin-bottom: 16px;
+    color: var(--accent);
+    font-size: 0.72rem;
+  }
+
+  .capabilities strong,
+  .capabilities small {
+    display: block;
+  }
+
+  .capabilities small {
+    margin-top: 7px;
+    color: var(--muted);
+  }
+
+  .console {
+    align-self: center;
+    padding: 20px;
+    transform: perspective(1200px) rotateY(-2deg) rotateX(1deg);
+  }
+
+  .console-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 4px 5px 17px;
+    color: #8f969a;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+  }
+
+  .console-lights {
+    display: flex;
+    gap: 7px;
+  }
+
+  .console-lights span {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #454b4f;
+    box-shadow: inset 2px 2px 3px rgba(0, 0, 0, 0.75);
+  }
+
+  .monitor {
+    position: relative;
+    min-height: 530px;
+    overflow: hidden;
+    padding: 28px;
+    border: 11px solid #101214;
+    border-radius: 25px;
+    background:
+      linear-gradient(rgba(99, 246, 159, 0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(99, 246, 159, 0.035) 1px, transparent 1px),
+      radial-gradient(circle at center, #15231d, #07100c 70%);
+    background-size: 24px 24px;
+    box-shadow:
+      inset 10px 10px 28px rgba(0, 0, 0, 0.9),
+      inset -4px -4px 14px rgba(85, 160, 114, 0.08),
+      0 0 0 1px rgba(255, 255, 255, 0.05);
+  }
+
+  .monitor-label {
+    margin: 0;
+    color: #6f987e;
+    font-family: monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+  }
+
+  .terminal-copy {
+    position: relative;
+    z-index: 2;
+    margin-top: 25px;
+    color: #9ebba9;
+    font-family: monospace;
+    line-height: 1.7;
+  }
+
+  .terminal-copy span,
+  .terminal-copy .success {
+    color: var(--success);
+  }
+
+  .visual-core {
+    position: absolute;
+    right: 45px;
+    bottom: 45px;
+    display: grid;
+    width: 220px;
+    height: 220px;
+    place-items: center;
+  }
+
+  .core {
+    display: grid;
+    width: 85px;
+    height: 85px;
+    place-items: center;
+    border-radius: 50%;
+    color: #0c1711;
+    font-size: 1.4rem;
+    font-weight: 900;
+    background: var(--success);
+    box-shadow:
+      0 0 45px rgba(121, 230, 167, 0.45),
+      inset 8px 8px 14px rgba(255, 255, 255, 0.36),
+      inset -8px -8px 14px rgba(0, 0, 0, 0.22);
+  }
+
+  .orbit {
+    position: absolute;
+    border: 1px solid rgba(121, 230, 167, 0.3);
+    border-radius: 50%;
+  }
+
+  .orbit-one {
+    width: 155px;
+    height: 155px;
+    transform: rotateX(65deg);
+  }
+
+  .orbit-two {
+    width: 210px;
+    height: 110px;
+    transform: rotate(35deg);
+  }
+
+  .scan-line {
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    height: 2px;
+    left: 0;
+    top: 10%;
+    opacity: 0.3;
+    background: var(--success);
+    box-shadow: 0 0 18px var(--success);
+    animation: scan 5s linear infinite;
+  }
+
+  .console-controls {
+    display: flex;
+    justify-content: flex-end;
+    gap: 25px;
+    padding: 20px 10px 2px;
+  }
+
+  .console-controls div {
+    display: grid;
+    gap: 8px;
+    place-items: center;
+  }
+
+  .control-button {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #313639;
+    box-shadow:
+      3px 3px 6px rgba(0, 0, 0, 0.7),
+      inset 2px 2px 3px rgba(255, 255, 255, 0.08);
+  }
+
+  .control-button.active {
+    background: var(--success);
+    box-shadow: 0 0 12px rgba(121, 230, 167, 0.6);
+  }
+
+  .console-controls small {
+    color: #72797d;
+    font-size: 0.62rem;
+  }
+
+  @keyframes scan {
+    from {
+      top: 8%;
+    }
+
+    to {
+      top: 92%;
+    }
+  }
+
+  @media (max-width: 1000px) {
+    .hero {
+      grid-template-columns: 1fr;
+    }
+
+    .console {
+      transform: none;
+    }
+  }
+
+  @media (max-width: 700px) {
+    .page-shell {
+      width: min(100% - 20px, 1440px);
+      padding-top: 10px;
+    }
+
+    .topbar {
+      align-items: flex-start;
+      flex-wrap: wrap;
+    }
+
+    nav {
+      order: 3;
+      width: 100%;
+    }
+
+    .availability {
+      display: none;
+    }
+
+    .hero {
+      padding-top: 18px;
+    }
+
+    .hero-copy {
+      padding: 32px 22px;
+    }
+
+    h1 {
+      font-size: clamp(2.8rem, 15vw, 4.7rem);
+    }
+
+    .capabilities {
+      grid-template-columns: 1fr;
+    }
+
+    .monitor {
+      min-height: 460px;
+      padding: 20px;
+    }
+
+    .visual-core {
+      right: 20px;
+      bottom: 25px;
+      transform: scale(0.78);
+      transform-origin: right bottom;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    .scan-line {
+      animation: none;
+    }
+  }
+</style>
