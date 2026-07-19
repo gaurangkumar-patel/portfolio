@@ -35,7 +35,10 @@ const baseURL = import.meta.env.BASE_URL;
   >
     {
       navigationLinks.map((link) => (
-        <a href={link.href} data-navigation-link>
+        <a
+            href={`${baseURL}${link.href}`}
+            data-navigation-link
+        >
           {link.label}
         </a>
       ))
@@ -52,7 +55,7 @@ const baseURL = import.meta.env.BASE_URL;
   const header = document.querySelector('[data-site-header]');
   const menuButton = document.querySelector('[data-menu-button]');
   const navigation = document.querySelector('[data-navigation]');
-  const navigationLinks = document.querySelectorAll('[data-navigation-link]');
+  const navigationLinks = document.querySelectorAll<HTMLAnchorElement>('[data-navigation-link]',);
 
   const closeMenu = () => {
     menuButton?.setAttribute('aria-expanded', 'false');
@@ -92,8 +95,8 @@ const baseURL = import.meta.env.BASE_URL;
         }
 
         navigationLinks.forEach((link) => {
-          const href = link.getAttribute('href');
-          const isActive = href === `#${entry.target.id}`;
+            const linkHash = new URL(link.href).hash;
+            const isActive = linkHash === `#${entry.target.id}`;
 
           link.classList.toggle('is-active', isActive);
 
