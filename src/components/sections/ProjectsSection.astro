@@ -1,0 +1,994 @@
+---
+import {
+  getProjectsByCategory,
+  projectGroups,
+  type Project,
+} from '../../data/projects';
+
+import SectionHeader from '../ui/SectionHeader.astro';
+import ProjectBadge from '../ui/ProjectBadge.astro';
+
+const getProjectNumber = (
+  project: Project,
+): string => {
+  return String(project.displayOrder).padStart(2, '0');
+};
+
+const getCategoryLabel = (
+  project: Project,
+): string => {
+  const labels = {
+    public: 'Open source',
+    product: 'Product work',
+    commercial: 'Commercial experience',
+  };
+
+  return labels[project.category];
+};
+---
+
+<section
+  id="projects"
+  class="projects-section"
+  aria-labelledby="projects-title"
+  data-projects-section
+>
+  <SectionHeader
+    id="projects-title"
+    eyebrow="PROJECT SYSTEM // VERIFIED WORK"
+    title="Selected engineering work across public, product and commercial delivery."
+    description="Public repositories include working code and demos. Product and employer-owned work is presented through controlled technical summaries."
+  />
+
+  <div
+    class="project-tabs"
+    role="tablist"
+    aria-label="Project categories"
+  >
+    {
+      projectGroups.map((group, index) => (
+        <button
+          id={`project-tab-${group.id}`}
+          class:list={[
+            'project-tab',
+            {
+              'is-active': index === 0,
+            },
+          ]}
+          type="button"
+          role="tab"
+          aria-selected={index === 0 ? 'true' : 'false'}
+          aria-controls={`project-panel-${group.id}`}
+          tabindex={index === 0 ? '0' : '-1'}
+          data-project-tab={group.id}
+        >
+          <span class="tab-light" aria-hidden="true"></span>
+          {group.title}
+        </button>
+      ))
+    }
+  </div>
+
+  <div class="project-panels">
+    {
+      projectGroups.map((group, groupIndex) => {
+        const projects = getProjectsByCategory(group.id);
+
+        return (
+          <section
+            id={`project-panel-${group.id}`}
+            class="project-panel"
+            role="tabpanel"
+            aria-labelledby={`project-tab-${group.id}`}
+            data-project-panel={group.id}
+            hidden={groupIndex !== 0}
+          >
+            <div class="group-heading">
+              <div>
+                <p>{group.eyebrow}</p>
+                <h3>{group.title}</h3>
+              </div>
+
+              <div class="group-summary">
+                <span>
+                  {String(projects.length).padStart(2, '0')}
+                </span>
+
+                <p>{group.description}</p>
+              </div>
+            </div>
+
+            <div class="project-grid">
+              {
+                projects.map((project) => (
+                  <article
+                    class:list={[
+                      'project-card',
+                      `project-${project.category}`,
+                      {
+                        'is-featured': project.featured,
+                      },
+                    ]}
+                  >
+                    <div class="project-card-topline">
+                      <span class="project-number">
+                        {getProjectNumber(project)}
+                      </span>
+
+                      <ProjectBadge
+                        category={project.category}
+                        visibility={project.visibility}
+                        label={project.statusLabel}
+                      />
+                    </div>
+
+                    <div class="project-heading">
+                      <div>
+                        <p class="project-category">
+                          {getCategoryLabel(project)}
+                        </p>
+
+                        <h4>{project.title}</h4>
+
+                        {
+                          project.shortTitle && (
+                            <p class="project-short-title">
+                              {project.shortTitle}
+                            </p>
+                          )
+                        }
+                      </div>
+
+                      {
+                        project.featured && (
+                          <span class="featured-label">
+                            Featured
+                          </span>
+                        )
+                      }
+                    </div>
+
+                    {
+                      project.organisation && (
+                        <p class="project-organisation">
+                          {project.organisation}
+                        </p>
+                      )
+                    }
+
+                    <p class="project-domain">
+                      {project.domain}
+                    </p>
+
+                    <p class="project-summary">
+                      {project.summary}
+                    </p>
+
+                    <div
+                      class="technology-list"
+                      aria-label={`${project.title} technologies`}
+                    >
+                      {
+                        project.technologies.map(
+                          (technology) => (
+                            <span>{technology}</span>
+                          ),
+                        )
+                      }
+                    </div>
+
+                    <details class="project-details">
+                      <summary>
+                        <span class="closed-label">
+                          View engineering details
+                        </span>
+
+                        <span class="open-label">
+                          Close engineering details
+                        </span>
+
+                        <span
+                          class="details-button"
+                          aria-hidden="true"
+                        >
+                          +
+                        </span>
+                      </summary>
+
+                      <div class="details-content">
+                        <div class="detail-block">
+                          <p>CHALLENGE</p>
+                          <div>{project.challenge}</div>
+                        </div>
+
+                        <div class="detail-block">
+                          <p>CONTRIBUTION</p>
+                          <div>{project.contribution}</div>
+                        </div>
+
+                        <div class="detail-block">
+                          <p>IMPLEMENTED / DELIVERED</p>
+
+                          <ul>
+                            {
+                              project.highlights.map(
+                                (highlight) => (
+                                  <li>{highlight}</li>
+                                ),
+                              )
+                            }
+                          </ul>
+                        </div>
+
+                        {
+                          project.plannedWork.length > 0 && (
+                            <div class="detail-block planned-block">
+                              <p>PLANNED IMPROVEMENTS</p>
+
+                              <ul>
+                                {
+                                  project.plannedWork.map(
+                                    (item) => (
+                                      <li>{item}</li>
+                                    ),
+                                  )
+                                }
+                              </ul>
+                            </div>
+                          )
+                        }
+                      </div>
+                    </details>
+
+                    {
+                      project.sourceCodeNotice && (
+                        <div class="source-notice">
+                          <span
+                            class="notice-light"
+                            aria-hidden="true"
+                          ></span>
+
+                          <p>{project.sourceCodeNotice}</p>
+                        </div>
+                      )
+                    }
+
+                    {
+                      project.links.length > 0 && (
+                        <div class="project-links">
+                          {
+                            project.links.map((link) => (
+                              <a
+                                class:list={[
+                                  'project-link',
+                                  `link-${link.type}`,
+                                ]}
+                                href={link.url}
+                                target="_blank"
+                                rel="noreferrer"
+                              >
+                                {link.label}
+
+                                <span aria-hidden="true">
+                                  ↗
+                                </span>
+                              </a>
+                            ))
+                          }
+                        </div>
+                      )
+                    }
+                  </article>
+                ))
+              }
+            </div>
+          </section>
+        );
+      })
+    }
+  </div>
+
+  <div class="projects-footer">
+    <span class="footer-light" aria-hidden="true"></span>
+
+    <p>
+      Public-project claims must remain supported by the
+      corresponding repository. Commercial work remains
+      summary-only.
+    </p>
+  </div>
+</section>
+
+<script>
+  const projectSections = document.querySelectorAll(
+    '[data-projects-section]',
+  );
+
+  projectSections.forEach((section) => {
+    const tabs = Array.from(
+      section.querySelectorAll<HTMLButtonElement>(
+        '[data-project-tab]',
+      ),
+    );
+
+    const panels = Array.from(
+      section.querySelectorAll<HTMLElement>(
+        '[data-project-panel]',
+      ),
+    );
+
+    const activateTab = (
+      selectedTab: HTMLButtonElement,
+    ) => {
+      const selectedCategory =
+        selectedTab.dataset.projectTab;
+
+      tabs.forEach((tab) => {
+        const isActive = tab === selectedTab;
+
+        tab.classList.toggle('is-active', isActive);
+        tab.setAttribute(
+          'aria-selected',
+          String(isActive),
+        );
+
+        tab.tabIndex = isActive ? 0 : -1;
+      });
+
+      panels.forEach((panel) => {
+        panel.hidden =
+          panel.dataset.projectPanel !==
+          selectedCategory;
+      });
+    };
+
+    tabs.forEach((tab, index) => {
+      tab.addEventListener('click', () => {
+        activateTab(tab);
+      });
+
+      tab.addEventListener('keydown', (event) => {
+        let nextIndex = index;
+
+        if (
+          event.key === 'ArrowRight' ||
+          event.key === 'ArrowDown'
+        ) {
+          nextIndex = (index + 1) % tabs.length;
+        } else if (
+          event.key === 'ArrowLeft' ||
+          event.key === 'ArrowUp'
+        ) {
+          nextIndex =
+            (index - 1 + tabs.length) % tabs.length;
+        } else if (event.key === 'Home') {
+          nextIndex = 0;
+        } else if (event.key === 'End') {
+          nextIndex = tabs.length - 1;
+        } else {
+          return;
+        }
+
+        event.preventDefault();
+
+        const nextTab = tabs[nextIndex];
+
+        if (nextTab) {
+          activateTab(nextTab);
+          nextTab.focus();
+        }
+      });
+    });
+  });
+</script>
+
+<style>
+  .projects-section {
+    margin-top: 30px;
+    padding: clamp(40px, 7vw, 92px);
+    border: 1px solid var(--border);
+    border-radius: 32px;
+    background:
+      radial-gradient(
+        circle at 88% 12%,
+        rgba(239, 77, 77, 0.075),
+        transparent 27rem
+      ),
+      radial-gradient(
+        circle at 8% 88%,
+        rgba(121, 174, 230, 0.07),
+        transparent 25rem
+      ),
+      linear-gradient(
+        145deg,
+        rgba(37, 41, 44, 0.82),
+        rgba(16, 18, 20, 0.94)
+      );
+    box-shadow:
+      18px 18px 45px rgba(0, 0, 0, 0.38),
+      inset 1px 1px 1px
+        rgba(255, 255, 255, 0.055);
+  }
+
+  .project-tabs {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-top: 46px;
+    padding: 10px;
+    border: 1px solid var(--border);
+    border-radius: 19px;
+    background: rgba(0, 0, 0, 0.22);
+    box-shadow:
+      inset 6px 6px 15px rgba(0, 0, 0, 0.42);
+  }
+
+  .project-tab {
+    display: flex;
+    min-height: 48px;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    padding: 10px 14px;
+    cursor: pointer;
+    border: 1px solid transparent;
+    border-radius: 13px;
+    color: var(--muted);
+    font: inherit;
+    font-size: 0.82rem;
+    font-weight: 750;
+    background: transparent;
+    transition:
+      color 170ms ease,
+      background 170ms ease,
+      box-shadow 170ms ease;
+  }
+
+  .project-tab:hover,
+  .project-tab:focus-visible,
+  .project-tab.is-active {
+    color: white;
+    border-color: var(--border);
+    background:
+      linear-gradient(
+        145deg,
+        #2c3033,
+        #17191b
+      );
+    box-shadow:
+      6px 6px 13px rgba(0, 0, 0, 0.43),
+      inset 1px 1px 1px
+        rgba(255, 255, 255, 0.08);
+  }
+
+  .tab-light {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #737b7f;
+  }
+
+  .project-tab.is-active .tab-light {
+    background: var(--success);
+    box-shadow: 0 0 10px var(--success);
+  }
+
+  .project-panel {
+    margin-top: 32px;
+  }
+
+  .project-panel[hidden] {
+    display: none;
+  }
+
+  .group-heading {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 30px;
+    padding: 25px 28px;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    background: rgba(0, 0, 0, 0.18);
+    box-shadow:
+      inset 5px 5px 14px rgba(0, 0, 0, 0.38);
+  }
+
+  .group-heading > div:first-child > p {
+    margin: 0 0 9px;
+    color: var(--accent);
+    font-family: monospace;
+    font-size: 0.65rem;
+    font-weight: 800;
+    letter-spacing: 0.13em;
+  }
+
+  .group-heading h3 {
+    margin: 0;
+    font-size: clamp(1.7rem, 3vw, 2.6rem);
+    letter-spacing: -0.04em;
+  }
+
+  .group-summary {
+    display: flex;
+    max-width: 570px;
+    align-items: center;
+    gap: 18px;
+  }
+
+  .group-summary > span {
+    display: grid;
+    width: 48px;
+    height: 48px;
+    flex: 0 0 auto;
+    place-items: center;
+    border-radius: 14px;
+    color: var(--success);
+    font-family: monospace;
+    font-size: 0.72rem;
+    font-weight: 800;
+    background: rgba(0, 0, 0, 0.28);
+    box-shadow:
+      inset 4px 4px 10px rgba(0, 0, 0, 0.48);
+  }
+
+  .group-summary p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.8rem;
+    line-height: 1.55;
+    text-align: right;
+  }
+
+  .project-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+    margin-top: 22px;
+  }
+
+  .project-card {
+    position: relative;
+    display: flex;
+    min-width: 0;
+    min-height: 100%;
+    flex-direction: column;
+    padding: clamp(24px, 3.5vw, 36px);
+    overflow: hidden;
+    border: 1px solid var(--border);
+    border-radius: 25px;
+    background:
+      linear-gradient(
+        145deg,
+        rgba(43, 47, 50, 0.95),
+        rgba(19, 21, 23, 0.98)
+      );
+    box-shadow:
+      14px 14px 32px rgba(0, 0, 0, 0.4),
+      inset 1px 1px 1px
+        rgba(255, 255, 255, 0.065);
+    transition:
+      transform 180ms ease,
+      border-color 180ms ease;
+  }
+
+  .project-card::before {
+    position: absolute;
+    top: 0;
+    right: 18%;
+    left: 18%;
+    height: 1px;
+    content: '';
+    opacity: 0;
+    background: var(--success);
+    box-shadow: 0 0 18px var(--success);
+    transition: opacity 180ms ease;
+  }
+
+  .project-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(121, 230, 167, 0.18);
+  }
+
+  .project-card:hover::before,
+  .project-card.is-featured::before {
+    opacity: 0.72;
+  }
+
+  .project-product::before {
+    background: var(--accent);
+    box-shadow: 0 0 18px var(--accent);
+  }
+
+  .project-commercial::before {
+    background: #79aee6;
+    box-shadow: 0 0 18px #79aee6;
+  }
+
+  .project-card-topline,
+  .project-heading {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 18px;
+  }
+
+  .project-number {
+    color: var(--accent);
+    font-family: monospace;
+    font-size: 0.71rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+  }
+
+  .project-heading {
+    margin-top: 32px;
+  }
+
+  .project-category {
+    margin: 0 0 9px;
+    color: #7f888c;
+    font-family: monospace;
+    font-size: 0.63rem;
+    font-weight: 750;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .project-heading h4 {
+    margin: 0;
+    font-size: clamp(1.55rem, 2.7vw, 2.25rem);
+    line-height: 1.08;
+    letter-spacing: -0.04em;
+  }
+
+  .project-short-title {
+    margin: 8px 0 0;
+    color: var(--muted);
+    font-size: 0.82rem;
+  }
+
+  .featured-label {
+    flex: 0 0 auto;
+    padding: 7px 9px;
+    border: 1px solid rgba(121, 230, 167, 0.13);
+    border-radius: 9px;
+    color: var(--success);
+    font-family: monospace;
+    font-size: 0.61rem;
+    font-weight: 800;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    background: rgba(121, 230, 167, 0.045);
+  }
+
+  .project-organisation {
+    margin: 14px 0 0;
+    color: var(--accent);
+    font-size: 0.78rem;
+    font-weight: 750;
+  }
+
+  .project-domain {
+    margin: 24px 0 0;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    color: #d9d8d2;
+    font-size: 0.83rem;
+    font-weight: 700;
+  }
+
+  .project-summary {
+    margin: 13px 0 0;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  .technology-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 24px;
+  }
+
+  .technology-list span {
+    padding: 8px 10px;
+    border: 1px solid rgba(121, 230, 167, 0.11);
+    border-radius: 9px;
+    color: #b5d1bf;
+    font-family: monospace;
+    font-size: 0.67rem;
+    background: rgba(5, 14, 9, 0.33);
+    box-shadow:
+      inset 2px 2px 5px rgba(0, 0, 0, 0.4);
+  }
+
+  .project-details {
+    margin-top: 26px;
+    border-top: 1px solid var(--border);
+  }
+
+  .project-details summary {
+    display: flex;
+    min-height: 58px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    cursor: pointer;
+    color: #8d9599;
+    font-size: 0.76rem;
+    font-weight: 750;
+    list-style: none;
+  }
+
+  .project-details summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .open-label {
+    display: none;
+  }
+
+  .project-details[open] .closed-label {
+    display: none;
+  }
+
+  .project-details[open] .open-label {
+    display: inline;
+  }
+
+  .details-button {
+    display: grid;
+    width: 31px;
+    height: 31px;
+    flex: 0 0 auto;
+    place-items: center;
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    color: var(--success);
+    font-size: 1.1rem;
+    background:
+      linear-gradient(145deg, #292d30, #17191b);
+    box-shadow:
+      4px 4px 9px rgba(0, 0, 0, 0.45),
+      inset 1px 1px 1px
+        rgba(255, 255, 255, 0.08);
+    transition: transform 180ms ease;
+  }
+
+  .project-details[open] .details-button {
+    transform: rotate(45deg);
+  }
+
+  .details-content {
+    display: grid;
+    gap: 22px;
+    padding: 22px;
+    border: 1px solid rgba(121, 230, 167, 0.1);
+    border-radius: 16px;
+    background: rgba(0, 0, 0, 0.21);
+    box-shadow:
+      inset 5px 5px 14px rgba(0, 0, 0, 0.42);
+  }
+
+  .detail-block > p {
+    margin: 0 0 11px;
+    color: var(--success);
+    font-family: monospace;
+    font-size: 0.64rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+  }
+
+  .detail-block > div {
+    color: var(--muted);
+    line-height: 1.65;
+  }
+
+  .detail-block ul {
+    display: grid;
+    gap: 10px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .detail-block li {
+    position: relative;
+    padding-left: 19px;
+    color: var(--muted);
+    line-height: 1.55;
+  }
+
+  .detail-block li::before {
+    position: absolute;
+    top: 0.68em;
+    left: 0;
+    width: 7px;
+    height: 2px;
+    content: '';
+    background: var(--success);
+  }
+
+  .planned-block > p {
+    color: #e4bc70;
+  }
+
+  .planned-block li::before {
+    background: #e4bc70;
+  }
+
+  .source-notice {
+    display: flex;
+    gap: 11px;
+    margin-top: 22px;
+    padding: 13px 14px;
+    border: 1px solid rgba(121, 174, 230, 0.11);
+    border-radius: 12px;
+    background: rgba(121, 174, 230, 0.035);
+  }
+
+  .notice-light {
+    width: 8px;
+    height: 8px;
+    flex: 0 0 auto;
+    margin-top: 5px;
+    border-radius: 50%;
+    background: #79aee6;
+    box-shadow: 0 0 9px rgba(121, 174, 230, 0.6);
+  }
+
+  .source-notice p {
+    margin: 0;
+    color: #9ca9b3;
+    font-size: 0.72rem;
+    line-height: 1.55;
+  }
+
+  .project-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 11px;
+    margin-top: auto;
+    padding-top: 26px;
+  }
+
+  .project-link {
+    display: inline-flex;
+    min-height: 44px;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    padding: 0 15px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    color: var(--muted);
+    font-size: 0.76rem;
+    font-weight: 750;
+    background:
+      linear-gradient(145deg, #292d30, #17191b);
+    box-shadow:
+      5px 5px 12px rgba(0, 0, 0, 0.4),
+      inset 1px 1px 1px
+        rgba(255, 255, 255, 0.07);
+  }
+
+  .project-link:hover {
+    color: white;
+    border-color: rgba(121, 230, 167, 0.18);
+  }
+
+  .link-demo {
+    color: white;
+    background:
+      linear-gradient(145deg, #ff5e5e, #c82f2f);
+  }
+
+  .projects-footer {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: fit-content;
+    margin: 28px 0 0 auto;
+    padding: 12px 15px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    color: var(--muted);
+    background: rgba(0, 0, 0, 0.17);
+  }
+
+  .projects-footer p {
+    margin: 0;
+    font-size: 0.76rem;
+  }
+
+  .footer-light {
+    width: 9px;
+    height: 9px;
+    flex: 0 0 auto;
+    border-radius: 50%;
+    background: var(--success);
+    box-shadow: 0 0 10px var(--success);
+  }
+
+  @media (max-width: 950px) {
+    .project-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .group-heading {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+
+    .group-summary {
+      max-width: none;
+    }
+
+    .group-summary p {
+      text-align: left;
+    }
+  }
+
+  @media (max-width: 760px) {
+    .project-tabs {
+      grid-template-columns: 1fr;
+    }
+
+    .project-tab {
+      justify-content: flex-start;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .projects-section {
+      padding: 36px 18px;
+    }
+
+    .group-heading {
+      padding: 23px 20px;
+    }
+
+    .group-summary {
+      align-items: flex-start;
+    }
+
+    .project-card {
+      padding: 24px 20px;
+    }
+
+    .project-card-topline,
+    .project-heading {
+      flex-direction: column;
+    }
+
+    .details-content {
+      padding: 19px 16px;
+    }
+
+    .project-links {
+      display: grid;
+    }
+
+    .project-link {
+      width: 100%;
+    }
+
+    .projects-footer {
+      width: 100%;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .project-tab,
+    .project-card,
+    .project-card::before,
+    .details-button {
+      transition: none;
+    }
+
+    .project-card:hover {
+      transform: none;
+    }
+  }
+</style>

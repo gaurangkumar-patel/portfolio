@@ -1,0 +1,75 @@
+---
+import type {
+  ProjectCategory,
+  ProjectVisibility,
+} from '../../data/projects';
+
+interface Props {
+  category: ProjectCategory;
+  visibility: ProjectVisibility;
+  label: string;
+}
+
+const {
+  category,
+  visibility,
+  label,
+} = Astro.props;
+---
+
+<span
+  class:list={[
+    'project-badge',
+    `category-${category}`,
+    `visibility-${visibility}`,
+  ]}
+>
+  <span class="badge-light" aria-hidden="true"></span>
+  {label}
+</span>
+
+<style>
+  .project-badge {
+    display: inline-flex;
+    width: fit-content;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 10px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    color: var(--muted);
+    font-family: monospace;
+    font-size: 0.62rem;
+    font-weight: 750;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    background: rgba(0, 0, 0, 0.18);
+  }
+
+  .badge-light {
+    width: 7px;
+    height: 7px;
+    flex: 0 0 auto;
+    border-radius: 50%;
+    background: #8e969a;
+  }
+
+  .category-public .badge-light {
+    background: var(--success);
+    box-shadow: 0 0 9px var(--success);
+  }
+
+  .category-product .badge-light {
+    background: var(--accent);
+    box-shadow: 0 0 9px rgba(239, 77, 77, 0.7);
+  }
+
+  .category-commercial .badge-light {
+    background: #79aee6;
+    box-shadow: 0 0 9px rgba(121, 174, 230, 0.6);
+  }
+
+  .visibility-summary-only {
+    border-color: rgba(121, 174, 230, 0.15);
+  }
+</style>
