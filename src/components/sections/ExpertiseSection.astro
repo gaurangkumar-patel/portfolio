@@ -1,0 +1,394 @@
+---
+import {
+  expertiseModules,
+} from '../../data/expertise';
+
+import SectionHeader
+  from '../ui/SectionHeader.astro';
+
+import ExpertiseStatus
+  from '../ui/ExpertiseStatus.astro';
+---
+
+<section
+  id="expertise"
+  class="expertise-section"
+  aria-labelledby="expertise-title"
+>
+  <SectionHeader
+    id="expertise-title"
+    eyebrow="ENGINEERING SYSTEMS // CORE CAPABILITIES"
+    title="Engineering expertise built around real delivery."
+    description="A backend-focused technology stack supported by API development, data engineering, integrations, frontend collaboration and production delivery."
+  />
+
+  <div class="expertise-grid">
+    {
+      expertiseModules.map((module) => (
+        <details class="expertise-card">
+          <summary>
+            <div class="card-heading">
+              <span class="module-number">
+                {module.number}
+              </span>
+
+              <ExpertiseStatus
+                level={module.level}
+              />
+            </div>
+
+            <h3>{module.title}</h3>
+            <p>{module.summary}</p>
+
+            <div
+              class="technology-list"
+              aria-label={`${module.title} technologies`}
+            >
+              {
+                module.technologies.map(
+                  (technology) => (
+                    <span>{technology}</span>
+                  ),
+                )
+              }
+            </div>
+
+            <span class="expand-control">
+              <span class="closed-label">
+                View capabilities
+              </span>
+
+              <span class="open-label">
+                Close module
+              </span>
+
+              <span
+                class="expand-icon"
+                aria-hidden="true"
+              >
+                +
+              </span>
+            </span>
+          </summary>
+
+          <div class="capability-panel">
+            <p>DELIVERY CAPABILITIES</p>
+
+            <ul>
+              {
+                module.capabilities.map(
+                  (capability) => (
+                    <li>{capability}</li>
+                  ),
+                )
+              }
+            </ul>
+          </div>
+        </details>
+      ))
+    }
+  </div>
+
+  <div class="expertise-note">
+    <span class="note-light" aria-hidden="true"></span>
+
+    <p>
+      Technologies are grouped by practical use rather
+      than artificial percentage ratings.
+    </p>
+  </div>
+</section>
+
+<style>
+  .expertise-section {
+    margin-top: 30px;
+    padding: clamp(40px, 7vw, 92px);
+    border: 1px solid var(--border);
+    border-radius: 32px;
+    background:
+      radial-gradient(
+        circle at 12% 85%,
+        rgba(239, 77, 77, 0.07),
+        transparent 27rem
+      ),
+      linear-gradient(
+        145deg,
+        rgba(37, 41, 44, 0.82),
+        rgba(16, 18, 20, 0.94)
+      );
+    box-shadow:
+      18px 18px 45px rgba(0, 0, 0, 0.38),
+      inset 1px 1px 1px
+        rgba(255, 255, 255, 0.055);
+  }
+
+  .expertise-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin-top: 48px;
+  }
+
+  .expertise-card {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    background:
+      linear-gradient(
+        145deg,
+        rgba(43, 47, 50, 0.96),
+        rgba(19, 21, 23, 0.98)
+      );
+    box-shadow:
+      13px 13px 30px rgba(0, 0, 0, 0.4),
+      inset 1px 1px 1px
+        rgba(255, 255, 255, 0.065);
+    transition:
+      transform 180ms ease,
+      border-color 180ms ease;
+  }
+
+  .expertise-card:hover,
+  .expertise-card:focus-within {
+    transform: translateY(-4px);
+    border-color: rgba(121, 230, 167, 0.2);
+  }
+
+  .expertise-card[open] {
+    border-color: rgba(121, 230, 167, 0.22);
+  }
+
+  summary {
+    display: block;
+    padding: 28px;
+    cursor: pointer;
+    list-style: none;
+  }
+
+  summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .card-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+  }
+
+  .module-number {
+    color: var(--accent);
+    font-family: monospace;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.13em;
+  }
+
+  h3 {
+    margin: 38px 0 0;
+    font-size: clamp(1.55rem, 2.4vw, 2.1rem);
+    letter-spacing: -0.035em;
+  }
+
+  summary > p {
+    max-width: 580px;
+    min-height: 52px;
+    margin: 14px 0 0;
+    color: var(--muted);
+    line-height: 1.65;
+  }
+
+  .technology-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    min-height: 72px;
+    margin-top: 24px;
+    align-content: flex-start;
+  }
+
+  .technology-list span {
+    padding: 8px 10px;
+    border: 1px solid rgba(121, 230, 167, 0.12);
+    border-radius: 9px;
+    color: #b6d3c0;
+    font-family: monospace;
+    font-size: 0.7rem;
+    background: rgba(5, 14, 9, 0.35);
+    box-shadow:
+      inset 2px 2px 5px rgba(0, 0, 0, 0.4);
+  }
+
+  .expand-control {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 28px;
+    padding-top: 18px;
+    border-top: 1px solid var(--border);
+    color: #8f9699;
+    font-size: 0.76rem;
+    font-weight: 700;
+  }
+
+  .open-label {
+    display: none;
+  }
+
+  .expertise-card[open] .closed-label {
+    display: none;
+  }
+
+  .expertise-card[open] .open-label {
+    display: inline;
+  }
+
+  .expand-icon {
+    display: grid;
+    width: 30px;
+    height: 30px;
+    place-items: center;
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    color: var(--success);
+    font-size: 1.15rem;
+    background:
+      linear-gradient(145deg, #292d30, #17191b);
+    box-shadow:
+      4px 4px 9px rgba(0, 0, 0, 0.45),
+      inset 1px 1px 1px
+        rgba(255, 255, 255, 0.08);
+    transition: transform 180ms ease;
+  }
+
+  .expertise-card[open] .expand-icon {
+    transform: rotate(45deg);
+  }
+
+  .capability-panel {
+    padding: 24px 28px 30px;
+    border-top: 1px solid var(--border);
+    background:
+      linear-gradient(
+        145deg,
+        rgba(8, 13, 10, 0.48),
+        rgba(15, 18, 17, 0.85)
+      );
+    box-shadow:
+      inset 0 10px 22px rgba(0, 0, 0, 0.32);
+  }
+
+  .capability-panel > p {
+    margin: 0;
+    color: var(--success);
+    font-family: monospace;
+    font-size: 0.67rem;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+  }
+
+  .capability-panel ul {
+    display: grid;
+    gap: 12px;
+    margin: 20px 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .capability-panel li {
+    position: relative;
+    padding-left: 20px;
+    color: #c5c9c6;
+    line-height: 1.55;
+  }
+
+  .capability-panel li::before {
+    position: absolute;
+    top: 0.68em;
+    left: 0;
+    width: 7px;
+    height: 2px;
+    content: '';
+    background: var(--accent);
+    box-shadow: 0 0 7px
+      rgba(239, 77, 77, 0.7);
+  }
+
+  .expertise-note {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: fit-content;
+    margin: 28px 0 0 auto;
+    padding: 12px 15px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    color: var(--muted);
+    background: rgba(0, 0, 0, 0.17);
+  }
+
+  .expertise-note p {
+    margin: 0;
+    font-size: 0.78rem;
+  }
+
+  .note-light {
+    width: 8px;
+    height: 8px;
+    flex: 0 0 auto;
+    border-radius: 50%;
+    background: var(--success);
+    box-shadow: 0 0 10px var(--success);
+  }
+
+  @media (max-width: 900px) {
+    .expertise-grid {
+      grid-template-columns: 1fr;
+    }
+
+    summary > p,
+    .technology-list {
+      min-height: auto;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .expertise-section {
+      padding: 36px 20px;
+    }
+
+    summary {
+      padding: 23px 20px;
+    }
+
+    .card-heading {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+
+    h3 {
+      margin-top: 28px;
+    }
+
+    .capability-panel {
+      padding: 22px 20px 26px;
+    }
+
+    .expertise-note {
+      width: 100%;
+      margin-left: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .expertise-card,
+    .expand-icon {
+      transition: none;
+    }
+
+    .expertise-card:hover {
+      transform: none;
+    }
+  }
+</style>
