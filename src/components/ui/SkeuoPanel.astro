@@ -1,0 +1,53 @@
+---
+interface Props {
+  class?: string;
+  inset?: boolean;
+}
+
+const {
+  class: className = '',
+  inset = false,
+} = Astro.props;
+---
+
+<div
+  class:list={[
+    'skeuo-panel',
+    className,
+    {
+      'is-inset': inset,
+    },
+  ]}
+>
+  <slot />
+</div>
+
+<style>
+  .skeuo-panel {
+    border: 1px solid var(--border);
+    border-radius: 25px;
+    background:
+      linear-gradient(
+        145deg,
+        rgba(43, 47, 50, 0.94),
+        rgba(20, 22, 24, 0.97)
+      );
+    box-shadow:
+      16px 16px 38px rgba(0, 0, 0, 0.42),
+      -6px -6px 22px rgba(255, 255, 255, 0.018),
+      inset 1px 1px 1px rgba(255, 255, 255, 0.07),
+      inset -1px -1px 1px rgba(0, 0, 0, 0.75);
+  }
+
+  .skeuo-panel.is-inset {
+    background:
+      linear-gradient(
+        145deg,
+        rgba(15, 17, 18, 0.96),
+        rgba(27, 30, 32, 0.94)
+      );
+    box-shadow:
+      inset 8px 8px 22px rgba(0, 0, 0, 0.65),
+      inset -3px -3px 12px rgba(255, 255, 255, 0.025);
+  }
+</style>

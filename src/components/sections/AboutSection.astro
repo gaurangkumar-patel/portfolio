@@ -1,0 +1,378 @@
+---
+import { profile } from '../../data/profile';
+import SectionHeader from '../ui/SectionHeader.astro';
+import SkeuoPanel from '../ui/SkeuoPanel.astro';
+
+const cvURL =
+  `${import.meta.env.BASE_URL}documents/${profile.cvFilename}`;
+---
+
+<section
+  id="about"
+  class="about-section"
+  aria-labelledby="about-title"
+>
+  <SectionHeader
+    id="about-title"
+    eyebrow={profile.eyebrow}
+    title="Engineering software beyond the surface."
+    description="Backend-first thinking, dependable delivery and practical understanding of how software supports real business operations."
+  />
+
+  <div class="about-layout">
+    <SkeuoPanel class="profile-panel">
+      <div class="profile-terminal">
+        <span class="terminal-light"></span>
+        <span>PROFILE.DATA</span>
+      </div>
+
+      <p class="profile-lead">
+        {profile.summary}
+      </p>
+
+      <p class="profile-detail">
+        {profile.detail}
+      </p>
+
+      <div class="stack-list" aria-label="Core technology stack">
+        {
+          profile.stack.map((technology) => (
+            <span>{technology}</span>
+          ))
+        }
+      </div>
+
+      <div class="profile-actions">
+        <a class="primary-action" href={cvURL} download>
+          Download CV
+        </a>
+
+        <a
+          class="secondary-action"
+          href={profile.links.linkedin}
+          target="_blank"
+          rel="noreferrer"
+        >
+          View LinkedIn
+        </a>
+      </div>
+    </SkeuoPanel>
+
+    <SkeuoPanel class="status-panel" inset>
+      <div class="status-header">
+        <div>
+          <span class="status-light"></span>
+          <strong>ENGINEER STATUS</strong>
+        </div>
+
+        <span>ACTIVE</span>
+      </div>
+
+      <dl class="profile-facts">
+        {
+          profile.facts.map((fact) => (
+            <div>
+              <dt>{fact.label}</dt>
+              <dd>{fact.value}</dd>
+            </div>
+          ))
+        }
+      </dl>
+
+      <a
+        class="github-link"
+        href={profile.links.github}
+        target="_blank"
+        rel="noreferrer"
+      >
+        <span>GitHub profile</span>
+        <strong>Open repository console →</strong>
+      </a>
+    </SkeuoPanel>
+  </div>
+
+  <div class="strength-grid">
+    {
+      profile.strengths.map((strength) => (
+        <SkeuoPanel class="strength-card">
+          <span class="strength-number">
+            {strength.number}
+          </span>
+
+          <h3>{strength.title}</h3>
+          <p>{strength.description}</p>
+
+          <span class="strength-indicator" aria-hidden="true"></span>
+        </SkeuoPanel>
+      ))
+    }
+  </div>
+</section>
+
+<style>
+  .about-section {
+    margin-top: 30px;
+    padding: clamp(40px, 7vw, 92px);
+    border: 1px solid var(--border);
+    border-radius: 32px;
+    background:
+      radial-gradient(
+        circle at 85% 15%,
+        rgba(121, 230, 167, 0.07),
+        transparent 25rem
+      ),
+      linear-gradient(
+        145deg,
+        rgba(37, 41, 44, 0.82),
+        rgba(16, 18, 20, 0.94)
+      );
+    box-shadow:
+      18px 18px 45px rgba(0, 0, 0, 0.38),
+      inset 1px 1px 1px rgba(255, 255, 255, 0.055);
+  }
+
+  .about-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.25fr) minmax(320px, 0.75fr);
+    gap: 22px;
+    margin-top: 46px;
+  }
+
+  :global(.profile-panel),
+  :global(.status-panel) {
+    padding: clamp(24px, 4vw, 42px);
+  }
+
+  .profile-terminal {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    color: #7f8984;
+    font-family: monospace;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+  }
+
+  .terminal-light,
+  .status-light {
+    display: inline-block;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--success);
+    box-shadow: 0 0 12px rgba(121, 230, 167, 0.85);
+  }
+
+  .profile-lead {
+    max-width: 850px;
+    margin: 28px 0 0;
+    font-size: clamp(1.45rem, 2.5vw, 2.35rem);
+    font-weight: 720;
+    line-height: 1.28;
+    letter-spacing: -0.025em;
+  }
+
+  .profile-detail {
+    max-width: 800px;
+    margin: 22px 0 0;
+    color: var(--muted);
+    font-size: 1rem;
+    line-height: 1.8;
+  }
+
+  .stack-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9px;
+    margin-top: 28px;
+  }
+
+  .stack-list span {
+    padding: 9px 12px;
+    border: 1px solid rgba(121, 230, 167, 0.13);
+    border-radius: 10px;
+    color: #b8d8c3;
+    font-family: monospace;
+    font-size: 0.76rem;
+    background: rgba(7, 16, 11, 0.38);
+    box-shadow: inset 2px 2px 6px rgba(0, 0, 0, 0.45);
+  }
+
+  .profile-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 13px;
+    margin-top: 34px;
+  }
+
+  .primary-action,
+  .secondary-action {
+    display: inline-flex;
+    min-height: 48px;
+    align-items: center;
+    justify-content: center;
+    padding: 0 19px;
+    border-radius: 13px;
+    font-weight: 750;
+  }
+
+  .primary-action {
+    color: white;
+    background: linear-gradient(145deg, #ff5e5e, #c82f2f);
+    box-shadow:
+      7px 7px 16px rgba(0, 0, 0, 0.45),
+      inset 1px 1px 2px rgba(255, 255, 255, 0.3);
+  }
+
+  .secondary-action {
+    color: var(--muted);
+    border: 1px solid var(--border);
+    background: linear-gradient(145deg, #2a2e31, #181a1c);
+    box-shadow:
+      6px 6px 14px rgba(0, 0, 0, 0.4),
+      inset 1px 1px 1px rgba(255, 255, 255, 0.07);
+  }
+
+  .status-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 22px;
+    border-bottom: 1px solid var(--border);
+    color: var(--success);
+    font-family: monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.13em;
+  }
+
+  .status-header div {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .profile-facts {
+    margin: 0;
+  }
+
+  .profile-facts div {
+    padding: 19px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .profile-facts dt {
+    color: #737b7f;
+    font-family: monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .profile-facts dd {
+    margin: 7px 0 0;
+    color: #e8e5de;
+    font-size: 0.94rem;
+    line-height: 1.5;
+  }
+
+  .github-link {
+    display: block;
+    margin-top: 25px;
+    padding: 17px;
+    border: 1px solid rgba(121, 230, 167, 0.12);
+    border-radius: 14px;
+    background: rgba(121, 230, 167, 0.045);
+  }
+
+  .github-link span,
+  .github-link strong {
+    display: block;
+  }
+
+  .github-link span {
+    color: #7f8984;
+    font-size: 0.74rem;
+  }
+
+  .github-link strong {
+    margin-top: 6px;
+    color: var(--success);
+    font-size: 0.9rem;
+  }
+
+  .strength-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 17px;
+    margin-top: 22px;
+  }
+
+  :global(.strength-card) {
+    position: relative;
+    min-height: 230px;
+    padding: 28px;
+    overflow: hidden;
+  }
+
+  .strength-number {
+    color: var(--accent);
+    font-family: monospace;
+    font-size: 0.72rem;
+  }
+
+  .strength-card h3 {
+    margin: 42px 0 0;
+    font-size: 1.3rem;
+  }
+
+  .strength-card p {
+    margin: 12px 0 0;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  .strength-indicator {
+    position: absolute;
+    right: 24px;
+    bottom: 24px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--success);
+    box-shadow: 0 0 12px rgba(121, 230, 167, 0.8);
+  }
+
+  @media (max-width: 950px) {
+    .about-layout {
+      grid-template-columns: 1fr;
+    }
+
+    .strength-grid {
+      grid-template-columns: 1fr;
+    }
+
+    :global(.strength-card) {
+      min-height: auto;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .about-section {
+      padding: 36px 20px;
+    }
+
+    .profile-lead {
+      font-size: 1.45rem;
+    }
+
+    .profile-actions {
+      display: grid;
+    }
+
+    .primary-action,
+    .secondary-action {
+      width: 100%;
+    }
+  }
+</style>
