@@ -7,6 +7,9 @@ import {
   type Project,
   type ProjectCategory,
 } from '../../data/projects';
+import {
+  siteMetadata,
+} from '../../data/seo';
 
 export function getStaticPaths() {
   return allProjects.map((project) => ({
@@ -43,11 +46,68 @@ const pageDescription =
   `${project.summary} Technologies include ${project.technologies
     .slice(0, 5)
     .join(', ')}.`;
+
+const caseStudyURL = new URL(
+  Astro.url.pathname,
+  Astro.site ?? Astro.url,
+);
+
+const homepageURL = new URL(
+  import.meta.env.BASE_URL,
+  Astro.site ?? Astro.url,
+);
+
+const repositoryURL = project.links.find(
+  (link) => link.type === 'repository',
+)?.url;
+
+const liveDemoURL = project.links.find(
+  (link) => link.type === 'demo',
+)?.url;
+
+const projectStructuredData = {
+  '@context': 'https://schema.org',
+
+  '@type':
+    project.visibility === 'public-repository'
+      ? 'SoftwareSourceCode'
+      : 'CreativeWork',
+
+  name: project.title,
+
+  description: project.summary,
+
+  url: caseStudyURL.href,
+
+  creator: {
+    '@type': 'Person',
+    '@id': `${homepageURL.href}#person`,
+    name: 'Gaurangkumar Patel',
+    url: homepageURL.href,
+  },
+
+  keywords: project.technologies.join(', '),
+
+  ...(repositoryURL
+    ? {
+        codeRepository: repositoryURL,
+      }
+    : {}),
+
+  ...(liveDemoURL
+    ? {
+        sameAs: [liveDemoURL],
+      }
+    : {}),
+};
 ---
 
 <BaseLayout
   title={pageTitle}
   description={pageDescription}
+  ogType="article"
+  imageAlt={`${project.title} engineering case study by Gaurangkumar Patel`}
+  structuredData={projectStructuredData}
 >
   <div class="page-shell">
     <SiteHeader />
