@@ -1,0 +1,99 @@
+<div class="pointer-glow" aria-hidden="true"></div>
+
+<script>
+  const pointer = document.querySelector(".pointer-glow");
+
+  if (
+    pointer &&
+    window.matchMedia("(pointer: fine)").matches &&
+    !window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  ) {
+    let targetX = -100;
+    let targetY = -100;
+    let currentX = -100;
+    let currentY = -100;
+
+    window.addEventListener("pointermove", (event) => {
+      targetX = event.clientX;
+      targetY = event.clientY;
+      pointer.classList.add("is-visible");
+    });
+
+    window.addEventListener("pointerleave", () => {
+      pointer.classList.remove("is-visible");
+    });
+
+    const animatePointer = () => {
+      currentX += (targetX - currentX) * 0.16;
+      currentY += (targetY - currentY) * 0.16;
+
+      pointer.style.transform = `translate3d(${currentX}px, ${currentY}px, 0) translate(-50%, -50%)`;
+
+      requestAnimationFrame(animatePointer);
+    };
+
+    animatePointer();
+
+    const interactiveElements = document.querySelectorAll(
+      'a, button, [role="button"], input, textarea, select',
+    );
+
+    interactiveElements.forEach((element) => {
+      element.addEventListener("pointerenter", () => {
+        pointer.classList.add("is-interactive");
+      });
+
+      element.addEventListener("pointerleave", () => {
+        pointer.classList.remove("is-interactive");
+      });
+    });
+  }
+</script>
+
+<style>
+  .pointer-glow {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    width: 30px;
+    height: 30px;
+    pointer-events: none;
+    border: 1px solid rgba(121, 230, 167, 0.65);
+    border-radius: 50%;
+    opacity: 0;
+    box-shadow:
+      0 0 18px rgba(121, 230, 167, 0.18),
+      inset 0 0 10px rgba(121, 230, 167, 0.08);
+    transition:
+      width 160ms ease,
+      height 160ms ease,
+      opacity 180ms ease,
+      border-color 160ms ease,
+      background 160ms ease;
+    will-change: transform;
+  }
+
+  .pointer-glow.is-visible {
+    opacity: 1;
+  }
+
+  .pointer-glow.is-interactive {
+    width: 46px;
+    height: 46px;
+    border-color: rgba(239, 77, 77, 0.8);
+    background: rgba(239, 77, 77, 0.08);
+  }
+
+  @media (pointer: coarse) {
+    .pointer-glow {
+      display: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .pointer-glow {
+      display: none;
+    }
+  }
+</style>

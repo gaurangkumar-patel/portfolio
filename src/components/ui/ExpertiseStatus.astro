@@ -1,0 +1,56 @@
+---
+import type {
+  ExpertiseLevel,
+} from '../../data/expertise';
+
+interface Props {
+  level: ExpertiseLevel;
+}
+
+const { level } = Astro.props;
+
+const labels: Record<ExpertiseLevel, string> = {
+  commercial: 'Commercial experience',
+  supporting: 'Engineering practice',
+};
+---
+
+<span class:list={['status', `status-${level}`]}>
+  <span aria-hidden="true"></span>
+  {labels[level]}
+</span>
+
+<style>
+  .status {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    width: fit-content;
+    padding: 7px 10px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    color: var(--muted);
+    font-family: monospace;
+    font-size: 0.66rem;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    background: rgba(0, 0, 0, 0.18);
+  }
+
+  .status > span {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+  }
+
+  .status-commercial > span {
+    background: var(--success);
+    box-shadow: 0 0 9px var(--success);
+  }
+
+  .status-supporting > span {
+    background: #e7bc6a;
+    box-shadow: 0 0 9px rgba(231, 188, 106, 0.65);
+  }
+</style>
