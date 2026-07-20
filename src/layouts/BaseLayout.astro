@@ -1,8 +1,6 @@
 ---
 import '../styles/global.css';
 
-import defaultSocialImage
-  from '../assets/profile/gaurangkumar-patel-profile.webp';
 
 import StructuredData
   from '../components/seo/StructuredData.astro';
@@ -46,15 +44,26 @@ const canonicalURL = canonicalPath
   ? new URL(canonicalPath, siteBaseURL)
   : new URL(Astro.url.pathname, siteBaseURL);
 
+const defaultSocialImagePath =
+  `${import.meta.env.BASE_URL}social/portfolio-og.png`;
+
 const socialImageURL = image
   ? new URL(image, siteBaseURL)
-  : new URL(defaultSocialImage.src, siteBaseURL);
+  : new URL(defaultSocialImagePath, siteBaseURL);
 
 const faviconURL = new URL(
   `${import.meta.env.BASE_URL}favicon.svg`,
   siteBaseURL,
 );
+const manifestURL = new URL(
+  `${import.meta.env.BASE_URL}site.webmanifest`,
+  siteBaseURL,
+);
 
+const icon192URL = new URL(
+  `${import.meta.env.BASE_URL}icon-192.png`,
+  siteBaseURL,
+);
 const sitemapURL = new URL(
   `${import.meta.env.BASE_URL}sitemap-index.xml`,
   siteBaseURL,
@@ -139,7 +148,16 @@ const robotsContent = noindex
       type="image/svg+xml"
       href={faviconURL}
     />
+    <link
+      rel="apple-touch-icon"
+      sizes="192x192"
+      href={icon192URL}
+    />
 
+    <link
+      rel="manifest"
+      href={manifestURL}
+    />
     <link
       rel="alternate"
       hreflang="en-gb"

@@ -1,0 +1,23 @@
+{
+  "name": "Gaurangkumar Patel — Backend Engineering Portfolio",
+  "short_name": "Gaurangkumar Patel",
+  "description": "PHP and Laravel Backend Software Engineer portfolio.",
+  "id": "/portfolio/",
+  "start_url": "/portfolio/",
+  "scope": "/portfolio/",
+  "display": "standalone",
+  "background_color": "#111315",
+  "theme_color": "#111315",
+  "icons": [
+    {
+      "src": "/portfolio/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/portfolio/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

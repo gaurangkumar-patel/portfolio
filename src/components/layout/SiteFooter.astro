@@ -1,0 +1,195 @@
+---
+import { navigationLinks } from '../../data/navigation';
+import { profile } from '../../data/profile';
+
+const baseURL = import.meta.env.BASE_URL;
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="footer-main">
+    <div class="footer-brand">
+      <span class="brand-mark" aria-hidden="true">GP</span>
+
+      <div>
+        <strong>Gaurangkumar Patel</strong>
+        <p>Backend Software Engineer</p>
+      </div>
+    </div>
+
+    <nav aria-label="Footer navigation">
+      {
+        navigationLinks.map((link) => (
+          <a href={`${baseURL}${link.href}`}>
+            {link.label}
+          </a>
+        ))
+      }
+    </nav>
+
+    <div class="social-links">
+      <a
+        href={profile.links.github}
+        target="_blank"
+        rel="noreferrer"
+      >
+        GitHub ↗
+      </a>
+
+      <a
+        href={profile.links.linkedin}
+        target="_blank"
+        rel="noreferrer"
+      >
+        LinkedIn ↗
+      </a>
+
+      <a href="mailto:gaurangpatel3056@gmail.com">
+        Email →
+      </a>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>
+      © {currentYear} Gaurangkumar Patel.
+      Built with Astro, React, TypeScript and Three.js.
+    </p>
+
+    <div class="system-status">
+      <span aria-hidden="true"></span>
+      Portfolio system online
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    margin-top: 30px;
+    padding: clamp(28px, 5vw, 48px);
+    border: 1px solid var(--border);
+    border-radius: 28px;
+    background:
+      linear-gradient(
+        145deg,
+        rgba(37, 41, 44, 0.9),
+        rgba(15, 17, 19, 0.98)
+      );
+    box-shadow:
+      16px 16px 38px rgba(0, 0, 0, 0.4),
+      inset 1px 1px 1px rgba(255, 255, 255, 0.055);
+  }
+
+  .footer-main {
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    gap: 50px;
+    align-items: start;
+  }
+
+  .footer-brand {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+  }
+
+  .brand-mark {
+    display: grid;
+    width: 48px;
+    height: 48px;
+    flex: 0 0 auto;
+    place-items: center;
+    border-radius: 15px;
+    color: white;
+    font-weight: 850;
+    background:
+      linear-gradient(145deg, #ff6565, #bd2929);
+    box-shadow:
+      5px 5px 12px rgba(0, 0, 0, 0.5),
+      inset 2px 2px 3px rgba(255, 255, 255, 0.24);
+  }
+
+  .footer-brand p {
+    margin: 5px 0 0;
+    color: var(--muted);
+    font-size: 0.78rem;
+  }
+
+  nav,
+  .social-links {
+    display: grid;
+    gap: 10px;
+  }
+
+  nav a,
+  .social-links a {
+    color: var(--muted);
+    font-size: 0.8rem;
+  }
+
+  nav a:hover,
+  .social-links a:hover {
+    color: white;
+  }
+
+  .footer-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 25px;
+    margin-top: 32px;
+    padding-top: 22px;
+    border-top: 1px solid var(--border);
+  }
+
+  .footer-bottom p {
+    margin: 0;
+    color: #747c80;
+    font-size: 0.73rem;
+    line-height: 1.5;
+  }
+
+  .system-status {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    color: var(--muted);
+    font-family: monospace;
+    font-size: 0.68rem;
+    white-space: nowrap;
+  }
+
+  .system-status span {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--success);
+    box-shadow: 0 0 9px var(--success);
+  }
+
+  @media (max-width: 850px) {
+    .footer-main {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .footer-brand {
+      grid-column: 1 / -1;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .footer-main {
+      grid-template-columns: 1fr;
+      gap: 28px;
+    }
+
+    .footer-brand {
+      grid-column: auto;
+    }
+
+    .footer-bottom {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+  }
+</style>
