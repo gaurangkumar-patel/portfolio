@@ -9,5 +9,6 @@ export const navigationLinks: NavigationLink[] = [
   { label: "Expertise", href: "#expertise" },
   { label: "Experience", href: "#experience" },
   { label: "Projects", href: "#projects" },
+  { label: "Certifications", href: "#certifications" },
   { label: "Contact", href: "#contact" },
 ];

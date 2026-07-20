@@ -1,0 +1,61 @@
+---
+import type {
+  CertificationType,
+} from '../../data/certifications';
+
+interface Props {
+  type: CertificationType;
+  label: string;
+}
+
+const {
+  type,
+  label,
+} = Astro.props;
+---
+
+<span class:list={['certification-badge', `type-${type}`]}>
+  <span class="badge-light" aria-hidden="true"></span>
+  {label}
+</span>
+
+<style>
+  .certification-badge {
+    display: inline-flex;
+    width: fit-content;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 10px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    color: var(--muted);
+    font-family: monospace;
+    font-size: 0.62rem;
+    font-weight: 750;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    background: rgba(0, 0, 0, 0.18);
+  }
+
+  .badge-light {
+    width: 7px;
+    height: 7px;
+    flex: 0 0 auto;
+    border-radius: 50%;
+  }
+
+  .type-backend .badge-light {
+    background: var(--success);
+    box-shadow: 0 0 9px var(--success);
+  }
+
+  .type-engineering .badge-light {
+    background: #79aee6;
+    box-shadow: 0 0 9px rgba(121, 174, 230, 0.65);
+  }
+
+  .type-analytics .badge-light {
+    background: #e4bc70;
+    box-shadow: 0 0 9px rgba(228, 188, 112, 0.6);
+  }
+</style>

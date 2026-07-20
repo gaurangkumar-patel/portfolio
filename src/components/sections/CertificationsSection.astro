@@ -1,0 +1,459 @@
+---
+import {
+  certifications,
+} from '../../data/certifications';
+
+import SectionHeader from '../ui/SectionHeader.astro';
+import CertificationBadge from '../ui/CertificationBadge.astro';
+---
+
+<section
+  id="certifications"
+  class="certifications-section"
+  aria-labelledby="certifications-title"
+>
+  <SectionHeader
+    id="certifications-title"
+    eyebrow="PROFESSIONAL DEVELOPMENT // VERIFIED RECORDS"
+    title="Certifications supporting practical engineering capability."
+    description="Completed technical assessments and job simulations covering PHP backend development, software engineering, APIs, SQL and data analysis."
+  />
+
+  <div class="certification-console">
+    <div class="console-status">
+      <span class="status-light" aria-hidden="true"></span>
+
+      <div>
+        <small>VERIFICATION STATUS</small>
+        <strong>Completed certifications only</strong>
+      </div>
+    </div>
+
+    <p>
+      Incomplete courses and assessments are intentionally excluded.
+    </p>
+  </div>
+
+  <div class="certification-grid">
+    {
+      certifications.map((certification, index) => (
+        <article class:list={[
+          'certification-card',
+          `certification-${certification.type}`,
+        ]}>
+          <div class="card-topline">
+            <span class="certification-number">
+              {String(index + 1).padStart(2, '0')}
+            </span>
+
+            <CertificationBadge
+              type={certification.type}
+              label={certification.statusLabel}
+            />
+          </div>
+
+          <div class="certificate-heading">
+            <p>{certification.issuer}</p>
+            <h3>{certification.title}</h3>
+          </div>
+
+          <div class="certificate-date">
+            <span>COMPLETED</span>
+            <strong>{certification.date}</strong>
+          </div>
+
+          <p class="certificate-summary">
+            {certification.summary}
+          </p>
+
+          <div class="capability-panel">
+            <p>ASSESSED CAPABILITIES</p>
+
+            <ul>
+              {
+                certification.capabilities.map((capability) => (
+                  <li>{capability}</li>
+                ))
+              }
+            </ul>
+          </div>
+
+          {
+            certification.credentialUrl && (
+              <a
+                class="credential-link"
+                href={certification.credentialUrl}
+                target="_blank"
+                rel="noreferrer"
+              >
+                View credential
+                <span aria-hidden="true">↗</span>
+              </a>
+            )
+          }
+
+          <span class="card-indicator" aria-hidden="true"></span>
+        </article>
+      ))
+    }
+  </div>
+
+  <div class="certification-note">
+    <span aria-hidden="true"></span>
+
+    <p>
+      Certificate links or credential identifiers will only be added
+      after they have been verified.
+    </p>
+  </div>
+</section>
+
+<style>
+  .certifications-section {
+    margin-top: 30px;
+    padding: clamp(40px, 7vw, 92px);
+    border: 1px solid var(--border);
+    border-radius: 32px;
+    background:
+      radial-gradient(
+        circle at 88% 15%,
+        rgba(228, 188, 112, 0.07),
+        transparent 27rem
+      ),
+      linear-gradient(
+        145deg,
+        rgba(37, 41, 44, 0.84),
+        rgba(15, 17, 19, 0.96)
+      );
+    box-shadow:
+      18px 18px 45px rgba(0, 0, 0, 0.4),
+      inset 1px 1px 1px rgba(255, 255, 255, 0.055);
+  }
+
+  .certification-console {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    margin-top: 44px;
+    padding: 17px 20px;
+    border: 1px solid var(--border);
+    border-radius: 17px;
+    background: rgba(0, 0, 0, 0.18);
+    box-shadow:
+      inset 5px 5px 13px rgba(0, 0, 0, 0.35);
+  }
+
+  .console-status {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+  }
+
+  .status-light {
+    width: 10px;
+    height: 10px;
+    flex: 0 0 auto;
+    border-radius: 50%;
+    background: var(--success);
+    box-shadow: 0 0 12px var(--success);
+  }
+
+  .console-status small,
+  .console-status strong {
+    display: block;
+  }
+
+  .console-status small {
+    color: #777f83;
+    font-family: monospace;
+    font-size: 0.64rem;
+    letter-spacing: 0.11em;
+  }
+
+  .console-status strong {
+    margin-top: 5px;
+    font-size: 0.9rem;
+  }
+
+  .certification-console > p {
+    max-width: 420px;
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.8rem;
+    line-height: 1.55;
+    text-align: right;
+  }
+
+  .certification-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+    margin-top: 24px;
+  }
+
+  .certification-card {
+    position: relative;
+    display: flex;
+    min-width: 0;
+    min-height: 100%;
+    flex-direction: column;
+    padding: clamp(24px, 3vw, 32px);
+    overflow: hidden;
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    background:
+      linear-gradient(
+        145deg,
+        rgba(43, 47, 50, 0.95),
+        rgba(19, 21, 23, 0.98)
+      );
+    box-shadow:
+      14px 14px 32px rgba(0, 0, 0, 0.4),
+      inset 1px 1px 1px rgba(255, 255, 255, 0.065);
+    transition:
+      transform 180ms ease,
+      border-color 180ms ease;
+  }
+
+  .certification-card::before {
+    position: absolute;
+    top: 0;
+    right: 18%;
+    left: 18%;
+    height: 1px;
+    content: '';
+    opacity: 0.72;
+    background: var(--success);
+    box-shadow: 0 0 18px var(--success);
+  }
+
+  .certification-engineering::before {
+    background: #79aee6;
+    box-shadow: 0 0 18px #79aee6;
+  }
+
+  .certification-analytics::before {
+    background: #e4bc70;
+    box-shadow: 0 0 18px #e4bc70;
+  }
+
+  .certification-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(121, 230, 167, 0.18);
+  }
+
+  .card-topline {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 14px;
+  }
+
+  .certification-number {
+    color: var(--accent);
+    font-family: monospace;
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+  }
+
+  .certificate-heading {
+    margin-top: 36px;
+  }
+
+  .certificate-heading p {
+    margin: 0 0 9px;
+    color: var(--accent);
+    font-size: 0.76rem;
+    font-weight: 750;
+  }
+
+  .certificate-heading h3 {
+    margin: 0;
+    font-size: clamp(1.45rem, 2.5vw, 2rem);
+    line-height: 1.1;
+    letter-spacing: -0.035em;
+  }
+
+  .certificate-date {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    margin-top: 24px;
+    padding: 12px 14px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: rgba(0, 0, 0, 0.18);
+  }
+
+  .certificate-date span {
+    color: #777f83;
+    font-family: monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+  }
+
+  .certificate-date strong {
+    color: var(--success);
+    font-family: monospace;
+    font-size: 0.7rem;
+  }
+
+  .certificate-summary {
+    margin: 23px 0 0;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  .capability-panel {
+    margin-top: 24px;
+    padding: 19px;
+    border: 1px solid var(--border);
+    border-radius: 15px;
+    background: rgba(0, 0, 0, 0.18);
+    box-shadow:
+      inset 4px 4px 12px rgba(0, 0, 0, 0.34);
+  }
+
+  .capability-panel > p {
+    margin: 0;
+    color: var(--success);
+    font-family: monospace;
+    font-size: 0.63rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+  }
+
+  .capability-panel ul {
+    display: grid;
+    gap: 10px;
+    margin: 17px 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .capability-panel li {
+    position: relative;
+    padding-left: 18px;
+    color: var(--muted);
+    font-size: 0.82rem;
+    line-height: 1.5;
+  }
+
+  .capability-panel li::before {
+    position: absolute;
+    top: 0.68em;
+    left: 0;
+    width: 7px;
+    height: 2px;
+    content: '';
+    background: var(--success);
+  }
+
+  .credential-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    width: fit-content;
+    margin-top: 22px;
+    color: var(--success);
+    font-size: 0.76rem;
+    font-weight: 750;
+  }
+
+  .card-indicator {
+    position: absolute;
+    right: 23px;
+    bottom: 23px;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--success);
+    box-shadow: 0 0 10px var(--success);
+  }
+
+  .certification-engineering .card-indicator {
+    background: #79aee6;
+    box-shadow: 0 0 10px #79aee6;
+  }
+
+  .certification-analytics .card-indicator {
+    background: #e4bc70;
+    box-shadow: 0 0 10px #e4bc70;
+  }
+
+  .certification-note {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    width: fit-content;
+    margin: 28px 0 0 auto;
+    padding: 12px 15px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: rgba(0, 0, 0, 0.17);
+  }
+
+  .certification-note > span {
+    width: 8px;
+    height: 8px;
+    flex: 0 0 auto;
+    border-radius: 50%;
+    background: var(--success);
+    box-shadow: 0 0 9px var(--success);
+  }
+
+  .certification-note p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.75rem;
+  }
+
+  @media (max-width: 1000px) {
+    .certification-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 700px) {
+    .certification-console {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+
+    .certification-console > p {
+      max-width: none;
+      text-align: left;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .certifications-section {
+      padding: 36px 18px;
+    }
+
+    .certification-card {
+      padding: 24px 20px;
+    }
+
+    .card-topline {
+      flex-direction: column;
+    }
+
+    .certification-note {
+      width: 100%;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .certification-card {
+      transition: none;
+    }
+
+    .certification-card:hover {
+      transform: none;
+    }
+  }
+</style>
