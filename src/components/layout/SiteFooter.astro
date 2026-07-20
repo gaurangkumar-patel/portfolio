@@ -1,6 +1,6 @@
 ---
-import { navigationLinks } from '../../data/navigation';
-import { profile } from '../../data/profile';
+import { navigationLinks } from "../../data/navigation";
+import { profile } from "../../data/profile";
 
 const baseURL = import.meta.env.BASE_URL;
 const currentYear = new Date().getFullYear();
@@ -20,40 +20,28 @@ const currentYear = new Date().getFullYear();
     <nav aria-label="Footer navigation">
       {
         navigationLinks.map((link) => (
-          <a href={`${baseURL}${link.href}`}>
-            {link.label}
-          </a>
+          <a href={`${baseURL}${link.href}`}>{link.label}</a>
         ))
       }
     </nav>
 
     <div class="social-links">
-      <a
-        href={profile.links.github}
-        target="_blank"
-        rel="noreferrer"
-      >
+      <a href={profile.links.github} target="_blank" rel="noreferrer">
         GitHub ↗
       </a>
 
-      <a
-        href={profile.links.linkedin}
-        target="_blank"
-        rel="noreferrer"
-      >
+      <a href={profile.links.linkedin} target="_blank" rel="noreferrer">
         LinkedIn ↗
       </a>
 
-      <a href="mailto:gaurangpatel3056@gmail.com">
-        Email →
-      </a>
+      <a href="mailto:gaurangpatel3056@gmail.com"> Email → </a>
     </div>
   </div>
 
   <div class="footer-bottom">
     <p>
-      © {currentYear} Gaurangkumar Patel.
-      Built with Astro, React, TypeScript and Three.js.
+      © {currentYear} Gaurangkumar Patel. Built with Astro, React, TypeScript and
+      Three.js.
     </p>
 
     <div class="system-status">
@@ -69,12 +57,11 @@ const currentYear = new Date().getFullYear();
     padding: clamp(28px, 5vw, 48px);
     border: 1px solid var(--border);
     border-radius: 28px;
-    background:
-      linear-gradient(
-        145deg,
-        rgba(37, 41, 44, 0.9),
-        rgba(15, 17, 19, 0.98)
-      );
+    background: linear-gradient(
+      145deg,
+      rgba(37, 41, 44, 0.9),
+      rgba(15, 17, 19, 0.98)
+    );
     box-shadow:
       16px 16px 38px rgba(0, 0, 0, 0.4),
       inset 1px 1px 1px rgba(255, 255, 255, 0.055);
@@ -102,8 +89,7 @@ const currentYear = new Date().getFullYear();
     border-radius: 15px;
     color: white;
     font-weight: 850;
-    background:
-      linear-gradient(145deg, #ff6565, #bd2929);
+    background: linear-gradient(145deg, #ff6565, #bd2929);
     box-shadow:
       5px 5px 12px rgba(0, 0, 0, 0.5),
       inset 2px 2px 3px rgba(255, 255, 255, 0.24);
@@ -166,7 +152,74 @@ const currentYear = new Date().getFullYear();
     background: var(--success);
     box-shadow: 0 0 9px var(--success);
   }
+  .brand-mark {
+    transition:
+      transform 180ms ease,
+      box-shadow 180ms ease;
+  }
 
+  .brand-mark:hover {
+    transform: translateY(-3px) rotate(-2deg);
+    box-shadow:
+      8px 8px 16px rgba(0, 0, 0, 0.55),
+      inset 2px 2px 3px rgba(255, 255, 255, 0.24);
+  }
+
+  nav a,
+  .social-links a {
+    position: relative;
+    width: fit-content;
+  }
+
+  nav a::after,
+  .social-links a::after {
+    position: absolute;
+    right: 0;
+    bottom: -4px;
+    left: 0;
+    height: 1px;
+    content: "";
+    background: var(--success);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 180ms ease;
+  }
+
+  nav a:hover::after,
+  .social-links a:hover::after {
+    transform: scaleX(1);
+  }
+
+  .system-status span {
+    animation: statusPulse 2.4s ease-in-out infinite;
+  }
+
+  @keyframes statusPulse {
+    0%,
+    100% {
+      opacity: 0.7;
+      transform: scale(0.92);
+    }
+
+    50% {
+      opacity: 1;
+      transform: scale(1.12);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .brand-mark,
+    nav a::after,
+    .social-links a::after,
+    .system-status span {
+      animation: none;
+      transition: none;
+    }
+
+    .brand-mark:hover {
+      transform: none;
+    }
+  }
   @media (max-width: 850px) {
     .footer-main {
       grid-template-columns: 1fr 1fr;
