@@ -1,85 +1,75 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import HeroScene from '../components/HeroScene';
-import SiteHeader from '../components/layout/SiteHeader.astro';
-import AboutSection from '../components/sections/AboutSection.astro';
-import ExpertiseSection from '../components/sections/ExpertiseSection.astro';
-import ExperienceSection from '../components/sections/ExperienceSection.astro';
-import ProjectsSection from '../components/sections/ProjectsSection.astro';
-import PersonalIntroSection from '../components/sections/PersonalIntroSection.astro';
-import ContactSection from '../components/sections/ContactSection.astro';
-import profilePhoto from '../assets/profile/gaurangkumar-patel-profile.webp';
-import { siteMetadata, } from '../data/seo';
-import CertificationsSection from '../components/sections/CertificationsSection.astro';
-import SiteFooter from '../components/layout/SiteFooter.astro';
+import BaseLayout from "../layouts/BaseLayout.astro";
+import HeroScene from "../components/HeroScene";
+import SiteHeader from "../components/layout/SiteHeader.astro";
+import AboutSection from "../components/sections/AboutSection.astro";
+import ExpertiseSection from "../components/sections/ExpertiseSection.astro";
+import ExperienceSection from "../components/sections/ExperienceSection.astro";
+import ProjectsSection from "../components/sections/ProjectsSection.astro";
+import PersonalIntroSection from "../components/sections/PersonalIntroSection.astro";
+import ContactSection from "../components/sections/ContactSection.astro";
+import profilePhoto from "../assets/profile/gaurangkumar-patel-profile.webp";
+import { siteMetadata } from "../data/seo";
+import CertificationsSection from "../components/sections/CertificationsSection.astro";
+import SiteFooter from "../components/layout/SiteFooter.astro";
+import SkillsOrbitSection from "../components/sections/SkillsOrbitSection.astro";
 
-const homepageURL = new URL(
-  import.meta.env.BASE_URL,
-  Astro.site ?? Astro.url,
-);
+const homepageURL = new URL(import.meta.env.BASE_URL, Astro.site ?? Astro.url);
 
-const profileImageURL = new URL(
-  profilePhoto.src,
-  Astro.site ?? Astro.url,
-);
+const profileImageURL = new URL(profilePhoto.src, Astro.site ?? Astro.url);
 
 const homepageStructuredData = {
-  '@context': 'https://schema.org',
-  '@type': 'ProfilePage',
+  "@context": "https://schema.org",
+  "@type": "ProfilePage",
 
-  name:
-    'Gaurangkumar Patel — Backend Software Engineer Portfolio',
+  name: "Gaurangkumar Patel — Backend Software Engineer Portfolio",
 
-  description:
-    siteMetadata.defaultSeo.description,
+  description: siteMetadata.defaultSeo.description,
 
   url: homepageURL.href,
 
   mainEntity: {
-    '@type': 'Person',
-    '@id': `${homepageURL.href}#person`,
+    "@type": "Person",
+    "@id": `${homepageURL.href}#person`,
 
-    name: 'Gaurangkumar Patel',
+    name: "Gaurangkumar Patel",
 
     url: homepageURL.href,
 
     image: profileImageURL.href,
 
-    jobTitle: 'Backend Software Engineer',
+    jobTitle: "Backend Software Engineer",
 
     address: {
-      '@type': 'PostalAddress',
-      addressLocality: 'London',
-      addressCountry: 'GB',
+      "@type": "PostalAddress",
+      addressLocality: "London",
+      addressCountry: "GB",
     },
 
     knowsAbout: [
-      'PHP',
-      'Laravel',
-      'Yii2',
-      'REST APIs',
-      'MySQL',
-      'Redis',
-      'React',
-      'Backend software engineering',
-      'Database-driven web applications',
+      "PHP",
+      "Laravel",
+      "Yii2",
+      "REST APIs",
+      "MySQL",
+      "Redis",
+      "React",
+      "Backend software engineering",
+      "Database-driven web applications",
     ],
 
-    sameAs: [
-      siteMetadata.githubUrl,
-      siteMetadata.linkedinUrl,
-    ],
+    sameAs: [siteMetadata.githubUrl, siteMetadata.linkedinUrl],
   },
 };
-const githubURL = 'https://github.com/gaurangkumar-patel';
-const linkedinURL = 'https://www.linkedin.com/in/gaurangpatel2326';
+const githubURL = "https://github.com/gaurangkumar-patel";
+const linkedinURL = "https://www.linkedin.com/in/gaurangpatel2326";
 ---
 
 <BaseLayout
-	title={siteMetadata.defaultSeo.title}
-  	description={siteMetadata.defaultSeo.description}
-  	imageAlt="Gaurangkumar Patel PHP Laravel Backend Software Engineer portfolio preview"
-  	structuredData={homepageStructuredData}
+  title={siteMetadata.defaultSeo.title}
+  description={siteMetadata.defaultSeo.description}
+  imageAlt="Gaurangkumar Patel PHP Laravel Backend Software Engineer portfolio preview"
+  structuredData={homepageStructuredData}
 >
   <div class="page-shell">
     <SiteHeader />
@@ -95,16 +85,26 @@ const linkedinURL = 'https://www.linkedin.com/in/gaurangpatel2326';
           </h1>
 
           <p class="intro">
-            Hi, I’m Gaurangkumar Patel — a Backend Software Engineer focused
-            on PHP, Laravel, REST APIs, databases and dependable web applications.
+            Hi, I’m Gaurangkumar Patel — a Backend Software Engineer focused on
+            PHP, Laravel, REST APIs, databases and dependable web applications.
           </p>
 
           <div class="actions">
-            <a class="primary-button" href={githubURL} target="_blank" rel="noreferrer">
+            <a
+              class="primary-button"
+              href={githubURL}
+              target="_blank"
+              rel="noreferrer"
+            >
               Explore GitHub
             </a>
 
-            <a class="secondary-button" href={linkedinURL} target="_blank" rel="noreferrer">
+            <a
+              class="secondary-button"
+              href={linkedinURL}
+              target="_blank"
+              rel="noreferrer"
+            >
               View LinkedIn
             </a>
           </div>
@@ -156,12 +156,10 @@ const linkedinURL = 'https://www.linkedin.com/in/gaurangpatel2326';
             </div>
 
             <div class="scene-shell">
-				<HeroScene client:only="react" />
+              <HeroScene client:only="react" />
 
-				<span class="scene-caption">
-					BACKEND CORE
-				</span>
-			</div>
+              <span class="scene-caption"> BACKEND CORE </span>
+            </div>
           </div>
 
           <div class="console-controls">
@@ -182,38 +180,41 @@ const linkedinURL = 'https://www.linkedin.com/in/gaurangpatel2326';
           </div>
         </div>
       </section>
-	  <PersonalIntroSection />
-	  <AboutSection />
+      <PersonalIntroSection />
+      <AboutSection />
 
-	  <ExpertiseSection />
+      <ExpertiseSection />
+      <SkillsOrbitSection />
+      <ExperienceSection />
 
-	  <ExperienceSection />
-
-	  <ProjectsSection />
-    <CertificationsSection />
-	  <ContactSection />
+      <ProjectsSection />
+      <CertificationsSection />
+      <ContactSection />
     </main>
     <SiteFooter />
   </div>
 </BaseLayout>
 
 <style>
-	.page-shell {
-		width: min(1440px, calc(100% - 40px));
-		margin: 0 auto;
-		padding: 24px 0 60px;
-	}
+  .page-shell {
+    width: min(1440px, calc(100% - 40px));
+    margin: 0 auto;
+    padding: 24px 0 60px;
+  }
 
-	.panel {
-		border: 1px solid var(--border);
-		background:
-		linear-gradient(145deg, rgba(45, 49, 52, 0.96), rgba(22, 24, 26, 0.97));
-		box-shadow:
-		18px 18px 45px rgba(0, 0, 0, 0.45),
-		-8px -8px 30px rgba(255, 255, 255, 0.025),
-		inset 1px 1px 1px rgba(255, 255, 255, 0.08),
-		inset -1px -1px 1px rgba(0, 0, 0, 0.8);
-	}
+  .panel {
+    border: 1px solid var(--border);
+    background: linear-gradient(
+      145deg,
+      rgba(45, 49, 52, 0.96),
+      rgba(22, 24, 26, 0.97)
+    );
+    box-shadow:
+      18px 18px 45px rgba(0, 0, 0, 0.45),
+      -8px -8px 30px rgba(255, 255, 255, 0.025),
+      inset 1px 1px 1px rgba(255, 255, 255, 0.08),
+      inset -1px -1px 1px rgba(0, 0, 0, 0.8);
+  }
 
   .topbar {
     display: flex;
@@ -463,48 +464,44 @@ const linkedinURL = 'https://www.linkedin.com/in/gaurangpatel2326';
     color: var(--success);
   }
 
+  .scene-shell {
+    position: absolute;
+    right: 24px;
+    bottom: 24px;
+    width: min(58%, 340px);
+    aspect-ratio: 1;
+    overflow: hidden;
+    border: 1px solid rgba(121, 230, 167, 0.16);
+    border-radius: 50%;
+    background: radial-gradient(
+      circle,
+      rgba(121, 230, 167, 0.09),
+      rgba(4, 10, 7, 0.25) 58%,
+      rgba(4, 10, 7, 0.8)
+    );
+    box-shadow:
+      0 0 55px rgba(121, 230, 167, 0.12),
+      inset 0 0 40px rgba(0, 0, 0, 0.75);
+  }
 
-	.scene-shell {
-		position: absolute;
-		right: 24px;
-		bottom: 24px;
-		width: min(58%, 340px);
-		aspect-ratio: 1;
-		overflow: hidden;
-		border: 1px solid rgba(121, 230, 167, 0.16);
-		border-radius: 50%;
-		background:
-			radial-gradient(
-			circle,
-			rgba(121, 230, 167, 0.09),
-			rgba(4, 10, 7, 0.25) 58%,
-			rgba(4, 10, 7, 0.8)
-			);
-		box-shadow:
-			0 0 55px rgba(121, 230, 167, 0.12),
-			inset 0 0 40px rgba(0, 0, 0, 0.75);
-	}
+  :global(.three-scene),
+  :global(.three-scene canvas) {
+    width: 100%;
+    height: 100%;
+  }
 
-	:global(.three-scene),
-	:global(.three-scene canvas) {
-		width: 100%;
-		height: 100%;
-		}
-
-	.scene-caption {
-		position: absolute;
-		right: 50%;
-		bottom: 18px;
-		transform: translateX(50%);
-		color: rgba(121, 230, 167, 0.75);
-		font-family: monospace;
-		font-size: 0.64rem;
-		font-weight: 700;
-		letter-spacing: 0.18em;
-		pointer-events: none;
-	}
-
-
+  .scene-caption {
+    position: absolute;
+    right: 50%;
+    bottom: 18px;
+    transform: translateX(50%);
+    color: rgba(121, 230, 167, 0.75);
+    font-family: monospace;
+    font-size: 0.64rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    pointer-events: none;
+  }
 
   .scan-line {
     position: absolute;
@@ -614,44 +611,43 @@ const linkedinURL = 'https://www.linkedin.com/in/gaurangpatel2326';
     }
 
     .scene-shell {
-		right: 12px;
-		bottom: 18px;
-		width: 260px;
-	}
+      right: 12px;
+      bottom: 18px;
+      width: 260px;
+    }
   }
-	.content-placeholder {
-	display: grid;
-	min-height: 62vh;
-	margin-top: 30px;
-	padding: clamp(34px, 6vw, 80px);
-	align-content: center;
-	border: 1px solid var(--border);
-	border-radius: 32px;
-	background:
-		linear-gradient(
-		145deg,
-		rgba(38, 42, 45, 0.78),
-		rgba(17, 19, 21, 0.9)
-		);
-	box-shadow:
-		18px 18px 45px rgba(0, 0, 0, 0.38),
-		inset 1px 1px 1px rgba(255, 255, 255, 0.06);
-	}
+  .content-placeholder {
+    display: grid;
+    min-height: 62vh;
+    margin-top: 30px;
+    padding: clamp(34px, 6vw, 80px);
+    align-content: center;
+    border: 1px solid var(--border);
+    border-radius: 32px;
+    background: linear-gradient(
+      145deg,
+      rgba(38, 42, 45, 0.78),
+      rgba(17, 19, 21, 0.9)
+    );
+    box-shadow:
+      18px 18px 45px rgba(0, 0, 0, 0.38),
+      inset 1px 1px 1px rgba(255, 255, 255, 0.06);
+  }
 
-.content-placeholder p {
-  margin: 0 0 14px;
-  color: var(--accent);
-  font-family: monospace;
-  font-size: 0.76rem;
-  font-weight: 700;
-  letter-spacing: 0.16em;
-}
+  .content-placeholder p {
+    margin: 0 0 14px;
+    color: var(--accent);
+    font-family: monospace;
+    font-size: 0.76rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+  }
 
-.content-placeholder h2 {
-  margin: 0;
-  font-size: clamp(2.5rem, 6vw, 5.5rem);
-  letter-spacing: -0.055em;
-}
+  .content-placeholder h2 {
+    margin: 0;
+    font-size: clamp(2.5rem, 6vw, 5.5rem);
+    letter-spacing: -0.055em;
+  }
   @media (prefers-reduced-motion: reduce) {
     html {
       scroll-behavior: auto;

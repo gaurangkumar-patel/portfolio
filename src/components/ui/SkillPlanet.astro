@@ -1,0 +1,151 @@
+---
+import type { OrbitSkill } from "../../data/skills-orbit";
+
+interface Props {
+  skill: OrbitSkill;
+  index: number;
+  total: number;
+}
+
+const { skill, index, total } = Astro.props;
+
+const angle = `${(360 / total) * index}deg`;
+---
+
+<div
+  class:list={["skill-position", `group-${skill.group}`]}
+  style={`--planet-angle: ${angle};`}
+>
+  <article
+    class="skill-planet"
+    tabindex="0"
+    aria-label={`${skill.name}: ${skill.capability}`}
+  >
+    <span class="planet-symbol" aria-hidden="true">
+      {skill.symbol}
+    </span>
+
+    <span class="planet-copy">
+      <strong>{skill.shortLabel}</strong>
+      <small>{skill.capability}</small>
+    </span>
+  </article>
+</div>
+
+<style>
+  .skill-position {
+    position: absolute;
+    inset: 50%;
+    width: 0;
+    height: 0;
+    transform: rotate(var(--planet-angle)) translateX(var(--orbit-radius));
+  }
+
+  .skill-planet {
+    display: flex;
+    width: max-content;
+    max-width: 180px;
+    align-items: center;
+    gap: 9px;
+    padding: 8px 11px 8px 8px;
+    border: 1px solid rgba(121, 230, 167, 0.24);
+    border-radius: 999px;
+    color: white;
+    cursor: default;
+    background: linear-gradient(
+      145deg,
+      rgba(42, 47, 50, 0.98),
+      rgba(15, 18, 20, 0.98)
+    );
+    box-shadow:
+      7px 7px 18px rgba(0, 0, 0, 0.48),
+      inset 1px 1px 1px rgba(255, 255, 255, 0.08),
+      0 0 16px rgba(121, 230, 167, 0.07);
+    transform: translate(-50%, -50%) rotate(calc(var(--planet-angle) * -1));
+    transition:
+      border-color 180ms ease,
+      box-shadow 180ms ease,
+      scale 180ms ease;
+  }
+
+  .planet-symbol {
+    display: grid;
+    width: 35px;
+    height: 35px;
+    flex: 0 0 auto;
+    place-items: center;
+    border-radius: 50%;
+    color: #101513;
+    font-family: monospace;
+    font-size: 0.64rem;
+    font-weight: 900;
+    background: var(--success);
+    box-shadow:
+      0 0 14px rgba(121, 230, 167, 0.46),
+      inset 1px 1px 2px rgba(255, 255, 255, 0.3);
+  }
+
+  .planet-copy {
+    display: grid;
+    gap: 2px;
+  }
+
+  .planet-copy strong {
+    font-size: 0.72rem;
+  }
+
+  .planet-copy small {
+    display: none;
+    color: var(--muted);
+    font-size: 0.61rem;
+    white-space: nowrap;
+  }
+
+  .skill-planet:hover,
+  .skill-planet:focus-visible {
+    z-index: 10;
+    border-color: rgba(121, 230, 167, 0.7);
+    outline: none;
+    box-shadow:
+      10px 10px 24px rgba(0, 0, 0, 0.56),
+      0 0 24px rgba(121, 230, 167, 0.18);
+    scale: 1.08;
+  }
+
+  .skill-planet:hover .planet-copy small,
+  .skill-planet:focus-visible .planet-copy small {
+    display: block;
+  }
+
+  .group-data .planet-symbol {
+    color: #111418;
+    background: #79aee6;
+    box-shadow: 0 0 14px rgba(121, 174, 230, 0.52);
+  }
+
+  .group-platform .planet-symbol {
+    color: #17130c;
+    background: #e4bc70;
+    box-shadow: 0 0 14px rgba(228, 188, 112, 0.5);
+  }
+
+  @media (max-width: 700px) {
+    .skill-position {
+      position: static;
+      width: auto;
+      height: auto;
+      transform: none;
+    }
+
+    .skill-planet {
+      width: 100%;
+      max-width: none;
+      transform: none;
+    }
+
+    .planet-copy small {
+      display: block;
+      white-space: normal;
+    }
+  }
+</style>

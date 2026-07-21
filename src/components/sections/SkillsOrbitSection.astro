@@ -1,0 +1,507 @@
+---
+import profilePhoto from "../../assets/profile/gaurangkumar-patel-profile.webp";
+
+import { Image } from "astro:assets";
+
+import { orbitSkills } from "../../data/skills-orbit";
+
+import SectionHeader from "../ui/SectionHeader.astro";
+import SkillPlanet from "../ui/SkillPlanet.astro";
+
+const coreSkills = orbitSkills.filter((skill) => skill.group === "core");
+
+const dataSkills = orbitSkills.filter((skill) => skill.group === "data");
+
+const platformSkills = orbitSkills.filter(
+  (skill) => skill.group === "platform",
+);
+---
+
+<section
+  id="skills-orbit"
+  class="skills-orbit-section"
+  aria-labelledby="skills-orbit-title"
+>
+  <SectionHeader
+    id="skills-orbit-title"
+    eyebrow="ENGINEERING ECOSYSTEM // ACTIVE MODULES"
+    title="Technologies orbiting a backend engineering core."
+    description="A visual map of the confirmed technologies I use across backend development, data systems, integrations, automation and supporting interfaces."
+  />
+
+  <div class="skills-console">
+    <div class="console-status">
+      <span aria-hidden="true"></span>
+
+      <div>
+        <small>ORBIT STATUS</small>
+        <strong>12 engineering modules online</strong>
+      </div>
+    </div>
+
+    <div class="legend" aria-label="Skill groups">
+      <span class="legend-core">Core backend</span>
+      <span class="legend-data">Data and systems</span>
+      <span class="legend-platform">Supporting technologies</span>
+    </div>
+  </div>
+
+  <div class="orbit-stage">
+    <div class="space-field" aria-hidden="true">
+      <span class="star star-one"></span>
+      <span class="star star-two"></span>
+      <span class="star star-three"></span>
+      <span class="star star-four"></span>
+      <span class="star star-five"></span>
+    </div>
+
+    <div class="central-core">
+      <div class="core-glow" aria-hidden="true"></div>
+
+      <div class="profile-frame">
+        <Image
+          src={profilePhoto}
+          alt="Gaurangkumar Patel, Backend Software Engineer"
+          width={180}
+          height={180}
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
+
+      <p>BACKEND ENGINEERING CORE</p>
+      <strong>Gaurangkumar Patel</strong>
+
+      <div class="core-status">
+        <span aria-hidden="true"></span>
+        System online
+      </div>
+    </div>
+
+    <div class="orbit orbit-inner" aria-label="Core backend technologies">
+      {
+        coreSkills.map((skill, index) => (
+          <SkillPlanet skill={skill} index={index} total={coreSkills.length} />
+        ))
+      }
+    </div>
+
+    <div class="orbit orbit-middle" aria-label="Data and systems technologies">
+      {
+        dataSkills.map((skill, index) => (
+          <SkillPlanet skill={skill} index={index} total={dataSkills.length} />
+        ))
+      }
+    </div>
+
+    <div class="orbit orbit-outer" aria-label="Supporting technologies">
+      {
+        platformSkills.map((skill, index) => (
+          <SkillPlanet
+            skill={skill}
+            index={index}
+            total={platformSkills.length}
+          />
+        ))
+      }
+    </div>
+  </div>
+
+  <div class="mobile-skills">
+    {
+      orbitSkills.map((skill, index) => (
+        <SkillPlanet skill={skill} index={index} total={orbitSkills.length} />
+      ))
+    }
+  </div>
+
+  <p class="orbit-note">
+    Hover or focus a technology to view its engineering role.
+  </p>
+</section>
+
+<style>
+  .skills-orbit-section {
+    position: relative;
+    margin-top: 30px;
+    padding: clamp(40px, 7vw, 92px);
+    overflow: hidden;
+    border: 1px solid var(--border);
+    border-radius: 32px;
+    background:
+      radial-gradient(
+        circle at 50% 58%,
+        rgba(121, 230, 167, 0.08),
+        transparent 27rem
+      ),
+      radial-gradient(
+        circle at 13% 20%,
+        rgba(121, 174, 230, 0.07),
+        transparent 23rem
+      ),
+      linear-gradient(145deg, rgba(31, 35, 38, 0.94), rgba(10, 12, 14, 0.99));
+    box-shadow:
+      18px 18px 45px rgba(0, 0, 0, 0.42),
+      inset 1px 1px 1px rgba(255, 255, 255, 0.05);
+  }
+
+  .skills-console {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 22px;
+    margin-top: 42px;
+    padding: 15px 18px;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    background: rgba(0, 0, 0, 0.2);
+    box-shadow: inset 5px 5px 14px rgba(0, 0, 0, 0.34);
+  }
+
+  .console-status {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .console-status > span,
+  .core-status > span {
+    width: 9px;
+    height: 9px;
+    flex: 0 0 auto;
+    border-radius: 50%;
+    background: var(--success);
+    box-shadow: 0 0 11px var(--success);
+  }
+
+  .console-status small,
+  .console-status strong {
+    display: block;
+  }
+
+  .console-status small {
+    color: #7c8589;
+    font-family: monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.11em;
+  }
+
+  .console-status strong {
+    margin-top: 4px;
+    font-size: 0.83rem;
+  }
+
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9px;
+  }
+
+  .legend span {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    color: var(--muted);
+    font-family: monospace;
+    font-size: 0.64rem;
+  }
+
+  .legend span::before {
+    width: 7px;
+    height: 7px;
+    content: "";
+    border-radius: 50%;
+    background: var(--success);
+  }
+
+  .legend .legend-data::before {
+    background: #79aee6;
+  }
+
+  .legend .legend-platform::before {
+    background: #e4bc70;
+  }
+
+  .orbit-stage {
+    position: relative;
+    min-height: 780px;
+    margin-top: 30px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.055);
+    border-radius: 28px;
+    background:
+      radial-gradient(
+        circle at center,
+        rgba(121, 230, 167, 0.055),
+        transparent 38%
+      ),
+      rgba(0, 0, 0, 0.16);
+    isolation: isolate;
+  }
+
+  .space-field {
+    position: absolute;
+    inset: 0;
+    opacity: 0.65;
+    background-image: radial-gradient(
+      circle,
+      rgba(255, 255, 255, 0.28) 1px,
+      transparent 1px
+    );
+    background-size: 44px 44px;
+    mask-image: radial-gradient(circle, black, transparent 86%);
+  }
+
+  .star {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: white;
+    box-shadow: 0 0 10px white;
+    animation: starPulse 3s ease-in-out infinite;
+  }
+
+  .star-one {
+    top: 15%;
+    left: 18%;
+  }
+
+  .star-two {
+    top: 28%;
+    right: 17%;
+    animation-delay: 0.7s;
+  }
+
+  .star-three {
+    right: 28%;
+    bottom: 18%;
+    animation-delay: 1.2s;
+  }
+
+  .star-four {
+    bottom: 21%;
+    left: 21%;
+    animation-delay: 1.8s;
+  }
+
+  .star-five {
+    top: 9%;
+    left: 55%;
+    animation-delay: 2.2s;
+  }
+
+  .central-core {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 5;
+    display: grid;
+    width: 230px;
+    min-height: 280px;
+    place-items: center;
+    padding: 24px 20px;
+    border: 1px solid rgba(121, 230, 167, 0.32);
+    border-radius: 44% 44% 38% 38%;
+    text-align: center;
+    background: linear-gradient(
+      145deg,
+      rgba(45, 50, 53, 0.98),
+      rgba(15, 18, 20, 0.99)
+    );
+    box-shadow:
+      18px 18px 38px rgba(0, 0, 0, 0.5),
+      inset 1px 1px 2px rgba(255, 255, 255, 0.09),
+      0 0 45px rgba(121, 230, 167, 0.12);
+    transform: translate(-50%, -50%);
+  }
+
+  .core-glow {
+    position: absolute;
+    inset: -30px;
+    z-index: -1;
+    border-radius: 50%;
+    opacity: 0.55;
+    background: radial-gradient(
+      circle,
+      rgba(121, 230, 167, 0.2),
+      transparent 68%
+    );
+    animation: corePulse 3.5s ease-in-out infinite;
+  }
+
+  .profile-frame {
+    width: 132px;
+    height: 132px;
+    padding: 7px;
+    overflow: hidden;
+    border: 1px solid rgba(121, 230, 167, 0.38);
+    border-radius: 50%;
+    background: #141719;
+    box-shadow:
+      0 0 22px rgba(121, 230, 167, 0.18),
+      inset 2px 2px 5px rgba(0, 0, 0, 0.55);
+  }
+
+  .profile-frame :global(img) {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  .central-core > p {
+    margin: 18px 0 0;
+    color: var(--success);
+    font-family: monospace;
+    font-size: 0.61rem;
+    font-weight: 800;
+    letter-spacing: 0.11em;
+  }
+
+  .central-core > strong {
+    font-size: 0.92rem;
+  }
+
+  .core-status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--muted);
+    font-family: monospace;
+    font-size: 0.61rem;
+  }
+
+  .orbit {
+    --orbit-radius: 210px;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    border: 1px solid rgba(121, 230, 167, 0.13);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    animation: orbitRotation 34s linear infinite;
+  }
+
+  .orbit:hover,
+  .orbit:focus-within {
+    animation-play-state: paused;
+  }
+
+  .orbit-inner {
+    width: 420px;
+    height: 420px;
+  }
+
+  .orbit-middle {
+    --orbit-radius: 285px;
+
+    width: 570px;
+    height: 570px;
+    border-color: rgba(121, 174, 230, 0.12);
+    animation-duration: 44s;
+    animation-direction: reverse;
+  }
+
+  .orbit-outer {
+    --orbit-radius: 350px;
+
+    width: 700px;
+    height: 700px;
+    border-color: rgba(228, 188, 112, 0.11);
+    animation-duration: 56s;
+  }
+
+  .mobile-skills {
+    display: none;
+  }
+
+  .orbit-note {
+    margin: 22px 0 0;
+    color: var(--muted);
+    font-family: monospace;
+    font-size: 0.68rem;
+    text-align: center;
+  }
+
+  @keyframes orbitRotation {
+    to {
+      transform: translate(-50%, -50%) rotate(360deg);
+    }
+  }
+
+  @keyframes corePulse {
+    0%,
+    100% {
+      opacity: 0.4;
+      scale: 0.95;
+    }
+
+    50% {
+      opacity: 0.7;
+      scale: 1.05;
+    }
+  }
+
+  @keyframes starPulse {
+    0%,
+    100% {
+      opacity: 0.25;
+      scale: 0.8;
+    }
+
+    50% {
+      opacity: 1;
+      scale: 1.25;
+    }
+  }
+
+  @media (max-width: 1000px) {
+    .orbit-stage {
+      min-height: 680px;
+      scale: 0.88;
+      margin-inline: -6%;
+    }
+  }
+
+  @media (max-width: 700px) {
+    .skills-orbit-section {
+      padding: 36px 18px;
+    }
+
+    .skills-console {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+
+    .orbit-stage {
+      display: none;
+    }
+
+    .mobile-skills {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 26px;
+    }
+
+    .orbit-note {
+      text-align: left;
+    }
+  }
+
+  @media (max-width: 430px) {
+    .mobile-skills {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .orbit,
+    .core-glow,
+    .star {
+      animation: none;
+    }
+  }
+</style>
