@@ -27,7 +27,7 @@ export interface ProfileData {
 
 export const profile: ProfileData = {
   name: "Gaurangkumar Patel",
-  title: "Backend Software Engineer",
+  title: "Software Engineer · Backend Development",
   eyebrow: "ENGINEER PROFILE // BACKEND FOCUSED",
 
   summary:
@@ -83,5 +83,5 @@ export const profile: ProfileData = {
     linkedin: "https://www.linkedin.com/in/gaurangpatel2326",
   },
 
-  cvFilename: "Gaurangkumar_Patel_Master_Backend_Software_Engineer_CV_v4.2.pdf",
+  cvFilename: "Gaurangkumar_Patel_Master_Software_Engineer_CV_v4.3.pdf",
 };

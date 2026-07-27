@@ -1,17 +1,13 @@
 ---
-import { profile } from '../../data/profile';
-import SectionHeader from '../ui/SectionHeader.astro';
-import SkeuoPanel from '../ui/SkeuoPanel.astro';
+import { profile } from "../../data/profile";
+import SectionHeader from "../ui/SectionHeader.astro";
+import SkeuoPanel from "../ui/SkeuoPanel.astro";
+import { educationRecords } from "../../data/education";
 
-const cvURL =
-  `${import.meta.env.BASE_URL}documents/${profile.cvFilename}`;
+const cvURL = `${import.meta.env.BASE_URL}documents/${profile.cvFilename}`;
 ---
 
-<section
-  id="about"
-  class="about-section"
-  aria-labelledby="about-title"
->
+<section id="about" class="about-section" aria-labelledby="about-title">
   <SectionHeader
     id="about-title"
     eyebrow={profile.eyebrow}
@@ -35,17 +31,11 @@ const cvURL =
       </p>
 
       <div class="stack-list" aria-label="Core technology stack">
-        {
-          profile.stack.map((technology) => (
-            <span>{technology}</span>
-          ))
-        }
+        {profile.stack.map((technology) => <span>{technology}</span>)}
       </div>
 
       <div class="profile-actions">
-        <a class="primary-action" href={cvURL} download>
-          Download CV
-        </a>
+        <a class="primary-action" href={cvURL} download> Download CV </a>
 
         <a
           class="secondary-action"
@@ -95,24 +85,60 @@ const cvURL =
     {
       profile.strengths.map((strength) => (
         <SkeuoPanel class="strength-card">
-          <span class="strength-number">
-            {strength.number}
-          </span>
+          <span class="strength-number">{strength.number}</span>
 
           <h3>{strength.title}</h3>
           <p>{strength.description}</p>
 
-          <span class="strength-indicator" aria-hidden="true"></span>
+          <span class="strength-indicator" aria-hidden="true" />
         </SkeuoPanel>
       ))
     }
+  </div>
+  <div class="education-panel">
+    <div class="education-heading">
+      <div>
+        <span>ACADEMIC FOUNDATION</span>
+        <h3>Education</h3>
+      </div>
+
+      <div class="education-status">
+        <span aria-hidden="true"></span>
+        Verified records
+      </div>
+    </div>
+
+    <div class="education-grid">
+      {
+        educationRecords.map((education, index) => (
+          <article class="education-card">
+            <span class="education-number">
+              {String(index + 1).padStart(2, "0")}
+            </span>
+
+            <div>
+              <p>{education.institution}</p>
+
+              <h4>{education.qualification}</h4>
+
+              <div class="education-meta">
+                <span>{education.period}</span>
+                <span>{education.location}</span>
+              </div>
+            </div>
+
+            <span class="education-light" aria-hidden="true" />
+          </article>
+        ))
+      }
+    </div>
   </div>
 </section>
 
 <style>
   .about-section {
     margin-top: 30px;
-    padding: clamp(40px, 7vw, 92px);
+    padding: clamp(36px, 5vw, 72px);
     border: 1px solid var(--border);
     border-radius: 32px;
     background:
@@ -121,11 +147,7 @@ const cvURL =
         rgba(121, 230, 167, 0.07),
         transparent 25rem
       ),
-      linear-gradient(
-        145deg,
-        rgba(37, 41, 44, 0.82),
-        rgba(16, 18, 20, 0.94)
-      );
+      linear-gradient(145deg, rgba(37, 41, 44, 0.82), rgba(16, 18, 20, 0.94));
     box-shadow:
       18px 18px 45px rgba(0, 0, 0, 0.38),
       inset 1px 1px 1px rgba(255, 255, 255, 0.055);
@@ -342,7 +364,141 @@ const cvURL =
     background: var(--success);
     box-shadow: 0 0 12px rgba(121, 230, 167, 0.8);
   }
+  .education-panel {
+    margin-top: 28px;
+    padding: clamp(22px, 3vw, 30px);
+    border: 1px solid var(--border);
+    border-radius: 22px;
+    background: rgba(0, 0, 0, 0.17);
+    box-shadow: inset 5px 5px 14px rgba(0, 0, 0, 0.32);
+  }
 
+  .education-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+  }
+
+  .education-heading > div:first-child > span {
+    color: var(--accent);
+    font-family: monospace;
+    font-size: 0.62rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+  }
+
+  .education-heading h3 {
+    margin: 7px 0 0;
+    font-size: 1.45rem;
+  }
+
+  .education-status {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    color: var(--muted);
+    font-family: monospace;
+    font-size: 0.65rem;
+  }
+
+  .education-status > span,
+  .education-light {
+    width: 8px;
+    height: 8px;
+    flex: 0 0 auto;
+    border-radius: 50%;
+    background: var(--success);
+    box-shadow: 0 0 9px var(--success);
+  }
+
+  .education-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+    margin-top: 21px;
+  }
+
+  .education-card {
+    position: relative;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 16px;
+    min-width: 0;
+    padding: 21px;
+    border: 1px solid var(--border);
+    border-radius: 17px;
+    background: linear-gradient(
+      145deg,
+      rgba(42, 46, 49, 0.94),
+      rgba(17, 19, 21, 0.98)
+    );
+    box-shadow:
+      8px 8px 20px rgba(0, 0, 0, 0.34),
+      inset 1px 1px 1px rgba(255, 255, 255, 0.055);
+  }
+
+  .education-number {
+    color: var(--success);
+    font-family: monospace;
+    font-size: 0.67rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+  }
+
+  .education-card p {
+    margin: 0;
+    color: var(--accent);
+    font-size: 0.72rem;
+    font-weight: 750;
+  }
+
+  .education-card h4 {
+    max-width: 430px;
+    margin: 9px 0 0;
+    font-size: 1rem;
+    line-height: 1.4;
+  }
+
+  .education-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 14px;
+  }
+
+  .education-meta span {
+    padding: 6px 9px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--muted);
+    font-family: monospace;
+    font-size: 0.62rem;
+    background: rgba(0, 0, 0, 0.15);
+  }
+
+  .education-light {
+    position: absolute;
+    right: 17px;
+    bottom: 17px;
+  }
+
+  @media (max-width: 750px) {
+    .education-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 550px) {
+    .education-heading {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+
+    .education-card {
+      padding: 19px;
+    }
+  }
   @media (max-width: 950px) {
     .about-layout {
       grid-template-columns: 1fr;

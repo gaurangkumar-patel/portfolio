@@ -25,7 +25,7 @@ export const contactLinks: ContactLink[] = [
   },
   {
     label: "Download CV",
-    description: "View the latest Backend Software Engineer CV.",
+    description: "View the latest Software Engineer · Backend Development CV.",
     url: `${baseURL}documents/Gaurangkumar_Patel_Master_Backend_Software_Engineer_CV_v4.2.pdf`,
     type: "cv",
     external: false,

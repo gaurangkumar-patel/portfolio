@@ -1,0 +1,751 @@
+---
+import SectionHeader from "../ui/SectionHeader.astro";
+
+import { testimonials } from "../../data/testimonials";
+
+const featuredTestimonial = testimonials.find(
+  (testimonial) => testimonial.featured,
+);
+
+const carouselTestimonials = testimonials.filter(
+  (testimonial) => !testimonial.featured,
+);
+
+const linkedinRecommendationsUrl =
+  "https://www.linkedin.com/in/gaurangpatel2326/details/recommendations/";
+
+const getInitials = (name: string): string => {
+  return name
+    .split(" ")
+    .map((part) => part[0])
+    .join("")
+    .slice(0, 2)
+    .toUpperCase();
+};
+---
+
+<section
+  id="testimonials"
+  class="testimonials-section"
+  aria-labelledby="testimonials-title"
+>
+  <SectionHeader
+    id="testimonials-title"
+    eyebrow="PROFESSIONAL TRUST // LINKEDIN RECOMMENDATIONS"
+    title="Recommended by people I have worked with."
+    description="Selected professional recommendations from software engineers, technical mentors, collaborators and former colleagues."
+  />
+
+  <div class="recommendation-console">
+    <div class="console-status">
+      <span aria-hidden="true"></span>
+
+      <div>
+        <small>PEER VALIDATION</small>
+
+        <strong>
+          {testimonials.length} recommendations verified
+        </strong>
+      </div>
+    </div>
+
+    <a href={linkedinRecommendationsUrl} target="_blank" rel="noreferrer">
+      View all on LinkedIn
+      <span aria-hidden="true">↗</span>
+    </a>
+  </div>
+
+  {
+    featuredTestimonial && (
+      <article class="featured-testimonial">
+        <div class="featured-topline">
+          <span class="featured-label">Featured recommendation</span>
+
+          <span class="linkedin-verified">
+            <span aria-hidden="true">✓</span>
+            LinkedIn recommendation
+          </span>
+        </div>
+
+        <span class="quote-mark" aria-hidden="true">
+          “
+        </span>
+
+        <blockquote>
+          <p>{featuredTestimonial.quote}</p>
+        </blockquote>
+
+        <footer>
+          <div class="identity">
+            <span class="identity-mark" aria-hidden="true">
+              {getInitials(featuredTestimonial.name)}
+            </span>
+
+            <div>
+              <strong>{featuredTestimonial.name}</strong>
+
+              <small>{featuredTestimonial.role}</small>
+            </div>
+          </div>
+
+          <div class="relationship">
+            <p>{featuredTestimonial.relationship}</p>
+
+            <time>{featuredTestimonial.date}</time>
+          </div>
+        </footer>
+
+        <span class="featured-light" aria-hidden="true" />
+      </article>
+    )
+  }
+
+  <div class="testimonial-carousel" data-testimonial-carousel>
+    <div class="carousel-toolbar">
+      <div>
+        <small> PEER RECOMMENDATIONS </small>
+
+        <strong> Professional feedback archive </strong>
+      </div>
+
+      <div class="carousel-controls">
+        <button
+          type="button"
+          data-carousel-previous
+          aria-label="Show previous recommendation"
+        >
+          ←
+        </button>
+
+        <button
+          type="button"
+          data-carousel-next
+          aria-label="Show next recommendation"
+        >
+          →
+        </button>
+      </div>
+    </div>
+
+    <div
+      class="testimonial-track"
+      data-carousel-track
+      tabindex="0"
+      aria-label="Professional LinkedIn recommendations"
+    >
+      {
+        carouselTestimonials.map((testimonial) => (
+          <article class="testimonial-card">
+            <div class="card-topline">
+              <span class="quote-mark quote-mark-small" aria-hidden="true">
+                “
+              </span>
+
+              <span class="linkedin-chip">
+                <span aria-hidden="true">✓</span>
+                LinkedIn
+              </span>
+            </div>
+
+            <blockquote>
+              <p>{testimonial.quote}</p>
+            </blockquote>
+
+            <footer>
+              <div class="identity">
+                <span class="identity-mark" aria-hidden="true">
+                  {getInitials(testimonial.name)}
+                </span>
+
+                <div>
+                  <strong>{testimonial.name}</strong>
+
+                  <small>{testimonial.role}</small>
+                </div>
+              </div>
+
+              <div class="relationship">
+                <p>{testimonial.relationship}</p>
+                <time>{testimonial.date}</time>
+              </div>
+            </footer>
+
+            <span class="card-light" aria-hidden="true" />
+          </article>
+        ))
+      }
+    </div>
+
+    <div class="carousel-status">
+      <span aria-hidden="true"></span>
+
+      <p>Auto-scroll pauses on hover, focus or manual interaction.</p>
+    </div>
+  </div>
+</section>
+
+<script>
+  const carouselElements = document.querySelectorAll<HTMLElement>(
+    "[data-testimonial-carousel]",
+  );
+
+  carouselElements.forEach((carousel) => {
+    const track = carousel.querySelector<HTMLElement>("[data-carousel-track]");
+
+    const previousButton = carousel.querySelector<HTMLButtonElement>(
+      "[data-carousel-previous]",
+    );
+
+    const nextButton = carousel.querySelector<HTMLButtonElement>(
+      "[data-carousel-next]",
+    );
+
+    if (!track || !previousButton || !nextButton) {
+      return;
+    }
+
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+
+    let isPaused = false;
+    let autoplayTimer: number | undefined;
+
+    const getScrollDistance = (): number => {
+      const firstCard = track.querySelector<HTMLElement>(".testimonial-card");
+
+      if (!firstCard) {
+        return track.clientWidth;
+      }
+
+      const trackStyles = window.getComputedStyle(track);
+
+      const gap = Number.parseFloat(trackStyles.columnGap) || 18;
+
+      return firstCard.offsetWidth + gap;
+    };
+
+    const moveCarousel = (direction: number): void => {
+      track.scrollBy({
+        left: getScrollDistance() * direction,
+        behavior: prefersReducedMotion ? "auto" : "smooth",
+      });
+    };
+
+    const pauseCarousel = (): void => {
+      isPaused = true;
+    };
+
+    const resumeCarousel = (): void => {
+      isPaused = false;
+    };
+
+    previousButton.addEventListener("click", () => {
+      pauseCarousel();
+      moveCarousel(-1);
+    });
+
+    nextButton.addEventListener("click", () => {
+      pauseCarousel();
+      moveCarousel(1);
+    });
+
+    carousel.addEventListener("pointerenter", pauseCarousel);
+
+    carousel.addEventListener("pointerleave", resumeCarousel);
+
+    carousel.addEventListener("focusin", pauseCarousel);
+
+    carousel.addEventListener("focusout", resumeCarousel);
+
+    track.addEventListener("touchstart", pauseCarousel, {
+      passive: true,
+    });
+
+    if (!prefersReducedMotion) {
+      autoplayTimer = window.setInterval(() => {
+        if (isPaused) {
+          return;
+        }
+
+        const reachedEnd =
+          track.scrollLeft + track.clientWidth >= track.scrollWidth - 12;
+
+        if (reachedEnd) {
+          track.scrollTo({
+            left: 0,
+            behavior: "smooth",
+          });
+
+          return;
+        }
+
+        moveCarousel(1);
+      }, 7000);
+    }
+
+    document.addEventListener(
+      "astro:before-swap",
+      () => {
+        if (autoplayTimer) {
+          window.clearInterval(autoplayTimer);
+        }
+      },
+      {
+        once: true,
+      },
+    );
+  });
+</script>
+
+<style>
+  .testimonials-section {
+    margin-top: 30px;
+    padding: clamp(36px, 5vw, 72px);
+    overflow: hidden;
+    border: 1px solid var(--border);
+    border-radius: 32px;
+    background:
+      radial-gradient(
+        circle at 88% 12%,
+        rgba(121, 174, 230, 0.08),
+        transparent 28rem
+      ),
+      radial-gradient(
+        circle at 12% 82%,
+        rgba(121, 230, 167, 0.055),
+        transparent 24rem
+      ),
+      linear-gradient(145deg, rgba(35, 39, 42, 0.94), rgba(13, 15, 17, 0.99));
+    box-shadow:
+      18px 18px 45px rgba(0, 0, 0, 0.42),
+      inset 1px 1px 1px rgba(255, 255, 255, 0.055);
+  }
+
+  .recommendation-console {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    margin-top: 38px;
+    padding: 16px 19px;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    background: rgba(0, 0, 0, 0.2);
+    box-shadow: inset 5px 5px 14px rgba(0, 0, 0, 0.34);
+  }
+
+  .console-status {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .console-status > span,
+  .featured-light,
+  .card-light,
+  .carousel-status > span {
+    width: 9px;
+    height: 9px;
+    flex: 0 0 auto;
+    border-radius: 50%;
+    background: var(--success);
+    box-shadow: 0 0 11px var(--success);
+  }
+
+  .console-status small,
+  .console-status strong {
+    display: block;
+  }
+
+  .console-status small {
+    color: #7b8488;
+    font-family: monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.11em;
+  }
+
+  .console-status strong {
+    margin-top: 4px;
+    font-size: 0.86rem;
+  }
+
+  .recommendation-console > a {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--success);
+    font-size: 0.76rem;
+    font-weight: 750;
+  }
+
+  .featured-testimonial {
+    position: relative;
+    margin-top: 24px;
+    padding: clamp(28px, 4vw, 46px);
+    overflow: hidden;
+    border: 1px solid rgba(121, 230, 167, 0.16);
+    border-radius: 26px;
+    background:
+      radial-gradient(
+        circle at 90% 16%,
+        rgba(121, 230, 167, 0.11),
+        transparent 24rem
+      ),
+      linear-gradient(145deg, rgba(47, 52, 55, 0.98), rgba(16, 18, 20, 0.99));
+    box-shadow:
+      15px 15px 34px rgba(0, 0, 0, 0.42),
+      inset 1px 1px 1px rgba(255, 255, 255, 0.07);
+  }
+
+  .featured-testimonial::before {
+    position: absolute;
+    top: 0;
+    right: 20%;
+    left: 20%;
+    height: 1px;
+    content: "";
+    background: var(--success);
+    box-shadow: 0 0 20px var(--success);
+  }
+
+  .featured-topline,
+  .card-topline {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 18px;
+  }
+
+  .featured-label {
+    color: var(--success);
+    font-family: monospace;
+    font-size: 0.65rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .linkedin-verified,
+  .linkedin-chip {
+    display: inline-flex;
+    width: fit-content;
+    align-items: center;
+    gap: 7px;
+    padding: 7px 10px;
+    border: 1px solid rgba(121, 174, 230, 0.22);
+    border-radius: 999px;
+    color: #9bbfe7;
+    font-family: monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.06em;
+    background: rgba(121, 174, 230, 0.07);
+  }
+
+  .quote-mark {
+    display: block;
+    margin-top: 27px;
+    color: var(--success);
+    font-family: Georgia, serif;
+    font-size: 5rem;
+    line-height: 0.55;
+    opacity: 0.7;
+  }
+
+  .quote-mark-small {
+    margin-top: 0;
+    font-size: 3.7rem;
+  }
+
+  blockquote {
+    margin: 25px 0 0;
+  }
+
+  blockquote p {
+    margin: 0;
+    color: #d8dcda;
+    line-height: 1.75;
+  }
+
+  .featured-testimonial blockquote p {
+    max-width: 1050px;
+    font-size: clamp(1rem, 1.5vw, 1.25rem);
+  }
+
+  .featured-testimonial footer,
+  .testimonial-card footer {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 22px;
+    margin-top: 31px;
+  }
+
+  .identity {
+    display: flex;
+    min-width: 0;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .identity-mark {
+    display: grid;
+    width: 46px;
+    height: 46px;
+    flex: 0 0 auto;
+    place-items: center;
+    border: 1px solid rgba(121, 230, 167, 0.24);
+    border-radius: 14px;
+    color: var(--success);
+    font-family: monospace;
+    font-size: 0.72rem;
+    font-weight: 850;
+    background: rgba(0, 0, 0, 0.22);
+    box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.4);
+  }
+
+  .identity strong,
+  .identity small {
+    display: block;
+  }
+
+  .identity strong {
+    font-size: 0.88rem;
+  }
+
+  .identity small {
+    margin-top: 4px;
+    color: var(--muted);
+    font-size: 0.72rem;
+  }
+
+  .relationship {
+    text-align: right;
+  }
+
+  .relationship p {
+    max-width: 280px;
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.7rem;
+    line-height: 1.45;
+  }
+
+  .relationship time {
+    display: block;
+    margin-top: 5px;
+    color: #727b7f;
+    font-family: monospace;
+    font-size: 0.62rem;
+  }
+
+  .featured-light,
+  .card-light {
+    position: absolute;
+    right: 24px;
+    bottom: 24px;
+  }
+
+  .testimonial-carousel {
+    margin-top: 22px;
+    padding: 20px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    background: rgba(0, 0, 0, 0.16);
+    box-shadow: inset 5px 5px 14px rgba(0, 0, 0, 0.3);
+  }
+
+  .carousel-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 18px;
+  }
+
+  .carousel-toolbar small,
+  .carousel-toolbar strong {
+    display: block;
+  }
+
+  .carousel-toolbar small {
+    color: var(--success);
+    font-family: monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.11em;
+  }
+
+  .carousel-toolbar strong {
+    margin-top: 5px;
+    font-size: 0.86rem;
+  }
+
+  .carousel-controls {
+    display: flex;
+    gap: 9px;
+  }
+
+  .carousel-controls button {
+    display: grid;
+    width: 42px;
+    height: 42px;
+    place-items: center;
+    border: 1px solid var(--border);
+    border-radius: 13px;
+    color: white;
+    cursor: pointer;
+    background: linear-gradient(
+      145deg,
+      rgba(48, 52, 55, 0.96),
+      rgba(17, 19, 21, 0.98)
+    );
+    box-shadow:
+      5px 5px 12px rgba(0, 0, 0, 0.38),
+      inset 1px 1px 1px rgba(255, 255, 255, 0.08);
+    transition:
+      transform 160ms ease,
+      border-color 160ms ease;
+  }
+
+  .carousel-controls button:hover {
+    transform: translateY(-2px);
+    border-color: rgba(121, 230, 167, 0.45);
+  }
+
+  .testimonial-track {
+    display: grid;
+    grid-auto-columns: minmax(350px, 43%);
+    grid-auto-flow: column;
+    gap: 18px;
+    padding: 4px 4px 14px;
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+    scroll-behavior: smooth;
+    scroll-snap-type: inline mandatory;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(121, 230, 167, 0.45) rgba(255, 255, 255, 0.04);
+  }
+
+  .testimonial-card {
+    position: relative;
+    display: flex;
+    min-width: 0;
+    min-height: 410px;
+    flex-direction: column;
+    padding: 27px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    border-radius: 22px;
+    background: linear-gradient(
+      145deg,
+      rgba(43, 47, 50, 0.97),
+      rgba(17, 19, 21, 0.99)
+    );
+    box-shadow:
+      12px 12px 28px rgba(0, 0, 0, 0.4),
+      inset 1px 1px 1px rgba(255, 255, 255, 0.06);
+    scroll-snap-align: start;
+    transition:
+      transform 170ms ease,
+      border-color 170ms ease;
+  }
+
+  .testimonial-card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(121, 230, 167, 0.2);
+  }
+
+  .testimonial-card blockquote {
+    margin-top: 20px;
+  }
+
+  .testimonial-card blockquote p {
+    font-size: 0.9rem;
+  }
+
+  .testimonial-card footer {
+    align-items: flex-start;
+    flex-direction: column;
+    margin-top: auto;
+    padding-top: 28px;
+  }
+
+  .testimonial-card .relationship {
+    text-align: left;
+  }
+
+  .carousel-status {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 13px;
+  }
+
+  .carousel-status p {
+    margin: 0;
+    color: #737c80;
+    font-family: monospace;
+    font-size: 0.61rem;
+  }
+
+  @media (max-width: 900px) {
+    .testimonial-track {
+      grid-auto-columns: minmax(320px, 74%);
+    }
+  }
+
+  @media (max-width: 650px) {
+    .testimonials-section {
+      padding: 36px 18px;
+    }
+
+    .recommendation-console,
+    .featured-testimonial footer,
+    .carousel-toolbar {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+
+    .featured-topline {
+      flex-direction: column;
+    }
+
+    .featured-testimonial {
+      padding: 28px 22px;
+    }
+
+    .relationship {
+      text-align: left;
+    }
+
+    .testimonial-carousel {
+      padding: 15px;
+    }
+
+    .testimonial-track {
+      grid-auto-columns: 92%;
+    }
+
+    .testimonial-card {
+      min-height: auto;
+      padding: 24px 20px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .testimonial-card,
+    .carousel-controls button {
+      transition: none;
+    }
+
+    .testimonial-card:hover,
+    .carousel-controls button:hover {
+      transform: none;
+    }
+
+    .testimonial-track {
+      scroll-behavior: auto;
+    }
+  }
+</style>

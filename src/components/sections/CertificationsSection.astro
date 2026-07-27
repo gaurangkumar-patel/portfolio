@@ -1,10 +1,8 @@
 ---
-import {
-  certifications,
-} from '../../data/certifications';
+import { certifications } from "../../data/certifications";
 
-import SectionHeader from '../ui/SectionHeader.astro';
-import CertificationBadge from '../ui/CertificationBadge.astro';
+import SectionHeader from "../ui/SectionHeader.astro";
+import CertificationBadge from "../ui/CertificationBadge.astro";
 ---
 
 <section
@@ -29,21 +27,21 @@ import CertificationBadge from '../ui/CertificationBadge.astro';
       </div>
     </div>
 
-    <p>
-      Incomplete courses and assessments are intentionally excluded.
-    </p>
+    <p>Incomplete courses and assessments are intentionally excluded.</p>
   </div>
 
   <div class="certification-grid">
     {
       certifications.map((certification, index) => (
-        <article class:list={[
-          'certification-card',
-          `certification-${certification.type}`,
-        ]}>
+        <article
+          class:list={[
+            "certification-card",
+            `certification-${certification.type}`,
+          ]}
+        >
           <div class="card-topline">
             <span class="certification-number">
-              {String(index + 1).padStart(2, '0')}
+              {String(index + 1).padStart(2, "0")}
             </span>
 
             <CertificationBadge
@@ -62,37 +60,31 @@ import CertificationBadge from '../ui/CertificationBadge.astro';
             <strong>{certification.date}</strong>
           </div>
 
-          <p class="certificate-summary">
-            {certification.summary}
-          </p>
+          <p class="certificate-summary">{certification.summary}</p>
 
           <div class="capability-panel">
             <p>ASSESSED CAPABILITIES</p>
 
             <ul>
-              {
-                certification.capabilities.map((capability) => (
-                  <li>{capability}</li>
-                ))
-              }
+              {certification.capabilities.map((capability) => (
+                <li>{capability}</li>
+              ))}
             </ul>
           </div>
 
-          {
-            certification.credentialUrl && (
-              <a
-                class="credential-link"
-                href={certification.credentialUrl}
-                target="_blank"
-                rel="noreferrer"
-              >
-                View credential
-                <span aria-hidden="true">↗</span>
-              </a>
-            )
-          }
+          {certification.credentialUrl && (
+            <a
+              class="credential-link"
+              href={certification.credentialUrl}
+              target="_blank"
+              rel="noreferrer"
+            >
+              View credential
+              <span aria-hidden="true">↗</span>
+            </a>
+          )}
 
-          <span class="card-indicator" aria-hidden="true"></span>
+          <span class="card-indicator" aria-hidden="true" />
         </article>
       ))
     }
@@ -102,8 +94,8 @@ import CertificationBadge from '../ui/CertificationBadge.astro';
     <span aria-hidden="true"></span>
 
     <p>
-      Certificate links or credential identifiers will only be added
-      after they have been verified.
+      Certificate links or credential identifiers will only be added after they
+      have been verified.
     </p>
   </div>
 </section>
@@ -111,7 +103,7 @@ import CertificationBadge from '../ui/CertificationBadge.astro';
 <style>
   .certifications-section {
     margin-top: 30px;
-    padding: clamp(40px, 7vw, 92px);
+    padding: clamp(36px, 5vw, 72px);
     border: 1px solid var(--border);
     border-radius: 32px;
     background:
@@ -120,11 +112,7 @@ import CertificationBadge from '../ui/CertificationBadge.astro';
         rgba(228, 188, 112, 0.07),
         transparent 27rem
       ),
-      linear-gradient(
-        145deg,
-        rgba(37, 41, 44, 0.84),
-        rgba(15, 17, 19, 0.96)
-      );
+      linear-gradient(145deg, rgba(37, 41, 44, 0.84), rgba(15, 17, 19, 0.96));
     box-shadow:
       18px 18px 45px rgba(0, 0, 0, 0.4),
       inset 1px 1px 1px rgba(255, 255, 255, 0.055);
@@ -140,8 +128,7 @@ import CertificationBadge from '../ui/CertificationBadge.astro';
     border: 1px solid var(--border);
     border-radius: 17px;
     background: rgba(0, 0, 0, 0.18);
-    box-shadow:
-      inset 5px 5px 13px rgba(0, 0, 0, 0.35);
+    box-shadow: inset 5px 5px 13px rgba(0, 0, 0, 0.35);
   }
 
   .console-status {
@@ -202,12 +189,11 @@ import CertificationBadge from '../ui/CertificationBadge.astro';
     overflow: hidden;
     border: 1px solid var(--border);
     border-radius: 24px;
-    background:
-      linear-gradient(
-        145deg,
-        rgba(43, 47, 50, 0.95),
-        rgba(19, 21, 23, 0.98)
-      );
+    background: linear-gradient(
+      145deg,
+      rgba(43, 47, 50, 0.95),
+      rgba(19, 21, 23, 0.98)
+    );
     box-shadow:
       14px 14px 32px rgba(0, 0, 0, 0.4),
       inset 1px 1px 1px rgba(255, 255, 255, 0.065);
@@ -222,7 +208,7 @@ import CertificationBadge from '../ui/CertificationBadge.astro';
     right: 18%;
     left: 18%;
     height: 1px;
-    content: '';
+    content: "";
     opacity: 0.72;
     background: var(--success);
     box-shadow: 0 0 18px var(--success);
@@ -313,8 +299,7 @@ import CertificationBadge from '../ui/CertificationBadge.astro';
     border: 1px solid var(--border);
     border-radius: 15px;
     background: rgba(0, 0, 0, 0.18);
-    box-shadow:
-      inset 4px 4px 12px rgba(0, 0, 0, 0.34);
+    box-shadow: inset 4px 4px 12px rgba(0, 0, 0, 0.34);
   }
 
   .capability-panel > p {
@@ -348,7 +333,7 @@ import CertificationBadge from '../ui/CertificationBadge.astro';
     left: 0;
     width: 7px;
     height: 2px;
-    content: '';
+    content: "";
     background: var(--success);
   }
 

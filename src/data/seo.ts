@@ -26,6 +26,6 @@ export const siteMetadata = {
     title: "Gaurangkumar Patel | PHP Laravel Backend Software Engineer",
 
     description:
-      "Backend Software Engineer in London specialising in PHP, Laravel, REST APIs, MySQL, Redis and reliable database-driven web applications.",
+      "Software Engineer · Backend Development in London specialising in PHP, Laravel, REST APIs, MySQL, Redis and reliable database-driven web applications.",
   } satisfies PageSeo,
 };
