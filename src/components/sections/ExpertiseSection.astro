@@ -1,13 +1,9 @@
 ---
-import {
-  expertiseModules,
-} from '../../data/expertise';
+import { expertiseModules } from "../../data/expertise";
 
-import SectionHeader
-  from '../ui/SectionHeader.astro';
+import SectionHeader from "../ui/SectionHeader.astro";
 
-import ExpertiseStatus
-  from '../ui/ExpertiseStatus.astro';
+import ExpertiseStatus from "../ui/ExpertiseStatus.astro";
 ---
 
 <section
@@ -28,13 +24,9 @@ import ExpertiseStatus
         <details class="expertise-card">
           <summary>
             <div class="card-heading">
-              <span class="module-number">
-                {module.number}
-              </span>
+              <span class="module-number">{module.number}</span>
 
-              <ExpertiseStatus
-                level={module.level}
-              />
+              <ExpertiseStatus level={module.level} />
             </div>
 
             <h3>{module.title}</h3>
@@ -44,28 +36,17 @@ import ExpertiseStatus
               class="technology-list"
               aria-label={`${module.title} technologies`}
             >
-              {
-                module.technologies.map(
-                  (technology) => (
-                    <span>{technology}</span>
-                  ),
-                )
-              }
+              {module.technologies.map((technology) => (
+                <span>{technology}</span>
+              ))}
             </div>
 
             <span class="expand-control">
-              <span class="closed-label">
-                View capabilities
-              </span>
+              <span class="closed-label">View capabilities</span>
 
-              <span class="open-label">
-                Close module
-              </span>
+              <span class="open-label">Close module</span>
 
-              <span
-                class="expand-icon"
-                aria-hidden="true"
-              >
+              <span class="expand-icon" aria-hidden="true">
                 +
               </span>
             </span>
@@ -75,13 +56,9 @@ import ExpertiseStatus
             <p>DELIVERY CAPABILITIES</p>
 
             <ul>
-              {
-                module.capabilities.map(
-                  (capability) => (
-                    <li>{capability}</li>
-                  ),
-                )
-              }
+              {module.capabilities.map((capability) => (
+                <li>{capability}</li>
+              ))}
             </ul>
           </div>
         </details>
@@ -93,8 +70,8 @@ import ExpertiseStatus
     <span class="note-light" aria-hidden="true"></span>
 
     <p>
-      Technologies are grouped by practical use rather
-      than artificial percentage ratings.
+      Technologies are grouped by practical use rather than artificial
+      percentage ratings.
     </p>
   </div>
 </section>
@@ -102,7 +79,7 @@ import ExpertiseStatus
 <style>
   .expertise-section {
     margin-top: 30px;
-    padding: clamp(40px, 7vw, 92px);
+    padding: clamp(36px, 5vw, 72px);
     border: 1px solid var(--border);
     border-radius: 32px;
     background:
@@ -111,15 +88,10 @@ import ExpertiseStatus
         rgba(239, 77, 77, 0.07),
         transparent 27rem
       ),
-      linear-gradient(
-        145deg,
-        rgba(37, 41, 44, 0.82),
-        rgba(16, 18, 20, 0.94)
-      );
+      linear-gradient(145deg, rgba(37, 41, 44, 0.82), rgba(16, 18, 20, 0.94));
     box-shadow:
       18px 18px 45px rgba(0, 0, 0, 0.38),
-      inset 1px 1px 1px
-        rgba(255, 255, 255, 0.055);
+      inset 1px 1px 1px rgba(255, 255, 255, 0.055);
   }
 
   .expertise-grid {
@@ -134,16 +106,14 @@ import ExpertiseStatus
     overflow: hidden;
     border: 1px solid var(--border);
     border-radius: 24px;
-    background:
-      linear-gradient(
-        145deg,
-        rgba(43, 47, 50, 0.96),
-        rgba(19, 21, 23, 0.98)
-      );
+    background: linear-gradient(
+      145deg,
+      rgba(43, 47, 50, 0.96),
+      rgba(19, 21, 23, 0.98)
+    );
     box-shadow:
       13px 13px 30px rgba(0, 0, 0, 0.4),
-      inset 1px 1px 1px
-        rgba(255, 255, 255, 0.065);
+      inset 1px 1px 1px rgba(255, 255, 255, 0.065);
     transition:
       transform 180ms ease,
       border-color 180ms ease;
@@ -216,8 +186,7 @@ import ExpertiseStatus
     font-family: monospace;
     font-size: 0.7rem;
     background: rgba(5, 14, 9, 0.35);
-    box-shadow:
-      inset 2px 2px 5px rgba(0, 0, 0, 0.4);
+    box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.4);
   }
 
   .expand-control {
@@ -253,12 +222,10 @@ import ExpertiseStatus
     border-radius: 50%;
     color: var(--success);
     font-size: 1.15rem;
-    background:
-      linear-gradient(145deg, #292d30, #17191b);
+    background: linear-gradient(145deg, #292d30, #17191b);
     box-shadow:
       4px 4px 9px rgba(0, 0, 0, 0.45),
-      inset 1px 1px 1px
-        rgba(255, 255, 255, 0.08);
+      inset 1px 1px 1px rgba(255, 255, 255, 0.08);
     transition: transform 180ms ease;
   }
 
@@ -269,14 +236,12 @@ import ExpertiseStatus
   .capability-panel {
     padding: 24px 28px 30px;
     border-top: 1px solid var(--border);
-    background:
-      linear-gradient(
-        145deg,
-        rgba(8, 13, 10, 0.48),
-        rgba(15, 18, 17, 0.85)
-      );
-    box-shadow:
-      inset 0 10px 22px rgba(0, 0, 0, 0.32);
+    background: linear-gradient(
+      145deg,
+      rgba(8, 13, 10, 0.48),
+      rgba(15, 18, 17, 0.85)
+    );
+    box-shadow: inset 0 10px 22px rgba(0, 0, 0, 0.32);
   }
 
   .capability-panel > p {
@@ -309,10 +274,9 @@ import ExpertiseStatus
     left: 0;
     width: 7px;
     height: 2px;
-    content: '';
+    content: "";
     background: var(--accent);
-    box-shadow: 0 0 7px
-      rgba(239, 77, 77, 0.7);
+    box-shadow: 0 0 7px rgba(239, 77, 77, 0.7);
   }
 
   .expertise-note {

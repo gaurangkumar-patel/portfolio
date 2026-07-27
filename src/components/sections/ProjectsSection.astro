@@ -3,24 +3,20 @@ import {
   getProjectsByCategory,
   projectGroups,
   type Project,
-} from '../../data/projects';
+} from "../../data/projects";
 
-import SectionHeader from '../ui/SectionHeader.astro';
-import ProjectBadge from '../ui/ProjectBadge.astro';
+import SectionHeader from "../ui/SectionHeader.astro";
+import ProjectBadge from "../ui/ProjectBadge.astro";
 const baseURL = import.meta.env.BASE_URL;
-const getProjectNumber = (
-  project: Project,
-): string => {
-  return String(project.displayOrder).padStart(2, '0');
+const getProjectNumber = (project: Project): string => {
+  return String(project.displayOrder).padStart(2, "0");
 };
 
-const getCategoryLabel = (
-  project: Project,
-): string => {
+const getCategoryLabel = (project: Project): string => {
   const labels = {
-    public: 'Open source',
-    product: 'Product work',
-    commercial: 'Commercial experience',
+    public: "Open source",
+    product: "Product work",
+    commercial: "Commercial experience",
   };
 
   return labels[project.category];
@@ -40,29 +36,25 @@ const getCategoryLabel = (
     description="Public repositories include working code and demos. Product and employer-owned work is presented through controlled technical summaries."
   />
 
-  <div
-    class="project-tabs"
-    role="tablist"
-    aria-label="Project categories"
-  >
+  <div class="project-tabs" role="tablist" aria-label="Project categories">
     {
       projectGroups.map((group, index) => (
         <button
           id={`project-tab-${group.id}`}
           class:list={[
-            'project-tab',
+            "project-tab",
             {
-              'is-active': index === 0,
+              "is-active": index === 0,
             },
           ]}
           type="button"
           role="tab"
-          aria-selected={index === 0 ? 'true' : 'false'}
+          aria-selected={index === 0 ? "true" : "false"}
           aria-controls={`project-panel-${group.id}`}
-          tabindex={index === 0 ? '0' : '-1'}
+          tabindex={index === 0 ? "0" : "-1"}
           data-project-tab={group.id}
         >
-          <span class="tab-light" aria-hidden="true"></span>
+          <span class="tab-light" aria-hidden="true" />
           {group.title}
         </button>
       ))
@@ -90,202 +82,149 @@ const getCategoryLabel = (
               </div>
 
               <div class="group-summary">
-                <span>
-                  {String(projects.length).padStart(2, '0')}
-                </span>
+                <span>{String(projects.length).padStart(2, "0")}</span>
 
                 <p>{group.description}</p>
               </div>
             </div>
 
             <div class="project-grid">
-              {
-                projects.map((project) => (
-                  <article
-                    class:list={[
-                      'project-card',
-                      `project-${project.category}`,
-                      {
-                        'is-featured': project.featured,
-                      },
-                    ]}
-                  >
-                    <div class="project-card-topline">
-                      <span class="project-number">
-                        {getProjectNumber(project)}
-                      </span>
+              {projects.map((project) => (
+                <article
+                  class:list={[
+                    "project-card",
+                    `project-${project.category}`,
+                    {
+                      "is-featured": project.featured,
+                    },
+                  ]}
+                >
+                  <div class="project-card-topline">
+                    <span class="project-number">
+                      {getProjectNumber(project)}
+                    </span>
 
-                      <ProjectBadge
-                        category={project.category}
-                        visibility={project.visibility}
-                        label={project.statusLabel}
-                      />
+                    <ProjectBadge
+                      category={project.category}
+                      visibility={project.visibility}
+                      label={project.statusLabel}
+                    />
+                  </div>
+
+                  <div class="project-heading">
+                    <div>
+                      <p class="project-category">
+                        {getCategoryLabel(project)}
+                      </p>
+
+                      <h4>{project.title}</h4>
+
+                      {project.shortTitle && (
+                        <p class="project-short-title">{project.shortTitle}</p>
+                      )}
                     </div>
 
-                    <div class="project-heading">
-                      <div>
-                        <p class="project-category">
-                          {getCategoryLabel(project)}
-                        </p>
+                    {project.featured && (
+                      <span class="featured-label">Featured</span>
+                    )}
+                  </div>
 
-                        <h4>{project.title}</h4>
+                  {project.organisation && (
+                    <p class="project-organisation">{project.organisation}</p>
+                  )}
 
-                        {
-                          project.shortTitle && (
-                            <p class="project-short-title">
-                              {project.shortTitle}
-                            </p>
-                          )
-                        }
+                  <p class="project-domain">{project.domain}</p>
+
+                  <p class="project-summary">{project.summary}</p>
+
+                  <div
+                    class="technology-list"
+                    aria-label={`${project.title} technologies`}
+                  >
+                    {project.technologies.map((technology) => (
+                      <span>{technology}</span>
+                    ))}
+                  </div>
+
+                  <details class="project-details">
+                    <summary>
+                      <span class="closed-label">View engineering details</span>
+
+                      <span class="open-label">Close engineering details</span>
+
+                      <span class="details-button" aria-hidden="true">
+                        +
+                      </span>
+                    </summary>
+
+                    <div class="details-content">
+                      <div class="detail-block">
+                        <p>CHALLENGE</p>
+                        <div>{project.challenge}</div>
                       </div>
 
-                      {
-                        project.featured && (
-                          <span class="featured-label">
-                            Featured
-                          </span>
-                        )
-                      }
-                    </div>
+                      <div class="detail-block">
+                        <p>CONTRIBUTION</p>
+                        <div>{project.contribution}</div>
+                      </div>
 
-                    {
-                      project.organisation && (
-                        <p class="project-organisation">
-                          {project.organisation}
-                        </p>
-                      )
-                    }
+                      <div class="detail-block">
+                        <p>IMPLEMENTED / DELIVERED</p>
 
-                    <p class="project-domain">
-                      {project.domain}
-                    </p>
+                        <ul>
+                          {project.highlights.map((highlight) => (
+                            <li>{highlight}</li>
+                          ))}
+                        </ul>
+                      </div>
 
-                    <p class="project-summary">
-                      {project.summary}
-                    </p>
-
-                    <div
-                      class="technology-list"
-                      aria-label={`${project.title} technologies`}
-                    >
-                      {
-                        project.technologies.map(
-                          (technology) => (
-                            <span>{technology}</span>
-                          ),
-                        )
-                      }
-                    </div>
-
-                    <details class="project-details">
-                      <summary>
-                        <span class="closed-label">
-                          View engineering details
-                        </span>
-
-                        <span class="open-label">
-                          Close engineering details
-                        </span>
-
-                        <span
-                          class="details-button"
-                          aria-hidden="true"
-                        >
-                          +
-                        </span>
-                      </summary>
-
-                      <div class="details-content">
-                        <div class="detail-block">
-                          <p>CHALLENGE</p>
-                          <div>{project.challenge}</div>
-                        </div>
-
-                        <div class="detail-block">
-                          <p>CONTRIBUTION</p>
-                          <div>{project.contribution}</div>
-                        </div>
-
-                        <div class="detail-block">
-                          <p>IMPLEMENTED / DELIVERED</p>
+                      {project.plannedWork.length > 0 && (
+                        <div class="detail-block planned-block">
+                          <p>PLANNED IMPROVEMENTS</p>
 
                           <ul>
-                            {
-                              project.highlights.map(
-                                (highlight) => (
-                                  <li>{highlight}</li>
-                                ),
-                              )
-                            }
+                            {project.plannedWork.map((item) => (
+                              <li>{item}</li>
+                            ))}
                           </ul>
                         </div>
+                      )}
+                    </div>
+                  </details>
 
-                        {
-                          project.plannedWork.length > 0 && (
-                            <div class="detail-block planned-block">
-                              <p>PLANNED IMPROVEMENTS</p>
+                  {project.sourceCodeNotice && (
+                    <div class="source-notice">
+                      <span class="notice-light" aria-hidden="true" />
 
-                              <ul>
-                                {
-                                  project.plannedWork.map(
-                                    (item) => (
-                                      <li>{item}</li>
-                                    ),
-                                  )
-                                }
-                              </ul>
-                            </div>
-                          )
-                        }
-                      </div>
-                    </details>
+                      <p>{project.sourceCodeNotice}</p>
+                    </div>
+                  )}
 
-                    {
-                      project.sourceCodeNotice && (
-                        <div class="source-notice">
-                          <span
-                            class="notice-light"
-                            aria-hidden="true"
-                          ></span>
+                  {project.links.length > 0 && (
+                    <div class="project-links">
+                      <a
+                        class="project-link link-case-study"
+                        href={`${baseURL}projects/${project.slug}/`}
+                      >
+                        View case study
+                        <span aria-hidden="true">→</span>
+                      </a>
 
-                          <p>{project.sourceCodeNotice}</p>
-                        </div>
-                      )
-                    }
-
-                    {
-                      project.links.length > 0 && (
-                        <div class="project-links">
-                            <a
-                                class="project-link link-case-study"
-                                href={`${baseURL}projects/${project.slug}/`}
-                            >
-                                View case study
-                                <span aria-hidden="true">→</span>
-                            </a>
-
-                            {
-                                project.links.map((link) => (
-                                <a
-                                    class:list={[
-                                    'project-link',
-                                    `link-${link.type}`,
-                                    ]}
-                                    href={link.url}
-                                    target="_blank"
-                                    rel="noreferrer"
-                                >
-                                    {link.label}
-                                    <span aria-hidden="true">↗</span>
-                                </a>
-                                ))
-                            }
-                            </div>
-                      )
-                    }
-                  </article>
-                ))
-              }
+                      {project.links.map((link) => (
+                        <a
+                          class:list={["project-link", `link-${link.type}`]}
+                          href={link.url}
+                          target="_blank"
+                          rel="noreferrer"
+                        >
+                          {link.label}
+                          <span aria-hidden="true">↗</span>
+                        </a>
+                      ))}
+                    </div>
+                  )}
+                </article>
+              ))}
             </div>
           </section>
         );
@@ -297,78 +236,56 @@ const getCategoryLabel = (
     <span class="footer-light" aria-hidden="true"></span>
 
     <p>
-      Public-project claims must remain supported by the
-      corresponding repository. Commercial work remains
-      summary-only.
+      Public-project claims must remain supported by the corresponding
+      repository. Commercial work remains summary-only.
     </p>
   </div>
 </section>
 
 <script>
-  const projectSections = document.querySelectorAll(
-    '[data-projects-section]',
-  );
+  const projectSections = document.querySelectorAll("[data-projects-section]");
 
   projectSections.forEach((section) => {
     const tabs = Array.from(
-      section.querySelectorAll<HTMLButtonElement>(
-        '[data-project-tab]',
-      ),
+      section.querySelectorAll<HTMLButtonElement>("[data-project-tab]"),
     );
 
     const panels = Array.from(
-      section.querySelectorAll<HTMLElement>(
-        '[data-project-panel]',
-      ),
+      section.querySelectorAll<HTMLElement>("[data-project-panel]"),
     );
 
-    const activateTab = (
-      selectedTab: HTMLButtonElement,
-    ) => {
-      const selectedCategory =
-        selectedTab.dataset.projectTab;
+    const activateTab = (selectedTab: HTMLButtonElement) => {
+      const selectedCategory = selectedTab.dataset.projectTab;
 
       tabs.forEach((tab) => {
         const isActive = tab === selectedTab;
 
-        tab.classList.toggle('is-active', isActive);
-        tab.setAttribute(
-          'aria-selected',
-          String(isActive),
-        );
+        tab.classList.toggle("is-active", isActive);
+        tab.setAttribute("aria-selected", String(isActive));
 
         tab.tabIndex = isActive ? 0 : -1;
       });
 
       panels.forEach((panel) => {
-        panel.hidden =
-          panel.dataset.projectPanel !==
-          selectedCategory;
+        panel.hidden = panel.dataset.projectPanel !== selectedCategory;
       });
     };
 
     tabs.forEach((tab, index) => {
-      tab.addEventListener('click', () => {
+      tab.addEventListener("click", () => {
         activateTab(tab);
       });
 
-      tab.addEventListener('keydown', (event) => {
+      tab.addEventListener("keydown", (event) => {
         let nextIndex = index;
 
-        if (
-          event.key === 'ArrowRight' ||
-          event.key === 'ArrowDown'
-        ) {
+        if (event.key === "ArrowRight" || event.key === "ArrowDown") {
           nextIndex = (index + 1) % tabs.length;
-        } else if (
-          event.key === 'ArrowLeft' ||
-          event.key === 'ArrowUp'
-        ) {
-          nextIndex =
-            (index - 1 + tabs.length) % tabs.length;
-        } else if (event.key === 'Home') {
+        } else if (event.key === "ArrowLeft" || event.key === "ArrowUp") {
+          nextIndex = (index - 1 + tabs.length) % tabs.length;
+        } else if (event.key === "Home") {
           nextIndex = 0;
-        } else if (event.key === 'End') {
+        } else if (event.key === "End") {
           nextIndex = tabs.length - 1;
         } else {
           return;
@@ -390,7 +307,7 @@ const getCategoryLabel = (
 <style>
   .projects-section {
     margin-top: 30px;
-    padding: clamp(40px, 7vw, 92px);
+    padding: clamp(36px, 5vw, 72px);
     border: 1px solid var(--border);
     border-radius: 32px;
     background:
@@ -404,15 +321,10 @@ const getCategoryLabel = (
         rgba(121, 174, 230, 0.07),
         transparent 25rem
       ),
-      linear-gradient(
-        145deg,
-        rgba(37, 41, 44, 0.82),
-        rgba(16, 18, 20, 0.94)
-      );
+      linear-gradient(145deg, rgba(37, 41, 44, 0.82), rgba(16, 18, 20, 0.94));
     box-shadow:
       18px 18px 45px rgba(0, 0, 0, 0.38),
-      inset 1px 1px 1px
-        rgba(255, 255, 255, 0.055);
+      inset 1px 1px 1px rgba(255, 255, 255, 0.055);
   }
 
   .project-tabs {
@@ -424,8 +336,7 @@ const getCategoryLabel = (
     border: 1px solid var(--border);
     border-radius: 19px;
     background: rgba(0, 0, 0, 0.22);
-    box-shadow:
-      inset 6px 6px 15px rgba(0, 0, 0, 0.42);
+    box-shadow: inset 6px 6px 15px rgba(0, 0, 0, 0.42);
   }
 
   .project-tab {
@@ -454,16 +365,10 @@ const getCategoryLabel = (
   .project-tab.is-active {
     color: white;
     border-color: var(--border);
-    background:
-      linear-gradient(
-        145deg,
-        #2c3033,
-        #17191b
-      );
+    background: linear-gradient(145deg, #2c3033, #17191b);
     box-shadow:
       6px 6px 13px rgba(0, 0, 0, 0.43),
-      inset 1px 1px 1px
-        rgba(255, 255, 255, 0.08);
+      inset 1px 1px 1px rgba(255, 255, 255, 0.08);
   }
 
   .tab-light {
@@ -495,8 +400,7 @@ const getCategoryLabel = (
     border: 1px solid var(--border);
     border-radius: 20px;
     background: rgba(0, 0, 0, 0.18);
-    box-shadow:
-      inset 5px 5px 14px rgba(0, 0, 0, 0.38);
+    box-shadow: inset 5px 5px 14px rgba(0, 0, 0, 0.38);
   }
 
   .group-heading > div:first-child > p {
@@ -533,8 +437,7 @@ const getCategoryLabel = (
     font-size: 0.72rem;
     font-weight: 800;
     background: rgba(0, 0, 0, 0.28);
-    box-shadow:
-      inset 4px 4px 10px rgba(0, 0, 0, 0.48);
+    box-shadow: inset 4px 4px 10px rgba(0, 0, 0, 0.48);
   }
 
   .group-summary p {
@@ -562,16 +465,14 @@ const getCategoryLabel = (
     overflow: hidden;
     border: 1px solid var(--border);
     border-radius: 25px;
-    background:
-      linear-gradient(
-        145deg,
-        rgba(43, 47, 50, 0.95),
-        rgba(19, 21, 23, 0.98)
-      );
+    background: linear-gradient(
+      145deg,
+      rgba(43, 47, 50, 0.95),
+      rgba(19, 21, 23, 0.98)
+    );
     box-shadow:
       14px 14px 32px rgba(0, 0, 0, 0.4),
-      inset 1px 1px 1px
-        rgba(255, 255, 255, 0.065);
+      inset 1px 1px 1px rgba(255, 255, 255, 0.065);
     transition:
       transform 180ms ease,
       border-color 180ms ease;
@@ -583,7 +484,7 @@ const getCategoryLabel = (
     right: 18%;
     left: 18%;
     height: 1px;
-    content: '';
+    content: "";
     opacity: 0;
     background: var(--success);
     box-shadow: 0 0 18px var(--success);
@@ -704,8 +605,7 @@ const getCategoryLabel = (
     font-family: monospace;
     font-size: 0.67rem;
     background: rgba(5, 14, 9, 0.33);
-    box-shadow:
-      inset 2px 2px 5px rgba(0, 0, 0, 0.4);
+    box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.4);
   }
 
   .project-details {
@@ -752,12 +652,10 @@ const getCategoryLabel = (
     border-radius: 50%;
     color: var(--success);
     font-size: 1.1rem;
-    background:
-      linear-gradient(145deg, #292d30, #17191b);
+    background: linear-gradient(145deg, #292d30, #17191b);
     box-shadow:
       4px 4px 9px rgba(0, 0, 0, 0.45),
-      inset 1px 1px 1px
-        rgba(255, 255, 255, 0.08);
+      inset 1px 1px 1px rgba(255, 255, 255, 0.08);
     transition: transform 180ms ease;
   }
 
@@ -772,8 +670,7 @@ const getCategoryLabel = (
     border: 1px solid rgba(121, 230, 167, 0.1);
     border-radius: 16px;
     background: rgba(0, 0, 0, 0.21);
-    box-shadow:
-      inset 5px 5px 14px rgba(0, 0, 0, 0.42);
+    box-shadow: inset 5px 5px 14px rgba(0, 0, 0, 0.42);
   }
 
   .detail-block > p {
@@ -811,7 +708,7 @@ const getCategoryLabel = (
     left: 0;
     width: 7px;
     height: 2px;
-    content: '';
+    content: "";
     background: var(--success);
   }
 
@@ -870,12 +767,10 @@ const getCategoryLabel = (
     color: var(--muted);
     font-size: 0.76rem;
     font-weight: 750;
-    background:
-      linear-gradient(145deg, #292d30, #17191b);
+    background: linear-gradient(145deg, #292d30, #17191b);
     box-shadow:
       5px 5px 12px rgba(0, 0, 0, 0.4),
-      inset 1px 1px 1px
-        rgba(255, 255, 255, 0.07);
+      inset 1px 1px 1px rgba(255, 255, 255, 0.07);
   }
 
   .project-link:hover {
@@ -885,8 +780,7 @@ const getCategoryLabel = (
 
   .link-demo {
     color: white;
-    background:
-      linear-gradient(145deg, #ff5e5e, #c82f2f);
+    background: linear-gradient(145deg, #ff5e5e, #c82f2f);
   }
 
   .projects-footer {
@@ -917,23 +811,17 @@ const getCategoryLabel = (
   }
 
   .link-case-study {
-  color: #102016;
-  border-color: rgba(121, 230, 167, 0.25);
-  background:
-    linear-gradient(
-      145deg,
-      #8bf0b4,
-      #58bd81
-    );
-  box-shadow:
-    5px 5px 12px rgba(0, 0, 0, 0.4),
-    inset 1px 1px 2px
-      rgba(255, 255, 255, 0.4);
-}
+    color: #102016;
+    border-color: rgba(121, 230, 167, 0.25);
+    background: linear-gradient(145deg, #8bf0b4, #58bd81);
+    box-shadow:
+      5px 5px 12px rgba(0, 0, 0, 0.4),
+      inset 1px 1px 2px rgba(255, 255, 255, 0.4);
+  }
 
-.link-case-study:hover {
-  color: #07110b;
-}
+  .link-case-study:hover {
+    color: #07110b;
+  }
 
   @media (max-width: 950px) {
     .project-grid {

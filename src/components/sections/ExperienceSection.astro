@@ -3,18 +3,18 @@ import {
   earlierExperience,
   primaryExperience,
   type ExperienceKind,
-} from '../../data/experience';
+} from "../../data/experience";
 
-import SectionHeader from '../ui/SectionHeader.astro';
-import ExperienceBadge from '../ui/ExperienceBadge.astro';
+import SectionHeader from "../ui/SectionHeader.astro";
+import ExperienceBadge from "../ui/ExperienceBadge.astro";
 
 const getEarlierTypeLabel = (kind: ExperienceKind): string => {
   const labels: Record<ExperienceKind, string> = {
-    product: 'Product development',
-    software: 'Software development',
-    operations: 'Business operations',
-    development: 'Professional development',
-    training: 'Academic training',
+    product: "Product development",
+    software: "Software development",
+    operations: "Business operations",
+    development: "Professional development",
+    training: "Academic training",
   };
 
   return labels[kind];
@@ -44,8 +44,8 @@ const getEarlierTypeLabel = (kind: ExperienceKind): string => {
     </div>
 
     <p>
-      Current product development continues alongside a
-      customer-facing UK operations role.
+      Current product development continues alongside a customer-facing UK
+      operations role.
     </p>
   </div>
 
@@ -56,14 +56,13 @@ const getEarlierTypeLabel = (kind: ExperienceKind): string => {
           <div class="timeline-rail" aria-hidden="true">
             <span
               class:list={[
-                'timeline-node',
+                "timeline-node",
                 {
-                  'is-current':
-                    experience.status === 'current',
+                  "is-current": experience.status === "current",
                 },
               ]}
             >
-              {String(index + 1).padStart(2, '0')}
+              {String(index + 1).padStart(2, "0")}
             </span>
           </div>
 
@@ -75,53 +74,37 @@ const getEarlierTypeLabel = (kind: ExperienceKind): string => {
                 label={experience.statusLabel}
               />
 
-              <span class="experience-period">
-                {experience.period}
-              </span>
+              <span class="experience-period">{experience.period}</span>
             </div>
 
             <div class="role-heading">
               <div>
                 <h3>{experience.title}</h3>
 
-                <p class="organisation">
-                  {experience.organisation}
-                </p>
+                <p class="organisation">{experience.organisation}</p>
               </div>
 
-              <span class="location">
-                {experience.location}
-              </span>
+              <span class="location">{experience.location}</span>
             </div>
 
-            <p class="experience-summary">
-              {experience.summary}
-            </p>
+            <p class="experience-summary">{experience.summary}</p>
 
             <ul class="highlight-list">
-              {
-                experience.highlights.map((highlight) => (
-                  <li>{highlight}</li>
-                ))
-              }
+              {experience.highlights.map((highlight) => (
+                <li>{highlight}</li>
+              ))}
             </ul>
 
-            {
-              experience.technologies && (
-                <div
-                  class="technology-list"
-                  aria-label={`${experience.organisation} technologies`}
-                >
-                  {
-                    experience.technologies.map(
-                      (technology) => (
-                        <span>{technology}</span>
-                      ),
-                    )
-                  }
-                </div>
-              )
-            }
+            {experience.technologies && (
+              <div
+                class="technology-list"
+                aria-label={`${experience.organisation} technologies`}
+              >
+                {experience.technologies.map((technology) => (
+                  <span>{technology}</span>
+                ))}
+              </div>
+            )}
           </article>
         </li>
       ))
@@ -135,81 +118,54 @@ const getEarlierTypeLabel = (kind: ExperienceKind): string => {
         <h3>Earlier professional journey</h3>
       </div>
 
-      <span>
-        Training, operations and development foundations
-      </span>
+      <span> Training, operations and development foundations </span>
     </div>
 
     <ol class="timeline earlier-timeline">
       {
         earlierExperience.map((experience, index) => (
           <li class="timeline-item earlier-timeline-item">
-            <div
-              class="timeline-rail earlier-rail"
-              aria-hidden="true"
-            >
+            <div class="timeline-rail earlier-rail" aria-hidden="true">
               <span class="timeline-node earlier-node">
-                {String(
-                  primaryExperience.length + index + 1,
-                ).padStart(2, '0')}
+                {String(primaryExperience.length + index + 1).padStart(2, "0")}
               </span>
             </div>
 
             <article class="experience-card earlier-card">
               <div class="card-topline">
-                <span
-                  class:list={[
-                    'earlier-type',
-                    `kind-${experience.kind}`,
-                  ]}
-                >
-                  <span
-                    class="type-light"
-                    aria-hidden="true"
-                  ></span>
+                <span class:list={["earlier-type", `kind-${experience.kind}`]}>
+                  <span class="type-light" aria-hidden="true" />
 
                   {getEarlierTypeLabel(experience.kind)}
                 </span>
 
-                <span class="experience-period">
-                  {experience.period}
-                </span>
+                <span class="experience-period">{experience.period}</span>
               </div>
 
               <div class="role-heading earlier-role-heading">
                 <div>
                   <h3>{experience.title}</h3>
 
-                  <p class="organisation">
-                    {experience.organisation}
-                  </p>
+                  <p class="organisation">{experience.organisation}</p>
                 </div>
 
-                <span class="location">
-                  {experience.location}
-                </span>
+                <span class="location">{experience.location}</span>
               </div>
 
               <p class="experience-summary earlier-summary">
                 {experience.summary}
               </p>
 
-              {
-                experience.technologies && (
-                  <div
-                    class="technology-list"
-                    aria-label={`${experience.organisation} technologies`}
-                  >
-                    {
-                      experience.technologies.map(
-                        (technology) => (
-                          <span>{technology}</span>
-                        ),
-                      )
-                    }
-                  </div>
-                )
-              }
+              {experience.technologies && (
+                <div
+                  class="technology-list"
+                  aria-label={`${experience.organisation} technologies`}
+                >
+                  {experience.technologies.map((technology) => (
+                    <span>{technology}</span>
+                  ))}
+                </div>
+              )}
             </article>
           </li>
         ))
@@ -221,8 +177,8 @@ const getEarlierTypeLabel = (kind: ExperienceKind): string => {
     <span class="footer-light" aria-hidden="true"></span>
 
     <p>
-      Commercial and product work is represented through
-      approved high-level descriptions only.
+      Commercial and product work is represented through approved high-level
+      descriptions only.
     </p>
   </div>
 </section>
@@ -230,7 +186,7 @@ const getEarlierTypeLabel = (kind: ExperienceKind): string => {
 <style>
   .experience-section {
     margin-top: 30px;
-    padding: clamp(40px, 7vw, 92px);
+    padding: clamp(36px, 5vw, 72px);
     border: 1px solid var(--border);
     border-radius: 32px;
     background:
@@ -239,15 +195,10 @@ const getEarlierTypeLabel = (kind: ExperienceKind): string => {
         rgba(121, 174, 230, 0.08),
         transparent 27rem
       ),
-      linear-gradient(
-        145deg,
-        rgba(37, 41, 44, 0.82),
-        rgba(16, 18, 20, 0.94)
-      );
+      linear-gradient(145deg, rgba(37, 41, 44, 0.82), rgba(16, 18, 20, 0.94));
     box-shadow:
       18px 18px 45px rgba(0, 0, 0, 0.38),
-      inset 1px 1px 1px
-        rgba(255, 255, 255, 0.055);
+      inset 1px 1px 1px rgba(255, 255, 255, 0.055);
   }
 
   .experience-intro {
@@ -260,8 +211,7 @@ const getEarlierTypeLabel = (kind: ExperienceKind): string => {
     border: 1px solid var(--border);
     border-radius: 17px;
     background: rgba(0, 0, 0, 0.18);
-    box-shadow:
-      inset 5px 5px 13px rgba(0, 0, 0, 0.35);
+    box-shadow: inset 5px 5px 13px rgba(0, 0, 0, 0.35);
   }
 
   .current-path {
@@ -336,13 +286,12 @@ const getEarlierTypeLabel = (kind: ExperienceKind): string => {
     top: 52px;
     bottom: -25px;
     width: 2px;
-    content: '';
-    background:
-      linear-gradient(
-        to bottom,
-        rgba(121, 230, 167, 0.32),
-        rgba(255, 255, 255, 0.04)
-      );
+    content: "";
+    background: linear-gradient(
+      to bottom,
+      rgba(121, 230, 167, 0.32),
+      rgba(255, 255, 255, 0.04)
+    );
   }
 
   .timeline-node {
@@ -358,12 +307,10 @@ const getEarlierTypeLabel = (kind: ExperienceKind): string => {
     font-family: monospace;
     font-size: 0.7rem;
     font-weight: 800;
-    background:
-      linear-gradient(145deg, #292d30, #151719);
+    background: linear-gradient(145deg, #292d30, #151719);
     box-shadow:
       7px 7px 15px rgba(0, 0, 0, 0.48),
-      inset 1px 1px 1px
-        rgba(255, 255, 255, 0.08);
+      inset 1px 1px 1px rgba(255, 255, 255, 0.08);
   }
 
   .timeline-node.is-current {
@@ -371,10 +318,8 @@ const getEarlierTypeLabel = (kind: ExperienceKind): string => {
     background: var(--success);
     box-shadow:
       0 0 20px rgba(121, 230, 167, 0.35),
-      inset 4px 4px 8px
-        rgba(255, 255, 255, 0.35),
-      inset -4px -4px 8px
-        rgba(0, 0, 0, 0.18);
+      inset 4px 4px 8px rgba(255, 255, 255, 0.35),
+      inset -4px -4px 8px rgba(0, 0, 0, 0.18);
   }
 
   .experience-card {
@@ -383,16 +328,14 @@ const getEarlierTypeLabel = (kind: ExperienceKind): string => {
     padding: clamp(24px, 4vw, 38px);
     border: 1px solid var(--border);
     border-radius: 25px;
-    background:
-      linear-gradient(
-        145deg,
-        rgba(43, 47, 50, 0.95),
-        rgba(19, 21, 23, 0.98)
-      );
+    background: linear-gradient(
+      145deg,
+      rgba(43, 47, 50, 0.95),
+      rgba(19, 21, 23, 0.98)
+    );
     box-shadow:
       14px 14px 32px rgba(0, 0, 0, 0.4),
-      inset 1px 1px 1px
-        rgba(255, 255, 255, 0.065);
+      inset 1px 1px 1px rgba(255, 255, 255, 0.065);
     transition:
       transform 180ms ease,
       border-color 180ms ease;
@@ -479,10 +422,9 @@ const getEarlierTypeLabel = (kind: ExperienceKind): string => {
     left: 0;
     width: 8px;
     height: 2px;
-    content: '';
+    content: "";
     background: var(--success);
-    box-shadow:
-      0 0 8px rgba(121, 230, 167, 0.7);
+    box-shadow: 0 0 8px rgba(121, 230, 167, 0.7);
   }
 
   .technology-list {
@@ -500,8 +442,7 @@ const getEarlierTypeLabel = (kind: ExperienceKind): string => {
     font-family: monospace;
     font-size: 0.68rem;
     background: rgba(5, 14, 9, 0.33);
-    box-shadow:
-      inset 2px 2px 5px rgba(0, 0, 0, 0.4);
+    box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.4);
   }
 
   .earlier-section {
@@ -518,16 +459,14 @@ const getEarlierTypeLabel = (kind: ExperienceKind): string => {
     padding: 28px 30px;
     border: 1px solid var(--border);
     border-radius: 22px;
-    background:
-      linear-gradient(
-        145deg,
-        rgba(13, 15, 16, 0.92),
-        rgba(25, 28, 30, 0.94)
-      );
+    background: linear-gradient(
+      145deg,
+      rgba(13, 15, 16, 0.92),
+      rgba(25, 28, 30, 0.94)
+    );
     box-shadow:
       inset 8px 8px 22px rgba(0, 0, 0, 0.55),
-      inset -3px -3px 10px
-        rgba(255, 255, 255, 0.02);
+      inset -3px -3px 10px rgba(255, 255, 255, 0.02);
   }
 
   .earlier-heading p {
@@ -561,14 +500,12 @@ const getEarlierTypeLabel = (kind: ExperienceKind): string => {
     padding-bottom: 20px;
   }
 
-  .earlier-timeline-item:not(:last-child)
-    .earlier-rail::after {
-    background:
-      linear-gradient(
-        to bottom,
-        rgba(239, 77, 77, 0.34),
-        rgba(255, 255, 255, 0.035)
-      );
+  .earlier-timeline-item:not(:last-child) .earlier-rail::after {
+    background: linear-gradient(
+      to bottom,
+      rgba(239, 77, 77, 0.34),
+      rgba(255, 255, 255, 0.035)
+    );
   }
 
   .earlier-node {
@@ -680,8 +617,7 @@ const getEarlierTypeLabel = (kind: ExperienceKind): string => {
       height: 42px;
     }
 
-    .timeline-item:not(:last-child)
-      .timeline-rail::after {
+    .timeline-item:not(:last-child) .timeline-rail::after {
       top: 46px;
     }
 
@@ -717,8 +653,7 @@ const getEarlierTypeLabel = (kind: ExperienceKind): string => {
       justify-content: flex-start;
     }
 
-    .timeline-item:not(:last-child)
-      .timeline-rail::after {
+    .timeline-item:not(:last-child) .timeline-rail::after {
       display: none;
     }
 

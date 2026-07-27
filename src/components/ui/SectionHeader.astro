@@ -6,53 +6,76 @@ interface Props {
   description?: string;
 }
 
-const {
-  id,
-  eyebrow,
-  title,
-  description,
-} = Astro.props;
+const { id, eyebrow, title, description } = Astro.props;
 ---
 
 <header class="section-header">
-  <p>{eyebrow}</p>
+  <p class="section-eyebrow">{eyebrow}</p>
+
   <h2 id={id}>{title}</h2>
 
-  {
-    description && (
-      <div class="section-description">
-        {description}
-      </div>
-    )
-  }
+  {description && <p class="section-description">{description}</p>}
 </header>
 
 <style>
   .section-header {
-    max-width: 820px;
+    max-width: 900px;
   }
 
-  .section-header p {
-    margin: 0 0 14px;
+  .section-eyebrow {
+    margin: 0;
     color: var(--accent);
     font-family: monospace;
-    font-size: 0.76rem;
+    font-size: 0.72rem;
     font-weight: 800;
-    letter-spacing: 0.17em;
+    line-height: 1.4;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
   }
 
   .section-header h2 {
-    margin: 0;
-    font-size: clamp(2.8rem, 6vw, 5.6rem);
+    max-width: 16ch;
+    margin: 20px 0 0;
+    font-size: clamp(2.6rem, 4.5vw, 4.8rem);
     line-height: 0.98;
-    letter-spacing: -0.06em;
+    letter-spacing: -0.052em;
+    text-wrap: balance;
   }
 
   .section-description {
-    max-width: 700px;
-    margin-top: 22px;
+    max-width: 720px;
+    margin: 22px 0 0;
     color: var(--muted);
-    font-size: 1.05rem;
-    line-height: 1.75;
+    font-size: clamp(0.95rem, 1.1vw, 1.05rem);
+    line-height: 1.7;
+    text-wrap: pretty;
+  }
+
+  @media (max-width: 900px) {
+    .section-header h2 {
+      max-width: 17ch;
+      font-size: clamp(2.4rem, 6.5vw, 4rem);
+    }
+  }
+
+  @media (max-width: 600px) {
+    .section-header h2 {
+      max-width: none;
+      margin-top: 16px;
+      font-size: clamp(2.05rem, 9vw, 3rem);
+      line-height: 1.02;
+      letter-spacing: -0.043em;
+    }
+
+    .section-eyebrow {
+      font-size: 0.64rem;
+      letter-spacing: 0.14em;
+    }
+
+    .section-description {
+      margin-top: 17px;
+      font-size: 0.94rem;
+      line-height: 1.65;
+    }
   }
 </style>
