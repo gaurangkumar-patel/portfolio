@@ -27,16 +27,25 @@ export interface ProfileData {
 
 export const profile: ProfileData = {
   name: "Gaurangkumar Patel",
-  title: "Software Engineer · Backend Development",
-  eyebrow: "ENGINEER PROFILE // BACKEND FOCUSED",
+  title: "Software Engineer · Backend & Full-Stack",
+  eyebrow: "SOFTWARE ENGINEER // PHP · LARAVEL · APIs · SQL · INTEGRATIONS",
 
   summary:
-    "Backend-focused software engineer with 5+ years of commercial experience building and maintaining web applications, REST APIs and database-driven platforms.",
+    "Software Engineer with 5+ years of commercial experience building and supporting production web applications, REST APIs, integrations and SQL-heavy business systems.",
 
   detail:
-    "Focused on PHP, Laravel, Yii2, MySQL and Redis, with practical experience across backend services, third-party integrations, performance improvement, production support and React-based administration interfaces.",
+    "Backend-first engineer specialising in PHP/Laravel, Yii2, MySQL and API-driven systems, with commercial React experience and Vue.js integration exposure. Experienced in scheduled automation, third-party integrations, Redis/Memcached caching, stored-procedure and query optimisation, complex approval workflows, legacy modernisation and production troubleshooting.",
 
-  stack: ["PHP", "Laravel", "Yii2", "REST APIs", "MySQL", "Redis", "React"],
+  stack: [
+    "PHP",
+    "Laravel",
+    "Yii2",
+    "REST APIs",
+    "MySQL / SQL",
+    "Redis / Memcached",
+    "React",
+    "Integrations",
+  ],
 
   facts: [
     {
@@ -45,36 +54,36 @@ export const profile: ProfileData = {
     },
     {
       label: "Primary focus",
-      value: "PHP / Laravel backend engineering",
+      value: "Backend / backend-focused full-stack engineering",
     },
     {
       label: "Work eligibility",
-      value: "UK right to work — no sponsorship required",
+      value: "Full UK right to work — no sponsorship required",
     },
     {
       label: "Availability",
-      value: "4 weeks' notice",
+      value: "4 weeks' notice · London / hybrid / remote UK",
     },
   ],
 
   strengths: [
     {
       number: "01",
-      title: "Backend Engineering",
+      title: "Backend & API Engineering",
       description:
-        "Maintainable PHP and Laravel services designed around clear business requirements.",
+        "Production PHP/Laravel and Yii2 services, REST APIs, authentication, business rules and third-party integrations.",
     },
     {
       number: "02",
-      title: "APIs and Data",
+      title: "SQL & Performance",
       description:
-        "REST API development, relational database design, validation and integration workflows.",
+        "MySQL optimisation, stored procedures, indexing, profiling, caching and performance improvements for data-heavy systems.",
     },
     {
       number: "03",
-      title: "Reliability",
+      title: "Automation & Reliability",
       description:
-        "Production debugging, SQL optimisation, Redis caching and safe incremental improvements.",
+        "Scheduled commands, file-processing workflows, background tasks, production debugging and maintainable legacy modernisation.",
     },
   ],
 
@@ -83,5 +92,6 @@ export const profile: ProfileData = {
     linkedin: "https://www.linkedin.com/in/gaurangpatel2326",
   },
 
+  // Keep the currently published PDF filename until the new CV binary is safely replaced.
   cvFilename: "Gaurangkumar_Patel_Master_Software_Engineer_CV_v4.3.pdf",
 };
