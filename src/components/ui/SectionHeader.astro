@@ -19,7 +19,7 @@ const { id, eyebrow, title, description } = Astro.props;
 
 <style>
   .section-header {
-    max-width: 900px;
+    max-width: 960px;
   }
 
   .section-eyebrow {
@@ -34,17 +34,17 @@ const { id, eyebrow, title, description } = Astro.props;
   }
 
   .section-header h2 {
-    max-width: 16ch;
-    margin: 20px 0 0;
-    font-size: clamp(2.6rem, 4.5vw, 4.8rem);
-    line-height: 0.98;
-    letter-spacing: -0.052em;
+    max-width: 20ch;
+    margin: 18px 0 0;
+    font-size: clamp(2.15rem, 3.4vw, 3.65rem);
+    line-height: 1.03;
+    letter-spacing: -0.045em;
     text-wrap: balance;
   }
 
   .section-description {
-    max-width: 720px;
-    margin: 22px 0 0;
+    max-width: 760px;
+    margin: 20px 0 0;
     color: var(--muted);
     font-size: clamp(0.95rem, 1.1vw, 1.05rem);
     line-height: 1.7;
@@ -53,18 +53,18 @@ const { id, eyebrow, title, description } = Astro.props;
 
   @media (max-width: 900px) {
     .section-header h2 {
-      max-width: 17ch;
-      font-size: clamp(2.4rem, 6.5vw, 4rem);
+      max-width: 20ch;
+      font-size: clamp(2rem, 5.2vw, 3.3rem);
     }
   }
 
   @media (max-width: 600px) {
     .section-header h2 {
       max-width: none;
-      margin-top: 16px;
-      font-size: clamp(2.05rem, 9vw, 3rem);
-      line-height: 1.02;
-      letter-spacing: -0.043em;
+      margin-top: 15px;
+      font-size: clamp(1.8rem, 7.8vw, 2.6rem);
+      line-height: 1.06;
+      letter-spacing: -0.038em;
     }
 
     .section-eyebrow {
@@ -73,7 +73,7 @@ const { id, eyebrow, title, description } = Astro.props;
     }
 
     .section-description {
-      margin-top: 17px;
+      margin-top: 16px;
       font-size: 0.94rem;
       line-height: 1.65;
     }
