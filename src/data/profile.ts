@@ -34,7 +34,7 @@ export const profile: ProfileData = {
     "Software Engineer with 5+ years of commercial experience building and supporting production web applications, REST APIs, integrations and SQL-heavy business systems.",
 
   detail:
-    "Backend-first engineer specialising in PHP/Laravel, Yii2, MySQL and API-driven systems, with commercial React experience and Vue.js integration exposure. Experienced in scheduled automation, third-party integrations, Redis/Memcached caching, stored-procedure and query optimisation, complex approval workflows, legacy modernisation and production troubleshooting.",
+    "My strongest experience is in PHP, Laravel, Yii2, MySQL and API-driven backend systems. I also work with React.js, JavaScript and legacy frontend stacks, and I have delivered scheduled automation, third-party integrations, Redis and Memcached caching, database optimisation, multi-role workflows, legacy modernisation and production troubleshooting.",
 
   stack: [
     "PHP",
@@ -43,8 +43,12 @@ export const profile: ProfileData = {
     "REST APIs",
     "MySQL / SQL",
     "Redis / Memcached",
-    "React",
+    "React.js",
+    "JavaScript",
+    "Webhooks",
     "Integrations",
+    "Performance",
+    "Automation",
   ],
 
   facts: [
@@ -54,15 +58,15 @@ export const profile: ProfileData = {
     },
     {
       label: "Primary focus",
-      value: "Backend / backend-focused full-stack engineering",
+      value: "Backend and backend-focused full-stack engineering",
     },
     {
       label: "Work eligibility",
-      value: "Full UK right to work — no sponsorship required",
+      value: "Full UK right to work, no sponsorship required",
     },
     {
       label: "Availability",
-      value: "4 weeks' notice · London / hybrid / remote UK",
+      value: "4 weeks' notice · London, hybrid or remote UK",
     },
   ],
 
@@ -71,19 +75,19 @@ export const profile: ProfileData = {
       number: "01",
       title: "Backend & API Engineering",
       description:
-        "Production PHP/Laravel and Yii2 services, REST APIs, authentication, business rules and third-party integrations.",
+        "Production PHP, Laravel and Yii2 applications with REST APIs, authentication, business rules, webhooks and third-party integrations.",
     },
     {
       number: "02",
-      title: "SQL & Performance",
+      title: "Data & Performance",
       description:
-        "MySQL optimisation, stored procedures, indexing, profiling, caching and performance improvements for data-heavy systems.",
+        "MySQL and SQL optimisation, stored procedures, indexing, query profiling, Redis and Memcached caching, pagination and load-focused improvements.",
     },
     {
       number: "03",
       title: "Automation & Reliability",
       description:
-        "Scheduled commands, file-processing workflows, background tasks, production debugging and maintainable legacy modernisation.",
+        "Scheduled commands, background processing, file and data workflows, production debugging, logging and maintainable legacy modernisation.",
     },
   ],
 
@@ -92,6 +96,5 @@ export const profile: ProfileData = {
     linkedin: "https://www.linkedin.com/in/gaurangpatel2326",
   },
 
-  // Keep the currently published PDF filename until the new CV binary is safely replaced.
   cvFilename: "Gaurangkumar_Patel_Master_Software_Engineer_CV_v4.3.pdf",
 };
