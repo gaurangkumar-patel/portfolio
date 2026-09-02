@@ -96,5 +96,5 @@ export const profile: ProfileData = {
     linkedin: "https://www.linkedin.com/in/gaurangpatel2326",
   },
 
-  cvFilename: "Gaurangkumar_Patel_Master_Software_Engineer_CV_v4.3.pdf",
+  cvFilename: "Gaurangkumar_Patel_Software_Engineer_CV.pdf",
 };
