@@ -311,28 +311,29 @@ export const productProjects: Project[] = [
     domain: "Seller tools, reusable listing content and automation",
 
     summary:
-      "A pre-MVP SaaS product concept intended to help online sellers manage reusable branded listing content and structured bulk-listing workflows.",
+      "A pre-MVP SaaS product intended to help online sellers manage reusable branded listing content and structured product workflows.",
 
     challenge:
       "Online sellers often repeat product-description formatting, template management and marketplace preparation across large product catalogues.",
 
     contribution:
-      "Defined the product direction and began designing a modular Laravel architecture separating product data, reusable templates, mapping rules and external integration services.",
+      "Defined the product requirements and designed a modular Laravel architecture separating product data, reusable templates, mapping rules and integration services.",
 
     technologies: [
-      "PHP 8.3",
-      "Laravel 12",
+      "PHP 8.x",
+      "Laravel 13",
       "MySQL",
-      "React / Blade",
+      "Blade / Inertia / React",
       "Tailwind CSS",
+      "Redis",
       "Git",
     ],
 
     highlights: [
-      "Defined the initial product scope and backend-first technical direction.",
-      "Designed a modular separation between products, templates, mappings and integrations.",
-      "Started relational data-model planning for product and template workflows.",
-      "Explored secure administration, validation, preview and export workflows.",
+      "Defined the approved MVP scope and backend-first technical direction.",
+      "Designed modular boundaries for products, templates, mappings and integrations.",
+      "Designed relational data models and secure seller workflows.",
+      "Planned validation, preview, export, caching and scheduled/background processing.",
       "Established controlled Git and documentation practices for product development.",
     ],
 
@@ -341,8 +342,8 @@ export const productProjects: Project[] = [
       "Implement secure user and role management.",
       "Implement reusable template-processing workflows.",
       "Introduce queue-driven bulk processing where required.",
-      "Evaluate Redis caching and scheduled background jobs.",
-      "Evaluate marketplace integrations only after the core MVP is stable.",
+      "Introduce Redis caching and scheduled background jobs where useful.",
+      "Add marketplace integrations in the approved phased MVP sequence.",
     ],
 
     links: [],
@@ -568,33 +569,32 @@ export const commercialProjects: Project[] = [
     domain: "Enterprise identity and employee workflows",
 
     summary:
-      "An employee-services platform supporting profiles, attendance, leave, tasks and internal workplace processes.",
+      "An employee-services mobile platform supported by a separate Laravel API backend for organisational data, leave, workplace services and internal workflows.",
 
     challenge:
-      "Enterprise workflows required secure access and synchronisation across organisational identity, content and employee data sources.",
+      "Enterprise mobile workflows required secure APIs, identity synchronisation, document processing, scheduled automation and dependable integrations across organisational systems.",
 
     contribution:
-      "Built Laravel APIs and integration routines using Azure Active Directory, SharePoint and OAuth2/JWT security controls.",
+      "Developed and supported Laravel REST APIs, scheduled commands, SharePoint and directory integrations, push notifications and file-processing automation for Android and iOS clients.",
 
     technologies: [
-      "Laravel APIs",
+      "Laravel REST APIs",
       "MySQL",
-      "Azure Active Directory",
-      "SharePoint",
-      "OAuth2",
-      "JWT",
+      "SharePoint / Active Directory",
+      "OAuth2 / JWT",
+      "Firebase FCM",
+      "AWS S3",
+      "Telescope",
+      "Swagger / OpenAPI",
     ],
 
     highlights: [
-      "Built APIs for employee profiles and organisational information.",
-      "Developed attendance and leave workflows.",
-      "Developed task and internal-workplace APIs.",
-      "Supported web and mobile API consumers.",
-      "Integrated Azure Active Directory authentication.",
-      "Integrated SharePoint organisational content.",
-      "Applied OAuth2 and JWT access controls.",
-      "Developed employee and directory synchronisation routines.",
-      "Handled external-service failures and access constraints.",
+      "Developed APIs for employee profiles, leave, workplace services and organisational information.",
+      "Synchronised Active Directory users into MySQL through scheduled commands.",
+      "Automated CSV exports, related file collection, ZIP generation, email delivery, retries and successful-file cleanup.",
+      "Implemented Firebase push-notification flows and OAuth-based token handling.",
+      "Supported webhook-triggered automation integrations and production exception alerting.",
+      "Protected sensitive fields using AES-based database encryption with environment-managed keys.",
     ],
 
     plannedWork: [],
@@ -630,25 +630,21 @@ export const commercialProjects: Project[] = [
       "Laravel",
       "Yii2",
       "MySQL",
-      "jQuery",
-      "Vue.js",
-      "Redis",
-      "Stored procedures",
+      "jQuery / jQuery UI",
+      "Vue.js integration",
+      "Redis / Memcached",
+      "Stored Procedures",
       "Apache",
       "JMeter",
     ],
 
     highlights: [
-      "Worked on customer accounts and profile workflows.",
-      "Maintained vouchers and loyalty-points functionality.",
-      "Supported promotional games, campaigns and content modules.",
-      "Developed administration and operational enhancements.",
-      "Optimised slow SQL queries and stored procedures.",
-      "Applied caching and backend code refactoring.",
-      "Supported Apache and load-balancer configuration work.",
-      "Used JMeter to support performance testing.",
-      "Developed a Vue.js module within the VivoCity Yii2 application.",
-      "Diagnosed and resolved issues across new and legacy applications.",
+      "Designed reusable two-tier and three-tier VivoCity approval workflows across a 13-role permission model.",
+      "Integrated client-supplied Vue.js forms into Yii2 by building backend APIs, authentication, database CRUD and workflow logic.",
+      "Refactored repeated role conditions into reusable configuration, shared classes and stored-procedure-driven permission logic.",
+      "Diagnosed ShopFarEast event spikes reported around 10k+ requests per minute and improved stability using caching, rate limiting and backend optimisation.",
+      "Used Redis and Memcached caching, SQL profiling and JMeter load testing to support performance improvements.",
+      "Maintained and enhanced related Yii2 retail functionality across LendLease and other legacy modules.",
     ],
 
     plannedWork: [],
@@ -680,17 +676,14 @@ export const commercialProjects: Project[] = [
     contribution:
       "Developed Laravel APIs and collaborated on practical payloads, validation behaviour, performance and error responses for React consumers.",
 
-    technologies: ["Laravel APIs", "React.js", "MySQL"],
+    technologies: ["Laravel APIs", "React.js", "MySQL", "JWT / OTP", "Firebase FCM"],
 
     highlights: [
-      "Developed citizen-services backend APIs.",
-      "Built catalogue and cart functionality.",
-      "Supported wholesale ordering workflows.",
-      "Improved performance through SQL query optimisation.",
-      "Streamlined API responses for data-heavy operations.",
-      "Refactored backend application paths.",
-      "Worked with React consumers on payload and validation behaviour.",
-      "Implemented practical API error responses.",
+      "Added a commerce module with seller roles and permissions, product CRUD, cart and order workflows.",
+      "Developed mobile APIs and supported Hindi and English application behaviour.",
+      "Implemented push notifications for order events.",
+      "Refactored static legacy conditions into reusable configuration and components.",
+      "Implemented React.js forms while supporting the Laravel Blade administration panel.",
     ],
 
     plannedWork: [],
@@ -714,25 +707,30 @@ export const commercialProjects: Project[] = [
     domain: "Reservations, ticketing and multi-country operations",
 
     summary:
-      "A multi-country reservation platform supporting booking, ticketing, notes and operational workflows across different locations.",
+      "A Yii2-based multi-country reservation platform supporting booking, ticketing, notes and data-heavy operational workflows across different locations.",
 
     challenge:
-      "Reservation rules needed to remain consistent while supporting multiple countries, currencies and interconnected operational modules.",
+      "Large reservation listings and complex joins created significant response-time problems while the platform still needed consistent multi-country operational rules.",
 
     contribution:
-      "Implemented and maintained reservation-related backend workflows, country-aware rules, reporting outputs and production enhancements.",
+      "Maintained Yii2 reservation workflows and improved a data-heavy listing from more than two minutes to under 30 seconds through database and application profiling and optimisation.",
 
-    technologies: ["PHP", "Laravel", "MySQL", "JavaScript"],
+    technologies: [
+      "Yii2",
+      "PHP",
+      "MySQL",
+      "Stored Procedures",
+      "JavaScript / jQuery",
+      "Debug Profiling",
+    ],
 
     highlights: [
-      "Implemented reservation and booking workflows.",
-      "Developed ticketing and operational-note functionality.",
-      "Supported multiple countries and business locations.",
-      "Handled currency-aware application data.",
-      "Supported country-specific reservation requirements.",
-      "Maintained consistent backend rules and reporting outputs.",
-      "Resolved issues across interconnected reservation modules.",
-      "Delivered ongoing enhancements and maintenance.",
+      "Profiled slow reservation queries and application execution paths across 10k+ records.",
+      "Added indexes and refactored stored procedures and joins.",
+      "Reduced selected fields and repeated queries and removed unnecessary loop and inline-edit payload work.",
+      "Applied pagination and caching to reduce page-load cost.",
+      "Reduced the key reservation listing from more than two minutes to under 30 seconds.",
+      "Verified behaviour through query profiling, debug tooling and manual regression testing.",
     ],
 
     plannedWork: [],

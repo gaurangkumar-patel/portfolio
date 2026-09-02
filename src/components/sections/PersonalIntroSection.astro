@@ -37,7 +37,7 @@ import { profile } from '../../data/profile';
 
       <div class="identity-label">
         <span>IDENTITY VERIFIED</span>
-        <strong>GP // BACKEND ENGINEER</strong>
+        <strong>GP // SOFTWARE ENGINEER</strong>
       </div>
     </div>
 
@@ -65,18 +65,25 @@ import { profile } from '../../data/profile';
       </p>
 
       <p class="intro-description intro-line line-four">
-        I build maintainable backend applications, REST APIs and
-        database-driven systems using PHP, Laravel and modern
-        engineering practices.
+        I build and support production software with a backend-first approach.
+        My work covers PHP and Laravel applications, Yii2 systems, REST APIs,
+        SQL-heavy workflows, React interfaces, third-party integrations,
+        performance optimisation and scheduled automation.
       </p>
     </div>
 
-    <div class="intro-stack intro-line line-five">
+    <div class="intro-stack intro-line line-five" aria-label="Core technologies">
       <span>PHP</span>
       <span>Laravel</span>
+      <span>Yii2</span>
       <span>REST APIs</span>
-      <span>MySQL</span>
+      <span>MySQL / SQL</span>
       <span>Redis</span>
+      <span>React.js</span>
+      <span>JavaScript</span>
+      <span>Webhooks</span>
+      <span>Automation</span>
+      <span>Performance</span>
     </div>
 
     <div class="intro-actions intro-line line-six">
@@ -91,7 +98,7 @@ import { profile } from '../../data/profile';
 
     <div class="availability">
       <span aria-hidden="true"></span>
-      London-based backend engineer
+      London-based Software Engineer with full UK right to work
     </div>
   </div>
 </section>
@@ -137,11 +144,12 @@ import { profile } from '../../data/profile';
 </script>
 
 <style>
-.portrait-console,
-.intro-content {
-  width: 100%;
-  min-width: 0;
-}
+  .portrait-console,
+  .intro-content {
+    width: 100%;
+    min-width: 0;
+  }
+
   .personal-intro {
     display: grid;
     grid-template-columns: minmax(340px, 0.85fr) minmax(0, 1.15fr);
@@ -330,49 +338,49 @@ import { profile } from '../../data/profile';
 
   .line-one {
     color: var(--muted);
-    font-size: clamp(1.2rem, 2vw, 1.6rem);
+    font-size: clamp(1.15rem, 1.7vw, 1.45rem);
   }
 
- .line-two {
-  max-width: 100%;
-  margin-top: 7px !important;
-  font-size: clamp(3rem, 6.2vw, 7.2rem);
-  line-height: 0.94;
-  letter-spacing: -0.06em;
-  overflow-wrap: anywhere;
-}
+  .line-two {
+    max-width: 100%;
+    margin-top: 8px !important;
+    font-size: clamp(2.8rem, 5vw, 5.7rem);
+    line-height: 0.98;
+    letter-spacing: -0.052em;
+    overflow-wrap: anywhere;
+  }
 
   .role-line {
     margin-top: 18px !important;
     color: var(--success);
     font-family: monospace;
-    font-size: clamp(0.9rem, 1.5vw, 1.15rem);
+    font-size: clamp(0.88rem, 1.35vw, 1.08rem);
     font-weight: 750;
-    letter-spacing: 0.06em;
+    letter-spacing: 0.05em;
   }
 
   .intro-description {
     max-width: 760px;
-    margin-top: 28px !important;
+    margin-top: 25px !important;
     color: var(--muted);
-    font-size: 1.03rem;
-    line-height: 1.78;
+    font-size: 1rem;
+    line-height: 1.75;
   }
 
   .intro-stack {
     display: flex;
     flex-wrap: wrap;
-    gap: 9px;
-    margin-top: 27px;
+    gap: 8px;
+    margin-top: 24px;
   }
 
   .intro-stack span {
-    padding: 8px 11px;
+    padding: 7px 10px;
     border: 1px solid rgba(121, 230, 167, 0.12);
     border-radius: 9px;
     color: #b6d2c0;
     font-family: monospace;
-    font-size: 0.68rem;
+    font-size: 0.65rem;
     background: rgba(5, 14, 9, 0.33);
   }
 
@@ -380,7 +388,7 @@ import { profile } from '../../data/profile';
     display: flex;
     flex-wrap: wrap;
     gap: 13px;
-    margin-top: 31px;
+    margin-top: 29px;
   }
 
   .primary-action,
@@ -418,7 +426,7 @@ import { profile } from '../../data/profile';
     display: flex;
     align-items: center;
     gap: 10px;
-    margin-top: 28px;
+    margin-top: 26px;
     color: #8b9397;
     font-size: 0.77rem;
   }
@@ -495,68 +503,68 @@ import { profile } from '../../data/profile';
     }
   }
 
-@media (max-width: 900px) {
-  .personal-intro {
-    grid-template-columns: minmax(0, 1fr);
+  @media (max-width: 900px) {
+    .personal-intro {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .portrait-console {
+      width: 100%;
+      max-width: 620px;
+      min-width: 0;
+      transform: none;
+    }
   }
 
-  .portrait-console {
-    width: 100%;
-    max-width: 620px;
-    min-width: 0;
-    transform: none;
-  }
-}
+  @media (max-width: 600px) {
+    .personal-intro {
+      width: 100%;
+      min-width: 0;
+      padding: 32px 18px;
+      overflow: hidden;
+    }
 
-@media (max-width: 600px) {
-  .personal-intro {
-    width: 100%;
-    min-width: 0;
-    padding: 32px 18px;
-    overflow: hidden;
-  }
+    .portrait-console,
+    .intro-content,
+    .intro-sequence {
+      width: 100%;
+      min-width: 0;
+      max-width: 100%;
+    }
 
-  .portrait-console,
-  .intro-content,
-  .intro-sequence {
-    width: 100%;
-    min-width: 0;
-    max-width: 100%;
-  }
+    .line-two {
+      max-width: 100%;
+      font-size: clamp(2.4rem, 10.5vw, 3.8rem);
+      line-height: 1;
+      letter-spacing: -0.048em;
+      overflow-wrap: anywhere;
+      word-break: normal;
+    }
 
-  .line-two {
-    max-width: 100%;
-    font-size: clamp(2.65rem, 12vw, 4.2rem);
-    line-height: 0.98;
-    letter-spacing: -0.055em;
-    overflow-wrap: anywhere;
-    word-break: normal;
-  }
+    .intro-description {
+      max-width: 100%;
+      font-size: 0.94rem;
+      line-height: 1.7;
+    }
 
-  .intro-description {
-    max-width: 100%;
-    font-size: 0.96rem;
-    line-height: 1.7;
-  }
+    .intro-actions {
+      display: grid;
+      width: 100%;
+      grid-template-columns: minmax(0, 1fr);
+    }
 
-  .intro-actions {
-    display: grid;
-    width: 100%;
-    grid-template-columns: minmax(0, 1fr);
-  }
+    .primary-action,
+    .replay-button {
+      width: 100%;
+      max-width: 100%;
+      padding-right: 14px;
+      padding-left: 14px;
+    }
 
-  .primary-action,
-  .replay-button {
-    width: 100%;
-    max-width: 100%;
-    padding-right: 14px;
-    padding-left: 14px;
+    .portrait-screen {
+      width: 100%;
+    }
   }
-
-  .portrait-screen {
-    width: 100%;
-  }
-}
 
   @media (prefers-reduced-motion: reduce) {
     .intro-line {

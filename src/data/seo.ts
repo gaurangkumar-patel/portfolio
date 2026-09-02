@@ -4,7 +4,7 @@ export interface PageSeo {
 }
 
 export const siteMetadata = {
-  name: "Gaurangkumar Patel — Backend Engineering Portfolio",
+  name: "Gaurangkumar Patel — Software Engineering Portfolio",
 
   shortName: "Gaurangkumar Patel",
 
@@ -23,9 +23,9 @@ export const siteMetadata = {
   themeColor: "#111315",
 
   defaultSeo: {
-    title: "Gaurangkumar Patel | PHP Laravel Backend Software Engineer",
+    title: "Gaurangkumar Patel | Software Engineer | PHP Laravel Backend",
 
     description:
-      "Software Engineer · Backend Development in London specialising in PHP, Laravel, REST APIs, MySQL, Redis and reliable database-driven web applications.",
+      "London-based Software Engineer with 5+ years of commercial experience across PHP, Laravel, Yii2, REST APIs, MySQL/SQL, integrations, automation, React and production performance optimisation. Full UK right to work; no sponsorship required.",
   } satisfies PageSeo,
 };
