@@ -9,11 +9,27 @@ export interface Testimonial {
 
 export const testimonials: Testimonial[] = [
   {
+    name: "Suresh Nariya",
+    role: "Solution Architect",
+    relationship: "Managed Gaurang directly",
+    date: "August 2026",
+    featured: true,
+    quote:
+      "He is a dedicated developer who learns quickly and delivers quality work. He has a positive attitude and is always willing to learn and improve.",
+  },
+  {
+    name: "Dhaval Sisodiya",
+    role: "Senior Software Developer",
+    relationship: "Managed Gaurang directly",
+    date: "August 2026",
+    quote:
+      "Having worked closely with Gaurang, I have seen his growth and dedication firsthand. He possesses a rare combination of strong problem-solving skills and a strict focus on standard engineering processes. He is reliable, detail-oriented, and handles challenges with a calm, logical approach. I strongly recommend him.",
+  },
+  {
     name: "Namrata Patel",
     role: "Software Engineer",
     relationship: "Worked with Gaurangkumar at E2logy on different teams",
     date: "July 2026",
-    featured: true,
     quote:
       "Gaurang is a highly skilled and dependable PHP and Laravel developer with strong expertise in backend development, REST APIs, MySQL, application architecture, debugging and problem-solving. He consistently wrote clean, maintainable and scalable code while ensuring that technical solutions aligned with business requirements and user needs.",
   },
