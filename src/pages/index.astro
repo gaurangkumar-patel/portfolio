@@ -15,69 +15,82 @@ import TestimonialsSection from "../components/sections/TestimonialsSection.astr
 import SiteFooter from "../components/layout/SiteFooter.astro";
 
 const homepageURL = new URL(import.meta.env.BASE_URL, Astro.site ?? Astro.url);
-
 const profileImageURL = new URL(profilePhoto.src, Astro.site ?? Astro.url);
 
 const homepageStructuredData = {
   "@context": "https://schema.org",
   "@type": "ProfilePage",
-
-  name: "Gaurangkumar Patel - Software Engineer · Backend Development Portfolio",
-
+  name: "Gaurangkumar Patel | Software Engineer, Backend & Full-Stack Portfolio",
   description: siteMetadata.defaultSeo.description,
-
   url: homepageURL.href,
-
   mainEntity: {
     "@type": "Person",
     "@id": `${homepageURL.href}#person`,
-
     name: "Gaurangkumar Patel",
-
     url: homepageURL.href,
-
     image: profileImageURL.href,
-
-    jobTitle: "Software Engineer · Backend Development",
-
+    jobTitle: "Software Engineer · Backend & Full-Stack",
     address: {
       "@type": "PostalAddress",
       addressLocality: "London",
       addressCountry: "GB",
     },
-
     knowsAbout: [
+      "Software engineering",
+      "Backend software engineering",
+      "Full-stack development",
       "PHP",
       "Laravel",
       "Yii2",
-      "REST APIs",
+      "Core PHP",
+      "REST API development",
+      "API-first systems",
+      "Webhooks",
+      "OAuth2",
+      "JWT",
       "MySQL",
+      "MariaDB",
+      "SQL optimisation",
+      "Database design",
+      "Stored procedures",
+      "Database indexing",
+      "EXPLAIN query profiling",
       "Redis",
-      "React",
-      "Backend software engineering",
-      "Database-driven web applications",
+      "Memcached",
+      "Caching strategies",
+      "Performance optimisation",
+      "Load testing",
+      "JMeter",
+      "React.js",
+      "JavaScript",
+      "jQuery",
+      "jQuery UI",
+      "Laravel Blade",
+      "Tailwind CSS",
+      "Vue.js integration",
       "Python",
       "Flask",
-      "React.js",
-      "Software engineering",
-      "SaaS application development",
-      "API development",
-      "OAuth",
-      "JWT",
-      "Performance optimization",
-      "Scalable backend systems",
-      "System architecture",
-      "Software development best practices",
-      "Test-driven development",
-      "Query optimization",
-      "stored procedures",
-      "cursors",
-      "database indexing",
+      "Scheduled commands",
+      "Cron jobs",
+      "Background processing",
+      "File processing",
+      "CSV and Excel workflows",
+      "Third-party integrations",
+      "Microsoft Graph",
+      "SharePoint",
+      "Firebase FCM",
+      "AWS S3",
+      "AWS KMS",
+      "Amazon SES",
+      "Production debugging",
+      "Legacy modernisation",
+      "Code review",
+      "CI/CD",
     ],
-
     sameAs: [siteMetadata.githubUrl, siteMetadata.linkedinUrl],
   },
 };
+
 const githubURL = "https://github.com/gaurangkumar-patel";
 const linkedinURL = "https://www.linkedin.com/in/gaurangpatel2326";
 ---
@@ -102,9 +115,10 @@ const linkedinURL = "https://www.linkedin.com/in/gaurangpatel2326";
           </h1>
 
           <p class="intro">
-            Hi, I’m Gaurangkumar Patel — a Software Engineer with 5+ years of
-            commercial experience building API-driven applications using PHP,
-            Laravel, Yii2, MySQL and React.js.
+            Hi, I’m Gaurangkumar Patel, a Software Engineer with 5+ years of
+            commercial experience. I build and support PHP and Laravel systems,
+            REST APIs, SQL-heavy applications, integrations and backend-focused
+            full-stack features using Yii2, MySQL, Redis and React.js.
           </p>
 
           <div class="actions">
@@ -131,19 +145,25 @@ const linkedinURL = "https://www.linkedin.com/in/gaurangpatel2326";
             <article>
               <span>01</span>
               <strong>Backend</strong>
-              <small>PHP · Laravel · Yii2</small>
+              <small>PHP · Laravel · Yii2 · OOP</small>
             </article>
 
             <article>
               <span>02</span>
-              <strong>Data</strong>
-              <small>MySQL · Redis · SQL</small>
+              <strong>APIs & Integration</strong>
+              <small>REST · OAuth2 · JWT · Webhooks</small>
             </article>
 
             <article>
               <span>03</span>
-              <strong>Integration</strong>
-              <small>REST APIs · OAuth · JWT</small>
+              <strong>Data & Performance</strong>
+              <small>MySQL · Redis · SQL · Profiling</small>
+            </article>
+
+            <article>
+              <span>04</span>
+              <strong>Full-Stack</strong>
+              <small>React · JavaScript · Blade · jQuery</small>
             </article>
           </div>
         </div>
@@ -168,16 +188,14 @@ const linkedinURL = "https://www.linkedin.com/in/gaurangpatel2326";
             <div class="terminal-copy">
               <p><span>&gt;</span> Initialising profile...</p>
               <p><span>&gt;</span> Identity: Gaurangkumar Patel</p>
-              <p>
-                <span>&gt;</span> Role: Software Engineer · Backend Development
-              </p>
-              <p><span>&gt;</span> Core: PHP / Laravel / REST APIs</p>
+              <p><span>&gt;</span> Role: Software Engineer · Backend & Full-Stack</p>
+              <p><span>&gt;</span> Core: PHP / Laravel / REST APIs / SQL</p>
+              <p><span>&gt;</span> Focus: Performance / Integrations / Reliability</p>
               <p class="success"><span>&gt;</span> Status: Ready to build</p>
             </div>
 
             <div class="scene-shell">
               <HeroScene client:only="react" />
-
               <span class="scene-caption"> BACKEND CORE </span>
             </div>
           </div>
@@ -200,18 +218,17 @@ const linkedinURL = "https://www.linkedin.com/in/gaurangpatel2326";
           </div>
         </div>
       </section>
+
       <PersonalIntroSection />
       <AboutSection />
-
       <ExpertiseSection />
-
       <ExperienceSection />
-
       <ProjectsSection />
       <CertificationsSection />
       <TestimonialsSection />
       <ContactSection />
     </main>
+
     <SiteFooter />
   </div>
 </BaseLayout>
@@ -237,74 +254,6 @@ const linkedinURL = "https://www.linkedin.com/in/gaurangpatel2326";
       inset -1px -1px 1px rgba(0, 0, 0, 0.8);
   }
 
-  .topbar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 28px;
-    padding: 14px 18px;
-    border-radius: 22px;
-  }
-
-  .brand {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-
-  .brand-button {
-    display: grid;
-    width: 44px;
-    height: 44px;
-    place-items: center;
-    border-radius: 14px;
-    color: white;
-    font-weight: 800;
-    background: linear-gradient(145deg, #ff6565, #bd2929);
-    box-shadow:
-      5px 5px 12px rgba(0, 0, 0, 0.55),
-      -3px -3px 10px rgba(255, 255, 255, 0.08),
-      inset 2px 2px 3px rgba(255, 255, 255, 0.25);
-  }
-
-  .brand strong,
-  .brand small {
-    display: block;
-  }
-
-  .brand small {
-    margin-top: 3px;
-    color: var(--muted);
-  }
-
-  nav {
-    display: flex;
-    gap: 24px;
-    color: var(--muted);
-  }
-
-  nav a:hover {
-    color: white;
-  }
-
-  .availability {
-    display: flex;
-    align-items: center;
-    gap: 9px;
-    color: var(--muted);
-    font-size: 0.9rem;
-  }
-
-  .status-light,
-  .power-light {
-    display: inline-block;
-    width: 9px;
-    height: 9px;
-    border-radius: 50%;
-    background: var(--success);
-    box-shadow: 0 0 12px var(--success);
-  }
-
   .hero {
     display: grid;
     grid-template-columns: minmax(0, 1.08fr) minmax(420px, 0.92fr);
@@ -322,23 +271,23 @@ const linkedinURL = "https://www.linkedin.com/in/gaurangpatel2326";
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: clamp(34px, 6vw, 80px);
+    padding: clamp(34px, 5vw, 70px);
   }
 
   .eyebrow {
-    margin: 0 0 22px;
+    margin: 0 0 20px;
     color: var(--accent);
-    font-size: 0.78rem;
+    font-size: 0.76rem;
     font-weight: 800;
     letter-spacing: 0.18em;
   }
 
   h1 {
-    max-width: 800px;
+    max-width: 780px;
     margin: 0;
-    font-size: clamp(3rem, 6.3vw, 6.8rem);
-    line-height: 0.96;
-    letter-spacing: -0.065em;
+    font-size: clamp(2.75rem, 4.9vw, 5.35rem);
+    line-height: 0.99;
+    letter-spacing: -0.055em;
   }
 
   h1 span {
@@ -347,18 +296,18 @@ const linkedinURL = "https://www.linkedin.com/in/gaurangpatel2326";
   }
 
   .intro {
-    max-width: 720px;
-    margin: 30px 0 0;
+    max-width: 760px;
+    margin: 27px 0 0;
     color: var(--muted);
-    font-size: clamp(1rem, 1.4vw, 1.22rem);
-    line-height: 1.75;
+    font-size: clamp(0.98rem, 1.25vw, 1.14rem);
+    line-height: 1.72;
   }
 
   .actions {
     display: flex;
     flex-wrap: wrap;
     gap: 15px;
-    margin-top: 34px;
+    margin-top: 30px;
   }
 
   .primary-button,
@@ -386,13 +335,14 @@ const linkedinURL = "https://www.linkedin.com/in/gaurangpatel2326";
 
   .capabilities {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 13px;
-    margin-top: 48px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    margin-top: 40px;
   }
 
   .capabilities article {
-    padding: 17px;
+    min-width: 0;
+    padding: 16px;
     border: 1px solid var(--border);
     border-radius: 17px;
     background: rgba(10, 12, 13, 0.32);
@@ -401,9 +351,9 @@ const linkedinURL = "https://www.linkedin.com/in/gaurangpatel2326";
 
   .capabilities span {
     display: block;
-    margin-bottom: 16px;
+    margin-bottom: 13px;
     color: var(--accent);
-    font-size: 0.72rem;
+    font-size: 0.69rem;
   }
 
   .capabilities strong,
@@ -411,9 +361,15 @@ const linkedinURL = "https://www.linkedin.com/in/gaurangpatel2326";
     display: block;
   }
 
+  .capabilities strong {
+    font-size: 0.95rem;
+  }
+
   .capabilities small {
-    margin-top: 7px;
+    margin-top: 6px;
     color: var(--muted);
+    font-size: 0.76rem;
+    line-height: 1.45;
   }
 
   .console {
@@ -443,6 +399,15 @@ const linkedinURL = "https://www.linkedin.com/in/gaurangpatel2326";
     border-radius: 50%;
     background: #454b4f;
     box-shadow: inset 2px 2px 3px rgba(0, 0, 0, 0.75);
+  }
+
+  .power-light {
+    display: inline-block;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--success);
+    box-shadow: 0 0 12px var(--success);
   }
 
   .monitor {
@@ -596,20 +561,6 @@ const linkedinURL = "https://www.linkedin.com/in/gaurangpatel2326";
       padding-top: 10px;
     }
 
-    .topbar {
-      align-items: flex-start;
-      flex-wrap: wrap;
-    }
-
-    nav {
-      order: 3;
-      width: 100%;
-    }
-
-    .availability {
-      display: none;
-    }
-
     .hero {
       padding-top: 18px;
     }
@@ -619,7 +570,8 @@ const linkedinURL = "https://www.linkedin.com/in/gaurangpatel2326";
     }
 
     h1 {
-      font-size: clamp(2.8rem, 15vw, 4.7rem);
+      font-size: clamp(2.45rem, 12vw, 4rem);
+      line-height: 1;
     }
 
     .capabilities {
@@ -637,38 +589,7 @@ const linkedinURL = "https://www.linkedin.com/in/gaurangpatel2326";
       width: 260px;
     }
   }
-  .content-placeholder {
-    display: grid;
-    min-height: 62vh;
-    margin-top: 30px;
-    padding: clamp(34px, 6vw, 80px);
-    align-content: center;
-    border: 1px solid var(--border);
-    border-radius: 32px;
-    background: linear-gradient(
-      145deg,
-      rgba(38, 42, 45, 0.78),
-      rgba(17, 19, 21, 0.9)
-    );
-    box-shadow:
-      18px 18px 45px rgba(0, 0, 0, 0.38),
-      inset 1px 1px 1px rgba(255, 255, 255, 0.06);
-  }
 
-  .content-placeholder p {
-    margin: 0 0 14px;
-    color: var(--accent);
-    font-family: monospace;
-    font-size: 0.76rem;
-    font-weight: 700;
-    letter-spacing: 0.16em;
-  }
-
-  .content-placeholder h2 {
-    margin: 0;
-    font-size: clamp(2.5rem, 6vw, 5.5rem);
-    letter-spacing: -0.055em;
-  }
   @media (prefers-reduced-motion: reduce) {
     html {
       scroll-behavior: auto;
