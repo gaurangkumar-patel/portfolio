@@ -23,9 +23,9 @@ export const siteMetadata = {
   themeColor: "#111315",
 
   defaultSeo: {
-    title: "Gaurangkumar Patel | Software Engineer | PHP Laravel Backend",
+    title: "Gaurangkumar Patel | Software Engineer | PHP Laravel Full-Stack",
 
     description:
-      "London-based Software Engineer with 5+ years of commercial experience across PHP, Laravel, Yii2, REST APIs, MySQL/SQL, integrations, automation, React and production performance optimisation. Full UK right to work; no sponsorship required.",
+      "London-based Software Engineer with 5+ years of commercial experience and around 5 years of Laravel development experience across PHP/Laravel, Yii2, REST APIs, MySQL/SQL, integrations, automation, React and production performance optimisation. Full UK right to work; no sponsorship required.",
   } satisfies PageSeo,
 };
