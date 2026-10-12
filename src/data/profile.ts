@@ -31,10 +31,10 @@ export const profile: ProfileData = {
   eyebrow: "SOFTWARE ENGINEER // PHP · LARAVEL · APIs · SQL · INTEGRATIONS",
 
   summary:
-    "Software Engineer with 5+ years of commercial experience building and supporting production web applications, REST APIs, integrations and SQL-heavy business systems.",
+    "Software Engineer with 5+ years of commercial experience and around 5 years of Laravel development experience, including 4+ years delivering and supporting production Laravel applications.",
 
   detail:
-    "My strongest experience is in PHP, Laravel, Yii2, MySQL and API-driven backend systems. I also work with React.js, JavaScript and legacy frontend stacks, and I have delivered scheduled automation, third-party integrations, Redis and Memcached caching, database optimisation, multi-role workflows, legacy modernisation and production troubleshooting.",
+    "Backend-first experience across PHP/Laravel, Yii2, REST APIs, MySQL, React.js, third-party integrations, scheduled automation, SQL and stored-procedure optimisation, Redis/Memcached, production troubleshooting and legacy modernisation. I currently also serve as a Team Leader, with hands-on responsibility for staffing coordination, incident escalation, operational controls and customer issue resolution.",
 
   stack: [
     "PHP",
