@@ -1,8 +1,8 @@
 <div align="center">
 
-# Gaurangkumar Patel - Backend Engineering Portfolio
+# Gaurangkumar Patel - Software Engineering Portfolio
 
-### A recruiter-focused developer portfolio built as an interactive backend engineering control centre.
+### A recruiter-focused portfolio for backend and full-stack software engineering.
 
 [![Live Portfolio](https://img.shields.io/badge/Live_Portfolio-Visit_Site-79E6A7?style=for-the-badge&logo=githubpages&logoColor=111315)](https://gaurangkumar-patel.github.io/portfolio/)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-0A66C2?style=for-the-badge&logo=linkedin)](https://www.linkedin.com/in/gaurangpatel2326)
@@ -26,7 +26,7 @@
 
 ### [gaurangkumar-patel.github.io/portfolio](https://gaurangkumar-patel.github.io/portfolio/)
 
-This repository contains the source code for my personal backend software engineering portfolio.
+This repository contains the source code for my personal software engineering portfolio.
 
 It presents my professional experience, technical expertise, public projects, selected high-level commercial case studies and verified certifications through a responsive, accessible and recruiter-focused interface.
 
@@ -36,7 +36,7 @@ The visual direction combines a dark engineering control-centre theme with restr
 
 ## Professional focus
 
-I am a Backend Software Engineer based in London, specialising in:
+I am a Software Engineer based in London with a backend-first full-stack focus, specialising in:
 
 - PHP and Laravel backend development
 - REST API design and third-party integrations
@@ -59,7 +59,7 @@ The homepage uses a custom React Three Fiber scene to present an animated backen
 
 ### Verified professional content
 
-Experience, skills and certifications are maintained against the latest confirmed Master Backend Software Engineer CV.
+Experience, skills and certifications are maintained against the current approved Master Software Engineer CV v5.2.
 
 ### Project case studies
 
@@ -332,7 +332,7 @@ Possible future enhancements are tracked separately and should not be treated as
 ## Contact
 
 **Gaurangkumar Patel**
-Backend Software Engineer — PHP, Laravel, REST APIs and SaaS
+Software Engineer — Backend & Full-Stack · PHP, Laravel, REST APIs and SQL
 
 - Portfolio: [gaurangkumar-patel.github.io/portfolio](https://gaurangkumar-patel.github.io/portfolio/)
 - GitHub: [github.com/gaurangkumar-patel](https://github.com/gaurangkumar-patel)
