@@ -25,12 +25,12 @@ export const contactLinks: ContactLink[] = [
   },
   {
     label: "Download CV",
-    description: "View the latest Software Engineer · Backend Development CV.",
+    description: "View the latest Software Engineer · Backend & Full-Stack CV.",
     url: `${baseURL}documents/Gaurangkumar_Patel_Software_Engineer_CV.pdf`,
     type: "cv",
     external: false,
   },
 ];
 
-// Add only after the email is verified against v4.2.
+// Email verified against the current approved CV v5.2.
 export const confirmedEmail: string | null = "gaurangpatel3056@gmail.com";
